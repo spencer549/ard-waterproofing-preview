@@ -1,0 +1,891 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARD homepage CTA band, 3 options</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&family=Bitter:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ARD service page templates. Tokens are Direction B's, unchanged. */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --navy:#112337; --navy-2:#1b3a55;
+  --blue:#125e98; --blue-lt:#2e88c0; --blue-dk:#0b4570;
+  --rust:#db3c11; --rust-dk:#b02f0b;
+  --ink:#23262a; --mute:#5d6672; --line:#dde4ea;
+  --soft:#f4f7f9; --sand:#f3ede4; --sand-2:#e6dccd; --clay:#8c7a63;
+  --r-sharp:3px; --r-soft:12px;
+  --head:'Fira Sans',system-ui,sans-serif;
+  --body:'Source Sans 3',system-ui,sans-serif;
+  --num:'Bitter',Georgia,serif;
+}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#e9edf1;
+  -webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3,h4{font-family:var(--head);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0}
+p{margin:0 0 1em;line-height:1.68}
+a{color:inherit}
+img,video{max-width:100%;display:block}
+ul{margin:0;padding:0}
+
+/* ---------------- review chrome ---------------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#0a1420;color:#fff;display:flex;
+  align-items:center;gap:12px;padding:9px 16px;font-size:13px;flex-wrap:wrap;font-family:var(--head)}
+.bar b{font-weight:700}
+.bar .sub{color:#8ea6bd;font-weight:400;font-size:12px}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tab{background:rgba(255,255,255,.1);color:#fff;border:0;padding:7px 15px;border-radius:999px;
+  font:600 13px var(--head);cursor:pointer}
+.tab.on{background:#fff;color:#0a1420}
+.tab.cmp.on{background:var(--rust);color:#fff}
+.stage{padding-top:42px}
+.pane{display:none;background:#fff}.pane.on{display:block}
+#cmp{display:none}#cmp.on{display:block}
+.cmpbar{display:flex;gap:10px;align-items:center;padding:9px 16px;background:#fff;
+  border-bottom:1px solid var(--line);position:sticky;top:42px;z-index:50}
+.cmpbar select{font:600 13px var(--head);padding:7px 10px;border:1px solid var(--line);border-radius:6px}
+.cmphint{font:500 12.5px var(--head);color:var(--mute)}
+.cmpwrap{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 90px)}
+.cmpwrap iframe{width:100%;height:100%;border:0;border-right:1px solid var(--line)}
+body.solo .bar{display:none}
+body.solo .stage{padding-top:0}
+
+/* ---------------- shared primitives ---------------- */
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.narrow{max-width:860px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
+  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;border:0;cursor:pointer}
+.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
+.btn-o{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.45)}
+.btn-d{background:var(--navy);color:#fff}
+.btn-w{background:#fff;color:var(--navy)}
+.btn.wide{width:100%}
+.eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
+.eyebrow.dk{color:var(--rust)}
+.stars{color:#f2a71b;letter-spacing:2px}
+.lede{font-size:19px;color:var(--mute)}
+.pane section{padding:78px 0}
+.band-white{background:#fff}
+.band-sand{background:var(--sand)}
+.band-navy{background:var(--navy);color:#fff}
+.pane h2{font-size:clamp(26px,3.2vw,38px);color:var(--navy);max-width:24ch}
+.band-navy h2{color:#fff}
+.band-navy .lede,.band-navy p{color:#b6c9da}
+.shead{margin-bottom:36px}
+.shead .lede{margin-top:12px;max-width:64ch}
+.shead.center{text-align:center}
+.shead.center h2,.shead.center .lede{margin-left:auto;margin-right:auto}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cols2 p{margin:0}
+.tnote{margin-top:22px;font:600 15px var(--head);color:var(--mute)}
+.band-navy .tnote{color:#93aec6}
+
+/* promo strip */
+.promo{background:var(--rust);color:#fff;font:600 13px var(--head);padding:8px 0}
+.promo .in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.promo .rt{margin-left:auto;display:flex;align-items:center;gap:7px}
+.promo a{color:#fff;text-decoration:underline}
+
+/* breadcrumbs */
+.crumbs{font:600 13px var(--head);color:var(--mute);margin-bottom:16px}
+.crumbs a{text-decoration:none;color:var(--blue)}
+.crumbs i{font-style:normal;opacity:.5;margin:0 6px}
+.crumbs.lt{color:var(--mute)}
+
+/* mega menu, identical behaviour across all three headers */
+.mm{position:relative}
+.mm>a{display:flex;align-items:center;gap:5px}
+.mm .drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);
+  background:#fff;border-radius:var(--r-soft);box-shadow:0 24px 60px rgba(17,35,55,.24);
+  padding:26px 30px;opacity:0;visibility:hidden;transition:.18s;z-index:200;border-top:3px solid var(--rust)}
+.mm:hover .drop,.mm:focus-within .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.mm .drop.svc{display:grid;grid-template-columns:1fr 1fr;gap:30px;width:600px}
+.mm .drop.area{width:430px;display:grid;grid-template-columns:1fr 1fr;gap:4px 26px}
+.mm .drop h5{font:700 11.5px var(--head);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--clay);margin:0 0 12px}
+.mm .drop.area h5{grid-column:1/-1}
+.mm .drop ul{list-style:none}
+.mm .drop li a{display:block;padding:7px 0;font:500 15px var(--body);color:var(--ink);
+  text-decoration:none;border-bottom:1px solid #f0f3f6}
+.mm .drop li a:hover{color:var(--rust)}
+.mm .drop.area a{font-size:14.5px;padding:6px 0}
+.mm .drop .allsvc{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+  font:700 14px var(--head);color:var(--rust);text-decoration:none}
+.mm .drop.area .allsvc{grid-column:1/-1}
+.burger{display:none;background:transparent;border:0;cursor:pointer;padding:9px;margin-left:12px;color:inherit}
+.burger span{display:block;width:25px;height:2px;background:currentColor;border-radius:2px;
+  transition:.2s;margin:5px 0}
+.lg{font:800 22px var(--head);letter-spacing:-.03em;text-decoration:none}
+.lg i{color:var(--rust);font-style:normal}
+
+/* trust badges */
+.tbadges{display:flex;gap:22px;flex-wrap:wrap}
+.tbadge{display:flex;align-items:center;gap:9px;font:600 14px var(--head)}
+.tbadge .ic{width:20px;height:20px;border-radius:50%;background:var(--rust);flex:none;position:relative}
+.tbadge .ic::after{content:"";position:absolute;left:6px;top:9px;width:8px;height:4px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+
+/* estimate form */
+.qform{background:#fff;border-radius:var(--r-soft);padding:28px;box-shadow:0 18px 44px rgba(17,35,55,.16)}
+.qform.dk{background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.qform h3{font-size:22px;color:var(--navy);margin-bottom:6px}
+.qform .fsub{font-size:14.5px;color:var(--mute);margin-bottom:16px}
+.qform input,.qform select{width:100%;padding:13px 14px;border:1px solid var(--line);
+  border-radius:var(--r-sharp);font:400 15.5px var(--body);margin-bottom:11px;background:#fff;color:var(--ink)}
+.qform .frow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.qform .fine{font-size:12.5px;color:var(--mute);margin:12px 0 0;line-height:1.5}
+.qform .fine a{color:var(--blue)}
+
+/* FAQ */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font:700 17.5px var(--head);
+  color:var(--navy);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:8px;top:15px;font:400 26px var(--head);color:var(--rust)}
+.faq details[open] summary::after{content:"\2212"}
+.faq .ans{padding:0 40px 22px 0;color:var(--mute);font-size:16px;line-height:1.7}
+.faq .ans p{margin:0}
+.band-sand .faq summary{color:var(--navy)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.chips a{text-decoration:none;padding:9px 16px;border-radius:999px;font:600 14px var(--head);
+  background:#fff;border:1px solid var(--line);color:var(--navy)}
+.band-navy .chips a{background:rgba(255,255,255,.1);border-color:transparent;color:#dceaf5}
+
+/* reviews */
+.rvgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.rv{background:#fff;border-radius:var(--r-soft);padding:24px;box-shadow:0 10px 28px rgba(17,35,55,.1)}
+.rv p{font-size:15.5px;line-height:1.65;font-style:italic;color:var(--ink)}
+.rv .who{font:700 14.5px var(--head);color:var(--navy)}
+.rv .who span{display:block;font-weight:500;font-size:13px;color:var(--mute);font-style:normal}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.gal figure{margin:0;background:#fff;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 10px 28px rgba(17,35,55,.1)}
+.gal img{width:100%;height:220px;object-fit:cover}
+.gal figcaption{padding:12px 14px;font:600 13.5px var(--head);color:var(--mute)}
+
+/* services grid */
+.svcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.svcitem{background:#fff;border-radius:var(--r-soft);text-decoration:none;display:block;overflow:hidden;
+  box-shadow:0 10px 28px rgba(17,35,55,.1)}
+.svcitem img{width:100%;height:150px;object-fit:cover}
+.svcitem h4{font-size:17px;margin:18px 20px 6px;color:var(--navy)}
+.svcitem p{font-size:14.5px;margin:0 20px 20px;color:var(--mute)}
+
+/* CTA band, shared closing element */
+.ctaband{background:var(--rust);color:#fff;padding:52px 0}
+.ctaband .in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;
+  gap:34px;flex-wrap:wrap}
+.ctaband h2{color:#fff;max-width:26ch;font-size:clamp(23px,2.8vw,33px)}
+.ctaband p{color:rgba(255,255,255,.92);margin:8px 0 0;max-width:48ch}
+.ctaband .sp{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
+
+/* footer */
+.sfoot{background:var(--navy);color:#a7bccf;padding:56px 0 26px;font-size:15px}
+.sfoot a{color:#fff;text-decoration:none}
+.sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
+.sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+.fg p{line-height:1.8;margin-bottom:.6em}
+.sfoot .lic{font-size:13.5px;color:#7e97ad}
+.fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:13px;color:#7e97ad;display:flex;gap:18px;flex-wrap:wrap}
+.soc{display:flex;gap:10px;margin-top:12px}
+.soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;
+  align-items:center;justify-content:center;font:700 12px var(--head)}
+
+/* =====================================================================
+   A, "DEEP SECTION"
+   offset-card over photo | transparent-over-hero | diagnose first
+   ===================================================================== */
+#A .ahero-wrap{position:relative;background:var(--navy)}
+#A .ahead{position:absolute;left:0;right:0;top:0;z-index:60;padding:18px 0}
+#A .ahead .in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:26px}
+#A .ahead .lg{color:#fff}
+#A .ahead nav{margin-left:auto;display:flex;gap:22px;font:600 14.5px var(--head);align-items:center}
+#A .ahead nav>a,#A .ahead .mm>a{color:rgba(255,255,255,.92);text-decoration:none}
+#A .ahead .tel{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;
+  padding:9px 17px;border-radius:999px;font:700 14px var(--head);text-decoration:none}
+#A .ahead .burger{color:#fff}
+#A .ahero{height:56vh;min-height:420px;position:relative;overflow:hidden}
+#A .ahero img{width:100%;height:100%;object-fit:cover;opacity:.8}
+#A .ahero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(17,35,55,.92) 0%,rgba(17,35,55,.48) 56%,rgba(17,35,55,.18) 100%)}
+#A .acard{max-width:1200px;margin:-160px auto 0;padding:0 24px;position:relative;z-index:20}
+#A .acard .inner{background:#fff;border-radius:var(--r-soft);padding:44px 48px;max-width:820px;
+  box-shadow:0 26px 60px rgba(17,35,55,.22)}
+#A .acard h1{font-size:clamp(31px,4.2vw,50px);color:var(--navy);margin:12px 0 16px;max-width:19ch}
+#A .acard .lede{max-width:56ch}
+#A .acta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+#A .acard .tbadges{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+#A .acard .tbadge{font-size:13.5px;color:var(--mute)}
+#A .asplit-intro{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:start}
+#A .asplit-intro p{margin-bottom:1.1em}
+#A .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+#A .rcard{background:#fff;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 10px 28px rgba(17,35,55,.1);display:flex;flex-direction:column}
+#A .rcard .sym{background:var(--navy);color:#fff;font:700 16.5px var(--head);padding:18px 20px;
+  line-height:1.3;display:flex;align-items:center;min-height:74px}
+#A .rcard .fix{padding:20px;flex:1}
+#A .rcard .fix b{font:700 11px var(--head);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rust);display:block;margin-bottom:7px}
+#A .rcard .fix h4{font-size:16.5px;color:var(--navy);margin-bottom:7px}
+#A .rcard .fix p{font-size:14.5px;color:var(--mute);margin:0}
+#A .mlist{display:grid;gap:0}
+#A .mstep{display:grid;grid-template-columns:120px 1fr;gap:34px;padding:34px 0;
+  border-top:1px solid var(--line)}
+#A .mstep:last-child{border-bottom:1px solid var(--line)}
+#A .mnum{font:800 54px var(--num);color:var(--sand-2);line-height:1}
+#A .mbody h3{font-size:22px;color:var(--navy);margin-bottom:12px}
+#A .mbody p{margin-bottom:.8em}
+#A .mmute{color:var(--mute);font-size:15.5px}
+#A .aform-split{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:start}
+
+/* =====================================================================
+   B, "FIELD NOTES"
+   split hero with a form rail | solid sticky header | sticky sub-nav, paired rows
+   ===================================================================== */
+#B .bhead2{position:sticky;top:42px;z-index:100;background:#fff;border-bottom:1px solid var(--line)}
+body.solo #B .bhead2{top:0}
+#B .bhead2 .in{max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;
+  align-items:center;gap:26px}
+#B .bhead2 .lg{color:var(--navy)}
+#B .bhead2 nav{margin-left:auto;display:flex;gap:22px;font:600 14.5px var(--head);align-items:center}
+#B .bhead2 nav>a,#B .bhead2 .mm>a{color:var(--ink);text-decoration:none}
+#B .bhead2 .tel{background:var(--navy);color:#fff;padding:9px 17px;border-radius:999px;
+  font:700 14px var(--head);text-decoration:none}
+#B .bhero{background:var(--soft);border-bottom:1px solid var(--line);padding:52px 0 60px}
+#B .bhero-in{display:grid;grid-template-columns:1.25fr .75fr;gap:54px;align-items:start}
+#B .bcopy h1{font-size:clamp(30px,3.9vw,46px);color:var(--navy);margin:12px 0 16px;max-width:19ch}
+#B .bcopy .lede{max-width:52ch}
+#B .bcopy .tbadges{margin-top:26px;padding-top:22px;border-top:1px solid var(--sand-2)}
+#B .bcopy .tbadge{font-size:13.5px;color:var(--mute)}
+#B .brail{position:sticky;top:130px}
+body.solo #B .brail{top:88px}
+#B .subnav{position:sticky;top:114px;z-index:80;background:var(--navy);
+  box-shadow:0 6px 18px rgba(17,35,55,.16)}
+body.solo #B .subnav{top:72px}
+#B .subnav .wrap{display:flex;gap:26px;overflow-x:auto;padding-top:0;padding-bottom:0}
+#B .subnav a{color:#c5d5e3;text-decoration:none;font:600 14px var(--head);padding:15px 0;
+  white-space:nowrap;border-bottom:3px solid transparent}
+#B .subnav a:hover{color:#fff;border-bottom-color:var(--rust)}
+#B .pairs{display:grid;gap:22px}
+#B .pair{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center;
+  background:#fff;border-radius:var(--r-soft);overflow:hidden;box-shadow:0 10px 28px rgba(17,35,55,.1)}
+#B .pair.flip .ppic{order:2}
+#B .pair .ppic img{width:100%;height:250px;object-fit:cover}
+#B .pair .pbody{padding:28px 34px 28px 0}
+#B .pair.flip .pbody{padding:28px 0 28px 34px}
+#B .pair h3{font-size:22px;color:var(--navy);margin:8px 0 12px}
+#B .pmeans{font:600 15px var(--head);color:var(--navy);background:var(--sand);
+  display:inline-block;padding:7px 13px;border-radius:var(--r-sharp);margin-bottom:12px}
+#B .pmeans b{color:var(--rust);text-transform:uppercase;font-size:11px;letter-spacing:.12em}
+#B .pair p{color:var(--mute);font-size:15.5px;margin-bottom:.9em}
+#B .plink{font:700 14.5px var(--head);color:var(--rust);text-decoration:none}
+#B .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+#B .mcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--rust);
+  border-radius:var(--r-sharp);padding:26px}
+#B .mcard h3{font-size:19px;color:var(--navy);margin-bottom:12px}
+#B .mcard p{font-size:15.5px}
+#B .mmute{color:var(--mute);font-size:14.5px;margin:0}
+#B .ftable{width:100%;border-collapse:collapse;font-size:16px}
+#B .ftable th{text-align:left;font:700 16.5px var(--head);color:#fff;padding:16px 24px 16px 0;
+  width:34%;vertical-align:top;border-bottom:1px solid rgba(255,255,255,.14)}
+#B .ftable td{color:#b6c9da;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.14);
+  vertical-align:top}
+
+/* =====================================================================
+   C, "THE ESTIMATE"
+   form-led hero, no photo | compact bar header | commercial first, timeline
+   ===================================================================== */
+#C .chead{background:var(--navy);color:#fff}
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+  align-items:center;gap:26px}
+#C .chead .lg{color:#fff}
+#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
+#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
+  font:700 14px var(--head);text-decoration:none}
+#C .chead .burger{color:#fff}
+#C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
+#C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
+#C .chero .crumbs{color:#8ea6bd}
+#C .chero .crumbs a{color:#9dc3e0}
+#C .chero h1{font-size:clamp(30px,3.9vw,46px);color:#fff;margin:12px 0 16px;max-width:18ch}
+#C .chero .lede{color:#b6c9da;max-width:50ch}
+/* Solid, not translucent. At 5% white these panels let a bright hero photograph
+   read straight through them and the copy lost all contrast. The hero image is
+   background; the panels sitting on it have to be their own surface. */
+#C .croute{list-style:none;margin:26px 0 0;display:grid;gap:1px;background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.16);border-radius:var(--r-sharp);overflow:hidden;
+  box-shadow:0 12px 30px rgba(4,12,22,.32)}
+/* Stacked, not inline. With a real description the inline version wrapped and left
+   the text dangling right-aligned on its own line. */
+#C .croute li{background:rgba(10,21,36,.88);padding:12px 18px;display:block}
+#C .croute b{display:block;font:700 15.5px var(--head);color:#fff}
+#C .croute span{display:block;margin-top:3px;font-size:14.5px;color:#adc3d6;line-height:1.5}
+#C .cmeta{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px;
+  padding-top:22px;border-top:1px solid rgba(255,255,255,.16)}
+#C .cmeta b{display:block;font:800 20px var(--num);color:#fff}
+#C .cmeta span{font:600 13px var(--head);color:#9ab3c8}
+#C .crail .railnote{margin-top:20px;padding:20px 22px;border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--r-sharp);background:rgba(10,21,36,.90);
+  box-shadow:0 12px 30px rgba(4,12,22,.32)}
+#C .crail .railnote b{display:block;font:700 15.5px var(--head);color:#fff;margin-bottom:6px}
+#C .crail .railnote p{font-size:14.5px;color:#adc3d6;margin:0}
+#C .crail .railnote a{color:#fff;font-weight:700;text-decoration:none;border-bottom:1px solid var(--rust)}
+#C .cstrip{background:var(--sand);border-bottom:1px solid var(--sand-2)}
+#C .cstrip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;
+  padding-top:26px;padding-bottom:26px}
+#C .cstrip b{display:block;font:800 24px var(--num);color:var(--navy);line-height:1.1}
+#C .cstrip span{font:600 13.5px var(--head);color:var(--mute)}
+#C .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+#C .fcard{border:1px solid var(--line);border-left:3px solid var(--rust);border-radius:var(--r-sharp);
+  padding:22px 24px;background:#fff}
+#C .fcard h4{font-size:17px;color:var(--navy);margin-bottom:8px}
+#C .fcard p{font-size:15px;color:var(--mute);margin:0}
+#C .timeline{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:24px;counter-reset:tl}
+#C .timeline li{border-top:3px solid var(--rust);padding-top:18px}
+#C .tk{font:800 11.5px var(--head);letter-spacing:.16em;color:var(--rust);display:block;margin-bottom:9px}
+#C .timeline h4{font-size:18.5px;color:var(--navy);margin-bottom:8px}
+#C .timeline p{font-size:15px;color:var(--mute);margin:0}
+#C .mrows{display:grid;gap:0}
+#C .mrow{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;padding:30px 0;
+  border-top:1px solid var(--line)}
+#C .mrow:last-child{border-bottom:1px solid var(--line)}
+#C .mrow h3{font-size:20px;color:var(--navy)}
+#C .mrow p{font-size:15.5px;margin-bottom:.8em}
+#C .mmute{color:var(--mute);font-size:14.5px;margin:0}
+#C .incgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+#C .inc{background:#fff;border-radius:var(--r-sharp);padding:24px;border-top:3px solid var(--navy)}
+#C .inc h4{font-size:17px;color:var(--navy);margin-bottom:8px}
+#C .inc p{font-size:15px;color:var(--mute);margin:0}
+#C .cgal .shead{margin-bottom:28px}
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+@media (max-width:1000px){
+  .pane section{padding:56px 0}
+  .cols2,#A .asplit-intro,#A .aform-split,#B .bhero-in,#C .chero-in{grid-template-columns:1fr;gap:34px}
+  #B .brail,#B .subnav{position:static}
+  #A .acard{margin-top:-90px}
+  #A .acard .inner{padding:32px 26px}
+  #A .mstep{grid-template-columns:1fr;gap:10px}
+  #A .mnum{font-size:38px}
+  #B .pair,#B .pair.flip .ppic{grid-template-columns:1fr;order:0}
+  #B .pair .pbody,#B .pair.flip .pbody{padding:24px}
+  #C .mrow{grid-template-columns:1fr;gap:12px}
+  #C .cmeta{grid-template-columns:1fr}
+  #C .fgrid{grid-template-columns:1fr 1fr}
+  .fg{grid-template-columns:1fr 1fr}
+  .cmpwrap{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  /* Specificity matters here. The per-template rules above are id-scoped
+     (#A .ahead nav), so a class-only override would silently lose and the
+     desktop nav would stay visible on phones. Match the id scope. */
+  #A .ahead nav,#B .bhead2 nav,#C .chead nav{display:none}
+  #A .ahead .burger,#B .bhead2 .burger,#C .chead .burger{display:block}
+  #A .ahead.navopen nav,#B .bhead2.navopen nav,#C .chead.navopen nav{
+    display:flex;position:absolute;top:100%;left:0;right:0;background:#fff;
+    flex-direction:column;align-items:stretch;gap:0;padding:14px 24px 20px;margin-left:0;
+    box-shadow:0 24px 50px rgba(17,35,55,.24);max-height:72vh;overflow:auto;z-index:300}
+  #A .ahead.navopen nav>a,#A .ahead.navopen .mm>a,
+  #B .bhead2.navopen nav>a,#B .bhead2.navopen .mm>a,
+  #C .chead.navopen nav>a,#C .chead.navopen .mm>a{color:var(--ink);padding:12px 0;
+    border-bottom:1px solid var(--line)}
+  .navopen .mm{position:static}
+  .navopen .mm .drop,.navopen .mm:hover .drop{position:static;transform:none;opacity:1;
+    visibility:visible;box-shadow:none;padding:8px 0 14px;width:auto;border-top:0;
+    grid-template-columns:1fr}
+  #A .ahead.navopen .tel,#B .bhead2.navopen .tel,#C .chead.navopen .tel{
+    background:var(--navy);color:#fff;text-align:center;margin-top:12px;justify-content:center}
+  #A .ahead,#C .chead{position:relative}
+  #A .ahero{height:300px;min-height:0}
+  #A .acard{margin-top:-60px}
+  .promo .rt{margin-left:0}
+  .fg{grid-template-columns:1fr}
+  .ctaband .sp{margin-left:0}
+  .gal img{height:190px}
+  #C .fgrid{grid-template-columns:1fr}
+  #C .croute li{flex-direction:column;gap:2px}
+  #C .croute span{margin-left:0}
+  #B .ftable th,#B .ftable td{display:block;width:auto;padding:12px 0 4px}
+  #B .ftable td{padding:0 0 14px}
+}
+
+
+/* standalone service pages, on top of template C */
+body{background:#fff}
+.chead .drop li a.here{color:var(--rust);font-weight:700}
+
+/* ---- HERO STRIP, picked 2026-08-06, shared by the service AND city pages ---------
+   Lives here rather than in the city generator so both families read one source: the
+   city build imports EXTRA_CSS. Replaces the old .croute dark table, which printed the
+   LIFTED service titles (60 to 85 characters) into a 604px slot and truncated every
+   title and description, stacking six ellipses in one block. The badges moved up into
+   the hero, so the separate .cstrip badgestrip below it is gone; rendering the same four
+   twice about 100px apart is duplication, not emphasis. */
+#C .hstrip{margin-top:26px;max-width:640px}
+#C .hline{margin:0 0 18px;font:500 16.5px var(--body);color:#cddcea;line-height:1.85}
+#C .hline b{font-weight:700;color:#fff}
+#C .hline a{color:#fff;font-weight:700;text-decoration:none;
+  border-bottom:2px solid var(--rust);padding-bottom:1px;transition:.16s}
+#C .hline a:hover{color:var(--rust)}
+#C .hproof{list-style:none;margin:0;padding:18px 0 0;
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px}
+#C .hproof li{position:relative;padding-left:26px;line-height:1.4;
+  font:600 14.5px var(--head);color:#dbe7f1}
+#C .hproof li::before{content:"";position:absolute;left:0;top:1px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+#C .hproof li::after{content:"";position:absolute;left:5px;top:6.5px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+@media (max-width:1000px){#C .hproof{grid-template-columns:1fr}}
+
+/* The rail note is part of the form card now, not a second box below it.
+   NOTE THE #C. The base rule is "#C .crail .railnote{margin-top:20px}", an ID selector,
+   so a plain ".crail.joined" override loses on specificity and the 20px gap survives.
+   That gap exposed a bright patch of the background photograph between the two boxes,
+   which read as a rendering artifact. Verified at 0px, not assumed. */
+#C .crail.joined .qform{border-radius:var(--r-soft) var(--r-soft) 0 0;margin:0;
+  box-shadow:0 18px 44px rgba(4,12,22,.36)}
+#C .crail.joined .railnote{margin-top:0;border-radius:0 0 var(--r-soft) var(--r-soft);
+  border:0;background:rgba(9,20,34,.95);padding:18px 26px;box-shadow:none}
+#C .crail.joined .railnote b{margin-bottom:4px}
+
+/* BANNER. Template C shipped as a flat navy gradient with a tall dead zone under the
+   form. A real photograph sits behind it now, with a left-weighted scrim so the copy
+   keeps contrast, and the columns align to the top so the panel is only as tall as
+   its content. */
+.chero.haspic{position:relative;overflow:hidden;padding:52px 0 58px}
+.chero .cbg{position:absolute;inset:0;z-index:0}
+.chero .cbg img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+/* Weighted left. The copy needs a dark bed; the right can stay open because the
+   estimate card sitting over it is opaque white, so nothing there needs the scrim. */
+.chero.haspic::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(11,24,39,.95) 0%,rgba(12,27,44,.88) 34%,
+    rgba(15,32,51,.60) 58%,rgba(17,35,55,.34) 80%,rgba(17,35,55,.26) 100%)}
+.chero.haspic .wrap{position:relative;z-index:2}
+.chero.haspic .chero-in{align-items:start}
+
+.cstrip.badgestrip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  align-items:center}
+.cstrip.badgestrip b{font:700 15px var(--head);color:var(--navy);display:block;line-height:1.35;
+  padding-left:15px;border-left:3px solid var(--rust)}
+
+/* cost block, with a supporting photograph instead of an empty right half */
+/* Centred, not top-aligned. The cost answer is a lifted FAQ and its length varies by
+   page, so top-aligning dumped all the leftover height under the text as dead space.
+   Centring splits it and the photograph stays a fixed size on every page. */
+.costsplit{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.costbody h2{margin-bottom:18px}
+.costlede{font-size:18px;line-height:1.7}
+.costpic{margin:0;border-radius:var(--r-soft);overflow:hidden;box-shadow:0 14px 34px rgba(17,35,55,.16)}
+.costpic img{width:100%;height:320px;object-fit:cover;display:block}
+
+/* long-form rows that carry a photograph */
+.mpic{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center;
+  padding:30px 0;border-top:1px solid var(--line)}
+.mpic.flip figure{order:2}
+.mpic figure{margin:0;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 14px 34px rgba(17,35,55,.16)}
+.mpic figure img{width:100%;height:300px;object-fit:cover}
+.mpic h3{font-size:20px;color:var(--navy);margin-bottom:12px}
+.mpic .mtxt p{font-size:15.5px;margin-bottom:.8em}
+.mpic .mtxt p:last-child{margin-bottom:0}
+.mrows .mpic:last-child{border-bottom:1px solid var(--line)}
+
+/* WHY. Was a heading over two ragged text columns. Now a lead paragraph carries the
+   argument and the supporting detail sits in a called-out panel. */
+.whysplit{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:start}
+.whymain h2{margin:10px 0 16px}
+.whylead{font-size:20px;line-height:1.62;color:var(--ink)}
+.whymap{border-radius:var(--r-soft);overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(17,35,55,.12);background:#fff}
+/* The iframe sits over a tinted bed. Map tiles load async, so a blank white box is what
+   a slow or blocked embed looks like; this keeps that state looking deliberate. */
+.whymap .mapbed{position:relative;height:330px;background:
+  repeating-linear-gradient(0deg,rgba(17,35,55,.06) 0 1px,transparent 1px 44px),
+  repeating-linear-gradient(90deg,rgba(17,35,55,.06) 0 1px,transparent 1px 44px),var(--soft)}
+/* Write percentages here SINGLY. EXTRA_CSS is passed as an ARGUMENT to page_shell's
+   format string, not used as one, so a doubled percent is never unescaped: it shipped
+   verbatim inside the inset declaration, the browser dropped that declaration as
+   invalid, and the placeholder fell out of its container onto the map caption where it
+   was visible on every page. z-index 0 keeps it behind the iframe once tiles paint. */
+.whymap .mapbed::after{content:"Map loading";position:absolute;left:0;right:0;top:50%;
+  transform:translateY(-50%);z-index:0;text-align:center;
+  font:600 13px var(--head);color:var(--mute)}
+.whymap iframe{position:relative;z-index:1;width:100%;height:330px;border:0;display:block;
+  filter:saturate(.92)}
+.mapcap{padding:16px 20px;border-top:1px solid var(--line)}
+.mapcap b{display:block;font:700 15px var(--head);color:var(--navy)}
+.mapcap span{display:block;margin-top:3px;font-size:14px;color:var(--mute);line-height:1.5}
+.whyrest{font-size:16px;color:var(--mute);margin-top:14px;max-width:56ch}
+.whyaside{background:var(--sand);border-left:3px solid var(--rust);
+  border-radius:0 var(--r-sharp) var(--r-sharp) 0;padding:26px 28px}
+.whytag{font:700 11.5px var(--head);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--clay);margin-bottom:12px}
+.whyaside p{font-size:15.5px;color:var(--mute);margin-bottom:.9em}
+.whyaside p:last-child{margin-bottom:0}
+
+/* WHAT THE WORK COVERS. Numbered, equal height, top rule. */
+.incgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:16px;
+  align-items:stretch}
+.inc{position:relative;background:#fff;border-radius:var(--r-sharp);padding:22px 20px 20px;
+  border-top:3px solid var(--navy);box-shadow:0 8px 22px rgba(17,35,55,.07);
+  display:flex;flex-direction:column}
+.inc .incnum{font:800 12px var(--num);letter-spacing:.08em;color:var(--rust);display:block;
+  margin-bottom:9px}
+.inc h4{font-size:16.5px;color:var(--navy);margin-bottom:8px;line-height:1.25}
+.inc p{font-size:14.5px;color:var(--mute);margin:0;line-height:1.6}
+
+/* CTA BANNER. Edge to edge, a real banner rather than a card sitting inside a section.
+   Background is that service's own photograph under a navy scrim, so it stays relevant
+   to the page it closes. Height is deliberately held down: one line of heading, a row of
+   proof points, and the action, around 250px. The previous version ran past 460px and
+   read as another content block. */
+.ctabanner{position:relative;background:var(--navy);overflow:hidden}
+.ctabanner .ctabg{position:absolute;inset:0;z-index:0}
+.ctabanner .ctabg img{width:100%;height:100%;object-fit:cover;object-position:center 45%}
+/* Two layers on purpose. The linear pass beds the headline on the left; the radial pass
+   re-darkens the right, where the action sits, because a bright patch of the photograph
+   was landing behind the phone link and killing its contrast. */
+.ctabanner::after{content:"";position:absolute;inset:0;z-index:1;
+  background:radial-gradient(80% 150% at 88% 50%,rgba(9,20,34,.70) 0%,rgba(9,20,34,.30) 55%,
+      rgba(9,20,34,0) 100%),
+    linear-gradient(96deg,rgba(11,24,39,.95) 0%,rgba(12,29,48,.90) 46%,
+      rgba(15,34,55,.78) 74%,rgba(17,35,55,.70) 100%)}
+.ctabar{position:relative;z-index:2;display:flex;align-items:center;gap:44px;
+  flex-wrap:wrap;padding-top:44px;padding-bottom:44px;min-height:250px}
+.ctatext{flex:1 1 460px}
+.ctabanner h2{color:#fff;margin:0;max-width:22ch;font-size:clamp(24px,2.6vw,33px);
+  line-height:1.14}
+.ctachecks{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;
+  gap:8px 26px}
+.ctachecks li{position:relative;padding-left:26px;font:600 14.5px var(--head);
+  color:#dbe7f1;line-height:1.4}
+.ctachecks li::before{content:"";position:absolute;left:0;top:2px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+.ctachecks li::after{content:"";position:absolute;left:5px;top:7px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+.ctaact{flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ctaact .btn-o{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.65)}
+.ctaact .btn-o:hover{background:rgba(255,255,255,.16)}
+.ctaact .btn{padding:18px 38px;font-size:17px;letter-spacing:.01em;
+  box-shadow:0 10px 26px rgba(0,0,0,.28)}
+.ctatel{color:#fff;font:600 16px var(--head);text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.42);padding-bottom:3px}
+.ctatel:hover{border-bottom-color:var(--rust)}
+
+/* SEE MORE disclosure. Native details/summary, no JS, same mechanic as the FAQ so the
+   content is in the DOM and indexable rather than injected on click. */
+.more{margin-top:22px}
+/* A <summary> always paints at the top of its <details>, so once opened the control sat
+   between the visible cards and the revealed ones. Reversing the open state puts the
+   revealed content first and drops Show less underneath it, where it belongs. */
+.more[open]{display:flex;flex-direction:column-reverse;align-items:stretch}
+.more>summary{align-self:flex-start}
+.more[open]>summary{margin-top:24px}
+.more>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:9px;
+  font:700 15px var(--head);color:var(--rust);padding:11px 20px;border:1px solid var(--rust);
+  border-radius:var(--r-sharp);background:transparent;transition:.16s}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary:hover{background:var(--rust);color:#fff}
+.more>summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;flex:none;transition:.16s;
+  /* translate BEFORE rotate. The other order moves the chevron along its rotated axis,
+     which drove it diagonally into the label text once open. */
+  transform:translateY(-2px) rotate(45deg)}
+.more[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+.more .moreshut{display:none}
+.more[open] .moreopen{display:none}
+.more[open] .moreshut{display:inline}
+.more .incgrid,.more .mrows{margin-top:22px}
+/* auto-FILL here, not auto-fit. The visible grid uses auto-fit so a page with only
+   three services still fills the row. The revealed remainder is usually one or two
+   cards, and stretching those to full width breaks the column rhythm, so keep the
+   empty tracks and let the cards line up with the four above. */
+.more .incgrid{grid-template-columns:repeat(auto-fill,minmax(228px,1fr))}
+.morefaq{margin-top:0}
+.morefaq>summary{margin:20px 0 0}
+.morefaq[open]>summary{margin:22px 0 0}
+.faqmore details{border-bottom:1px solid var(--line)}
+
+/* shared action pair, used by the local-conditions and cities sections */
+.btn-lg{padding:17px 34px;font-size:16.5px}
+.actrow{margin-top:26px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.actrow.center{justify-content:center;margin-top:30px}
+.actel{font:600 15.5px var(--head);color:var(--navy);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:3px}
+.actel:hover{border-bottom-color:var(--rust)}
+
+@media (max-width:1000px){
+  .ctabar{gap:26px;padding-top:36px;padding-bottom:36px;min-height:0}
+  .ctaact{width:100%}
+  .ctabanner h2{max-width:none}
+}
+
+/* CITIES. Modelled on the fleet section--cities pattern. */
+.citygrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:1240px){.citygrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:980px){.citygrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.citygrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.citygrid{grid-template-columns:1fr}}
+.citycard{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-sharp);padding:15px 18px;text-decoration:none;
+  font:600 15.5px var(--head);color:var(--navy);transition:.16s}
+.citycard:hover{border-color:var(--rust);box-shadow:0 8px 22px rgba(17,35,55,.1)}
+.citycard{min-width:0}
+.citycard .cpin{flex:none;display:flex;color:var(--rust)}
+.citycard .cpin svg{width:20px;height:20px}
+.citycard .ctxt{flex:1;min-width:0}
+.citycard .ctxt b{display:block;font:700 16px var(--head);color:var(--navy);line-height:1.2}
+.citycard .ctxt em{display:block;font:500 13px var(--body);font-style:normal;color:var(--mute);
+  margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.citycard .carrow{color:var(--rust);font-size:17px}
+.citynote{margin-top:20px;font:500 14px var(--head);color:var(--mute);text-align:center}
+
+@media (max-width:1000px){
+  .costsplit,.mpic,.mpic.flip,.whysplit{grid-template-columns:1fr;gap:24px}
+  .mpic.flip figure{order:0}
+  .mpic figure img{height:220px}
+  .cstrip.badgestrip .wrap{grid-template-columns:1fr 1fr}
+  .whylead{font-size:18px}
+}
+@media (max-width:620px){
+  .cstrip.badgestrip .wrap{grid-template-columns:1fr}
+}
+.idx{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.idxcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--rust);
+  border-radius:var(--r-sharp);padding:24px;text-decoration:none;display:block}
+.idxcard h3{font-size:19px;color:var(--navy);margin-bottom:8px}
+.idxcard p{font-size:15px;color:var(--mute);margin:0}
+
+
+/* ---- HERO STRIP, picked 2026-08-06 ---------------------------------------------- */
+/* Option B's visual language, boxless with hairline rules and rust accents, carrying the
+   sentence-plus-badges content. Replaces the old .croute dark table, which truncated
+   every title and description because it printed the lifted 60-to-85 character service
+   names into a 604px slot. */
+#C .hstrip{margin-top:26px;max-width:640px}
+#C .hline{margin:0 0 18px;font:500 16.5px var(--body);color:#cddcea;line-height:1.85}
+#C .hline b{font-weight:700;color:#fff}
+#C .hline a{color:#fff;font-weight:700;text-decoration:none;
+  border-bottom:2px solid var(--rust);padding-bottom:1px;transition:.16s}
+#C .hline a:hover{color:var(--rust)}
+#C .hproof{list-style:none;margin:0;padding:18px 0 0;
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px}
+#C .hproof li{position:relative;padding-left:26px;line-height:1.4;
+  font:600 14.5px var(--head);color:#dbe7f1}
+#C .hproof li::before{content:"";position:absolute;left:0;top:1px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+#C .hproof li::after{content:"";position:absolute;left:5px;top:6.5px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+@media (max-width:1000px){#C .hproof{grid-template-columns:1fr}}
+
+/* The rail note is part of the form card now, not a second box below it.
+   NOTE THE #C. The base rule is "#C .crail .railnote{margin-top:20px}", an ID selector,
+   so a plain ".crail.joined" override loses on specificity and the 20px gap survives.
+   That gap was exposing a bright patch of the background photograph between the two
+   boxes, which read as a rendering artifact. Verified as 0px, not assumed. */
+#C .crail.joined .qform{border-radius:var(--r-soft) var(--r-soft) 0 0;margin:0;
+  box-shadow:0 18px 44px rgba(4,12,22,.36)}
+#C .crail.joined .railnote{margin-top:0;border-radius:0 0 var(--r-soft) var(--r-soft);
+  border:0;background:rgba(9,20,34,.95);padding:18px 26px;box-shadow:none}
+#C .crail.joined .railnote b{margin-bottom:4px}
+
+/* ---- city pages, on top of template C and the service page rules ---------------- */
+/* Scope cards are links here, not static tiles, because a city page's job is to route
+   the reader onward to the service page. Keeps .inc's look, adds affordance. */
+a.inc{text-decoration:none;transition:.16s}
+a.inc:hover{border-top-color:var(--rust);box-shadow:0 12px 28px rgba(17,35,55,.13);
+  transform:translateY(-2px)}
+a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:var(--rust)}
+
+/* NEIGHBORHOODS. Chips rather than cards: these are names, not destinations, and ten
+   full cards would compete with the Other cities grid further down the same page. */
+.hoodwrap{display:flex;flex-wrap:wrap;gap:10px}
+.hood{display:inline-flex;align-items:center;gap:9px;background:#fff;
+  border:1px solid var(--line);border-radius:999px;padding:10px 18px 10px 14px;
+  font:600 15px var(--head);color:var(--navy)}
+.hood .cpin{display:flex;color:var(--rust)}
+.hood .cpin svg{width:17px;height:17px}
+
+.lmkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.lmkcol h4{font:700 15px var(--head);color:var(--navy);margin-bottom:10px;
+  padding-bottom:8px;border-bottom:2px solid var(--rust)}
+.lmkcol ul{list-style:none;margin:0;padding:0}
+.lmkcol li{font-size:14.5px;color:var(--mute);line-height:1.5;padding:5px 0;
+  border-bottom:1px solid var(--line)}
+.lmkcol li:last-child{border-bottom:0}
+
+/* Routing row for services this city's own page does not describe. */
+.alsohead{margin:26px 0 12px;font:700 11.5px var(--head);letter-spacing:.15em;
+  text-transform:uppercase;color:var(--clay)}
+.incgrid+.alsohead,.more+.alsohead{margin-top:30px}
+.svcnavgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.svcnav{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--navy);
+  border-radius:var(--r-sharp);padding:16px 18px;text-decoration:none;
+  font:700 15.5px var(--head);color:var(--navy);transition:.16s}
+.svcnav:hover{border-left-color:var(--rust);box-shadow:0 8px 22px rgba(17,35,55,.1)}
+.svcnav span{color:var(--rust);font-size:17px}
+
+.cityidx{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.cityidx .idxcard{border-top-color:var(--navy)}
+.cityidx .idxcard .cnty{display:block;margin-bottom:8px;font:700 11.5px var(--head);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+
+/* ---- shared by all three ---------------------------------------------------------- */
+/* Chips. Ten link to a real city page; three are towns the client names that have no
+   page yet, so they render as plain chips rather than as links to nowhere. */
+.ctachips{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+.ctachips a,.ctachips span{display:inline-block;padding:9px 17px;border-radius:999px;
+  font:700 13.5px var(--head);line-height:1.2}
+.ctachips a{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);
+  color:#fff;text-decoration:none;transition:.16s}
+.ctachips a:hover{background:var(--rust);border-color:var(--rust)}
+.ctachips span{background:transparent;border:1px dashed rgba(255,255,255,.24);
+  color:#9fb6c9}
+.chipnote{margin-top:14px;font:500 13.5px var(--body);color:#9fb6c9}
+.chipnote a{color:#fff;border-bottom:1px solid var(--rust);text-decoration:none}
+
+.ctasplit{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:start}
+@media (max-width:1000px){.ctasplit{grid-template-columns:1fr;gap:32px}}
+.ctaleft h2{margin:10px 0 14px}
+.ctaleft .lede{max-width:52ch}
+
+/* B, contact card */
+.ccard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--r-soft);overflow:hidden}
+.ccard .top{padding:26px 28px;border-bottom:1px solid rgba(255,255,255,.14)}
+.ccard .top b{display:block;font:800 30px var(--head);color:#fff;letter-spacing:-.01em}
+.ccard .top a{color:#fff;text-decoration:none}
+.ccard .top span{display:block;margin-top:6px;font:600 14px var(--head);color:var(--rust)}
+.ccard dl{margin:0;padding:22px 28px;display:grid;grid-template-columns:auto 1fr;
+  gap:12px 20px}
+.ccard dt{font:600 13px var(--head);color:#9fb6c9;white-space:nowrap}
+.ccard dd{margin:0;font:600 14.5px var(--head);color:#fff}
+.ccard .foot{padding:16px 28px;background:rgba(0,0,0,.18);
+  font:500 13.5px var(--body);color:#b6cadb}
+
+/* C, centered.
+   text-align alone does NOT centre these: the heading carries a max-width from the base
+   stylesheet, so the BLOCK stayed left while its text centred inside it, which read as a
+   ragged heading sitting off to one side. Every constrained child needs auto margins. */
+.ctacenter{text-align:center}
+.ctacenter h2{margin-left:auto;margin-right:auto;max-width:22ch}
+.ctacenter .eyebrow{margin-left:auto;margin-right:auto}
+.ctacenter .lede{max-width:62ch;margin-left:auto;margin-right:auto}
+.ctacenter .bcta{justify-content:center}
+.ctacenter .ctachips{justify-content:center}
+.ctacenter .chipnote{text-align:center}
+
+/* options chrome */
+body{background:#0d1a29;margin:0}
+.optbar{position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:10px;
+  padding:12px 20px;background:#0b1725;border-bottom:1px solid rgba(255,255,255,.14)}
+.optbar .ttl{font:800 15px var(--head);color:#fff;margin-right:8px}
+.optbar button{font:700 13.5px var(--head);color:#cfe0ee;background:transparent;
+  border:1px solid rgba(255,255,255,.28);border-radius:8px;padding:9px 16px;cursor:pointer}
+.optbar button.on{background:var(--rust);border-color:var(--rust);color:#fff}
+.optbar .sp{flex:1}
+.optnote{padding:16px 24px;background:#11202f;color:#b6cadb;font:500 14.5px var(--body);
+  border-bottom:1px solid rgba(255,255,255,.10)}
+.optnote b{color:#fff}
+.pane2{display:none}
+.pane2.on{display:block}
+.cmp{display:none;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.14)}
+.cmp.on{display:grid}
+.cmpcol{background:#0d1a29;min-width:0;overflow:auto;max-height:calc(100vh - 108px)}
+.cmpcol select{width:100%;font:700 13px var(--head);padding:9px;border:0;
+  background:#11202f;color:#fff}
+
+</style>
+<div class="optbar">
+  <span class="ttl">Closing CTA band</span><button data-go="A" class="on">A &middot; Split with the estimate form</button><button data-go="B">B &middot; Split with a contact card</button><button data-go="C">C &middot; Centered band</button>
+  <span class="sp"></span>
+  <button id="cmpbtn">&hArr; Compare</button>
+</div>
+<div class="optnote" data-opt="A"><b>A, Split with the estimate form.</b> Copy stays left, the estimate form fills the right. Turns a dead half into the conversion point and mirrors the hero, so the page opens and closes the same way.</div><div class="optnote" data-opt="B" style="display:none"><b>B, Split with a contact card.</b> Copy left, a contact card right: phone, hours, response time, address and license. Answers the questions a reader has at the point of calling, without a second form.</div><div class="optnote" data-opt="C" style="display:none"><b>C, Centered band.</b> No right column at all. Everything centers and the towns sit in an even grid. Smallest change, and it removes the dead space by rebalancing rather than filling.</div>
+<div id="single"><div class="pane2 on" data-opt="A"><div class="pane on" id="C">  <section class="band-navy" id="estimate">
+    <div class="wrap"><div class="ctasplit"><div class="ctaleft"><div class="eyebrow">Start your project today</div><h2>Write to us, call or text to get your estimate.</h2><p class="lede">Free estimate, free drainage design and advice, and a free consultation. ARD is open 24 hours for emergency basement flooding across Passaic, Morris, Union, and West Essex Counties.</p><div class="bcta"><a class="btn btn-p" href="#estimate">Request free estimate</a><a class="btn btn-o" href="tel:+19176918411">Call or text (917) 691-8411</a></div></div><form class="qform dk" onsubmit="return false">
+  <h3>Get your free estimate</h3>
+  <p class="fsub">Same business day confirmation. Owner-priced.</p>
+  <input type="text" placeholder="Full name" aria-label="Full name">
+  <div class="frow"><input type="tel" placeholder="Phone" aria-label="Phone">
+  <input type="text" placeholder="ZIP" aria-label="ZIP code"></div>
+  <select aria-label="What do you need">
+    <option>What do you need?</option>
+    <option>A new installation</option>
+    <option>A repair or replacement</option>
+    <option>A second opinion on a quote</option>
+    <option>Something else</option>
+  </select>
+  <button class="btn btn-p wide" type="submit">Get my free estimate</button>
+  <p class="fine">By submitting you agree ARD Waterproofing may contact you by phone, text or
+  email. See our <a href="https://ardwaterproofing.com/privacy-policy/" target="_blank" rel="noopener">privacy policy</a>.</p>
+</form></div><div class="ctachips"><a href="preview-ard-city-west-caldwell.html">West Caldwell</a><a href="preview-ard-city-livingston.html">Livingston</a><a href="preview-ard-city-montclair.html">Montclair</a><a href="preview-ard-city-north-caldwell.html">North Caldwell</a><a href="preview-ard-city-short-hills.html">Short Hills</a><a href="preview-ard-city-south-orange.html">South Orange</a><a href="preview-ard-city-summit.html">Summit</a><a href="preview-ard-city-verona.html">Verona</a><a href="preview-ard-city-wayne.html">Wayne</a><a href="preview-ard-city-west-orange.html">West Orange</a><span>Little Falls</span><span>Parsippany-Troy Hills</span><span>Morristown</span></div><p class="chipnote">Dashed towns are served but do not have a page yet. <a href="preview-ard-cities-index.html">See all service areas</a>.</p></div>
+  </section>
+</div></div><div class="pane2" data-opt="B"><div class="pane on" id="C">  <section class="band-navy" id="estimate">
+    <div class="wrap"><div class="ctasplit"><div class="ctaleft"><div class="eyebrow">Start your project today</div><h2>Write to us, call or text to get your estimate.</h2><p class="lede">Free estimate, free drainage design and advice, and a free consultation. ARD is open 24 hours for emergency basement flooding across Passaic, Morris, Union, and West Essex Counties.</p><div class="bcta"><a class="btn btn-p" href="#estimate">Request free estimate</a><a class="btn btn-o" href="tel:+19176918411">Call or text (917) 691-8411</a></div></div><aside class="ccard">
+  <div class="top"><b><a href="tel:+19176918411">(917) 691-8411</a></b><span>Call or text, open 24 hours</span></div>
+  <dl>
+    <dt>Response</dt><dd>Within the hour</dd>
+    <dt>Site visit</dt><dd>Typically next day</dd>
+    <dt>Estimate</dt><dd>Free, in writing, no obligation</dd>
+    <dt>Office</dt><dd>98 Smull Ave, West Caldwell, NJ 07006</dd>
+    <dt>License</dt><dd>NJ HIC 13VH12460700</dd>
+  </dl>
+  <div class="foot">We price-match any reasonable estimate.</div>
+</aside></div><div class="ctachips"><a href="preview-ard-city-west-caldwell.html">West Caldwell</a><a href="preview-ard-city-livingston.html">Livingston</a><a href="preview-ard-city-montclair.html">Montclair</a><a href="preview-ard-city-north-caldwell.html">North Caldwell</a><a href="preview-ard-city-short-hills.html">Short Hills</a><a href="preview-ard-city-south-orange.html">South Orange</a><a href="preview-ard-city-summit.html">Summit</a><a href="preview-ard-city-verona.html">Verona</a><a href="preview-ard-city-wayne.html">Wayne</a><a href="preview-ard-city-west-orange.html">West Orange</a><span>Little Falls</span><span>Parsippany-Troy Hills</span><span>Morristown</span></div><p class="chipnote">Dashed towns are served but do not have a page yet. <a href="preview-ard-cities-index.html">See all service areas</a>.</p></div>
+  </section>
+</div></div><div class="pane2" data-opt="C"><div class="pane on" id="C">  <section class="band-navy" id="estimate">
+    <div class="wrap"><div class="ctacenter"><div class="eyebrow">Start your project today</div><h2>Write to us, call or text to get your estimate.</h2><p class="lede">Free estimate, free drainage design and advice, and a free consultation. ARD is open 24 hours for emergency basement flooding across Passaic, Morris, Union, and West Essex Counties.</p><div class="bcta"><a class="btn btn-p" href="#estimate">Request free estimate</a><a class="btn btn-o" href="tel:+19176918411">Call or text (917) 691-8411</a></div><div class="ctachips"><a href="preview-ard-city-west-caldwell.html">West Caldwell</a><a href="preview-ard-city-livingston.html">Livingston</a><a href="preview-ard-city-montclair.html">Montclair</a><a href="preview-ard-city-north-caldwell.html">North Caldwell</a><a href="preview-ard-city-short-hills.html">Short Hills</a><a href="preview-ard-city-south-orange.html">South Orange</a><a href="preview-ard-city-summit.html">Summit</a><a href="preview-ard-city-verona.html">Verona</a><a href="preview-ard-city-wayne.html">Wayne</a><a href="preview-ard-city-west-orange.html">West Orange</a><span>Little Falls</span><span>Parsippany-Troy Hills</span><span>Morristown</span></div><p class="chipnote">Dashed towns are served but do not have a page yet. <a href="preview-ard-cities-index.html">See all service areas</a>.</p></div></div>
+  </section>
+</div></div></div>
+<div class="cmp" id="cmp">
+  <div class="cmpcol"><select id="selL"></select><div id="colL"></div></div>
+  <div class="cmpcol"><select id="selR"></select><div id="colR"></div></div>
+</div>
+<script>
+var OPTS=["A", "B", "C"];
+function show(k){
+  document.querySelectorAll('.pane2').forEach(function(p){p.classList.toggle('on',p.dataset.opt===k)});
+  document.querySelectorAll('.optnote').forEach(function(n){n.style.display=n.dataset.opt===k?'':'none'});
+  document.querySelectorAll('.optbar button[data-go]').forEach(function(b){b.classList.toggle('on',b.dataset.go===k)});
+}
+document.querySelectorAll('.optbar button[data-go]').forEach(function(b){
+  b.addEventListener('click',function(){cmpOff();show(b.dataset.go)})});
+function paneHTML(k){var p=document.querySelector('.pane2[data-opt="'+k+'"]');return p?p.innerHTML:''}
+function fill(sel,col){col.innerHTML=paneHTML(sel.value)}
+var cmp=document.getElementById('cmp'),single=document.getElementById('single'),on=false;
+function cmpOff(){on=false;cmp.classList.remove('on');single.style.display=''}
+document.getElementById('cmpbtn').addEventListener('click',function(){
+  on=!on;cmp.classList.toggle('on',on);single.style.display=on?'none':'';
+  if(on){['L','R'].forEach(function(s,i){
+    var sel=document.getElementById('sel'+s);
+    if(!sel.options.length){OPTS.forEach(function(k){var o=document.createElement('option');
+      o.value=k;o.textContent='Option '+k;sel.appendChild(o)});sel.value=OPTS[i]||OPTS[0];
+      sel.addEventListener('change',function(){fill(sel,document.getElementById('col'+s))})}
+    fill(sel,document.getElementById('col'+s))})}
+});
+</script>
+<script>
+document.querySelectorAll('.burger').forEach(function(b){
+  b.addEventListener('click', function(){
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!open));
+    b.closest('header').classList.toggle('navopen', !open);
+  });
+});
+</script>

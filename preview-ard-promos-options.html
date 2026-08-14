@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARD Waterproofing, 3 options for the promos section</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&family=Bitter:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#112337; --navy-2:#1b3a55; --blue:#125e98; --blue-lt:#2e88c0;
+  --rust:#db3c11; --rust-dk:#b02f0b; --rust-lt:#ff9b76;
+  --ink:#23262a; --mute:#5d6672; --line:#dde4ea; --soft:#f4f7f9; --sand:#f3ede4;
+  --r-sharp:3px; --r-soft:12px;
+  --head:'Fira Sans',system-ui,sans-serif; --body:'Source Sans 3',system-ui,sans-serif; --num:'Bitter',Georgia,serif;
+  --shadow:0 10px 28px rgba(17,35,55,.10); --chrome:60px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#e9edf1}
+h1,h2,h3,h4{font-family:var(--head);margin:0;line-height:1.15;color:var(--navy)}
+img{max-width:100%;display:block}
+.in{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* chrome */
+.chrome{position:fixed;top:0;left:0;right:0;min-height:var(--chrome);z-index:200;background:var(--navy);
+  display:flex;align-items:center;gap:8px;padding:10px 16px;box-shadow:0 2px 14px rgba(0,0,0,.28);flex-wrap:wrap}
+.chrome .lbl{color:#8fa8bd;font-family:var(--head);font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;font-weight:700;margin-right:4px}
+.tab{font-family:var(--head);font-weight:700;font-size:13px;border:1px solid #2c4a66;background:#182f47;
+  color:#c8d7e3;padding:9px 15px;border-radius:var(--r-sharp);cursor:pointer;white-space:nowrap}
+.tab:hover{background:#20405e;color:#fff}
+.tab.on{background:var(--rust);border-color:var(--rust);color:#fff}
+.tab.cmp{margin-left:auto;background:#123a2c;border-color:#1d5643;color:#a9dcc6}
+.tab.cmp.on{background:#1d7a56;border-color:#1d7a56;color:#fff}
+.stage{padding-top:calc(var(--chrome) + 24px);padding-bottom:40px}
+.pane{display:none;background:#fff;max-width:1280px;margin:0 auto;box-shadow:0 0 40px rgba(0,0,0,.12)}
+.pane.on{display:block}
+.cap{background:#fff;border-top:3px solid var(--rust);padding:16px 24px;font-size:13.5px;color:var(--mute);
+  max-width:1280px;margin:0 auto}
+.cap b{color:var(--navy)}
+#cmp{display:none}
+#cmp.on{display:block}
+.cmpbar{display:flex;gap:10px;padding:10px 16px;background:#dfe6ec;border-bottom:1px solid #c6d2db;
+  max-width:1280px;margin:0 auto}
+.cmpbar select{font-family:var(--head);font-weight:600;font-size:13px;padding:7px 10px;
+  border:1px solid #a8bac8;border-radius:var(--r-sharp);background:#fff;flex:1}
+.cmpwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;background:#dfe6ec;max-width:1280px;margin:0 auto}
+.cmpcol{background:#fff;height:calc(100vh - var(--chrome) - 130px);overflow-y:auto;box-shadow:0 0 16px rgba(0,0,0,.1)}
+.cmpcol iframe{width:100%;height:100%;border:0}
+
+/* shared bits */
+.btn{display:inline-block;font-family:var(--head);font-weight:700;font-size:16px;padding:15px 26px;
+  border-radius:var(--r-sharp);text-decoration:none;cursor:pointer;border:0;text-align:center}
+.btn-p{background:var(--rust);color:#fff} .btn-p:hover{background:var(--rust-dk)}
+.btn-w{background:#fff;color:var(--rust)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);padding:13px 24px}
+.btn-sm{padding:11px 18px;font-size:14.5px}
+.ctarow{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.sect{padding:56px 0}
+.center{text-align:center} .center .ctarow{justify-content:center}
+h2.big{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;margin-bottom:12px}
+.center h2.big::after{content:"";display:block;width:58px;height:3px;background:var(--rust);margin:13px auto 0;border-radius:2px}
+.note{font-size:13px;color:var(--mute);margin-top:18px}
+
+/* ============ A: DARK SPOTLIGHT ============ */
+.a-wrap{background:var(--navy);position:relative;overflow:hidden}
+.a-wrap::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(900px 380px at 50% -10%,rgba(219,60,17,.32),transparent 70%)}
+.a-wrap .in{position:relative;z-index:2}
+.a-wrap h2.big{color:#fff} .a-wrap h2.big::after{background:var(--rust-lt)}
+.a-pill{display:inline-flex;align-items:center;gap:9px;background:var(--rust);color:#fff;
+  font-family:var(--head);font-weight:800;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:8px 18px;border-radius:100px;margin-bottom:16px}
+.a-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:left}
+@media(max-width:1000px){.a-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.a-grid{grid-template-columns:1fr}}
+.a-card{background:#fff;border-radius:var(--r-soft);box-shadow:0 14px 34px rgba(0,0,0,.30);padding:22px;
+  border-top:4px solid var(--rust)}
+.a-card .ico{width:42px;height:42px;border-radius:50%;background:rgba(219,60,17,.12);
+  border:1px solid rgba(219,60,17,.35);display:flex;align-items:center;justify-content:center;
+  margin-bottom:13px;font-family:var(--num);font-weight:800;color:var(--rust);font-size:17px}
+.a-card .val{font-family:var(--head);font-weight:800;color:var(--rust);font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.a-card h3{font-size:17px;margin-bottom:6px}
+.a-card p{margin:0;font-size:14.5px;color:var(--mute);line-height:1.55}
+.a-wrap .note{color:#9db4c7}
+
+/* ============ B: CLAIM TICKETS ============ */
+.b-wrap{background:var(--sand)}
+.b-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:left}
+@media(max-width:760px){.b-grid{grid-template-columns:1fr}}
+.ticket{display:grid;grid-template-columns:104px 1fr;background:#fff;border-radius:var(--r-soft);
+  overflow:hidden;box-shadow:var(--shadow);position:relative}
+.ticket .stub{background:var(--rust);color:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:18px 10px;text-align:center}
+.ticket .stub .big{font-family:var(--num);font-weight:800;font-size:26px;line-height:1}
+.ticket .stub .sm{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:5px;font-weight:700}
+/* perforation between stub and body */
+.ticket .perf{position:absolute;left:104px;top:0;bottom:0;width:0;
+  border-left:2px dashed rgba(255,255,255,.65)}
+.ticket .body{padding:20px 22px}
+.ticket h3{font-size:17.5px;margin-bottom:6px}
+.ticket p{margin:0 0 10px;font-size:14.5px;color:var(--mute);line-height:1.55}
+.ticket .claim{font-family:var(--head);font-weight:700;font-size:13.5px;color:var(--rust);text-decoration:none}
+.ticket .claim:hover{text-decoration:underline}
+.b-strip{background:var(--navy);color:#fff;border-radius:var(--r-soft);padding:20px 24px;margin-top:24px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;text-align:left}
+.b-strip b{font-family:var(--head);font-size:18px}
+.b-strip span{color:#9db4c7;font-size:14px;display:block;margin-top:3px}
+
+/* ============ C: HEADLINE OFFER ============ */
+.c-wrap{background:#fff}
+.c-hero{display:grid;grid-template-columns:1.15fr 1fr;gap:0;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 18px 44px rgba(17,35,55,.20);text-align:left}
+@media(max-width:860px){.c-hero{grid-template-columns:1fr}}
+.c-hero .pic{position:relative;min-height:290px;background:var(--navy)}
+.c-hero .pic img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.c-flag{position:absolute;z-index:3;top:18px;left:18px;background:var(--rust);
+  box-shadow:0 4px 14px rgba(0,0,0,.35);color:#fff;font-family:var(--head);
+  font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:100px}
+.c-hero .body{background:var(--navy);color:#fff;padding:32px 34px;display:flex;flex-direction:column;justify-content:center}
+.c-hero .body h3{color:#fff;font-size:clamp(22px,2.6vw,29px);margin-bottom:10px}
+.c-hero .body p{color:#b7c8d6;font-size:15.5px;margin:0 0 18px;line-height:1.6}
+.c-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;text-align:left}
+@media(max-width:760px){.c-row{grid-template-columns:1fr}}
+.c-mini{border:1px solid var(--line);border-radius:var(--r-soft);padding:16px 18px;background:#fff;
+  display:flex;gap:13px;align-items:flex-start}
+.c-mini .k{font-family:var(--num);font-weight:800;color:var(--rust);font-size:19px;line-height:1.1;flex-shrink:0}
+.c-mini h4{font-size:15px;margin-bottom:3px}
+.c-mini p{margin:0;font-size:13.5px;color:var(--mute);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <span class="lbl">Promos section &middot; 3 options</span>
+  <button class="tab on" data-p="A">A &middot; Dark Spotlight</button>
+  <button class="tab" data-p="B">B &middot; Claim Tickets</button>
+  <button class="tab" data-p="C">C &middot; Headline Offer</button>
+  <button class="tab cmp" data-p="cmp">&#8646; Compare</button>
+</div>
+
+<div class="stage">
+
+<!-- ================= A ================= -->
+<div class="pane on" id="A">
+  <section class="sect center a-wrap"><div class="in">
+    <div class="a-pill">&#9733; Current offers</div>
+    <h2 class="big">What you can claim right now</h2>
+    <div class="a-grid">
+      <div class="a-card"><div class="ico">+</div><div class="val">Free add-on</div>
+        <h3>Free dual sump pump</h3><p>With every whole house French drain.</p></div>
+      <div class="a-card"><div class="ico">%</div><div class="val">12% off</div>
+        <h3>Military &amp; first responder</h3><p>12% off all services. Just ask when you call.</p></div>
+      <div class="a-card"><div class="ico">$</div><div class="val">0% APR</div>
+        <h3>Financing to $200,000</h3><p>Subject to approval. Ask about options at your estimate.</p></div>
+      <div class="a-card"><div class="ico">&#10003;</div><div class="val">No charge</div>
+        <h3>Free estimate</h3><p>No obligation, and we price-match any reasonable estimate.</p></div>
+    </div>
+    <div class="ctarow"><a class="btn btn-p" href="#">Get my free estimate</a><a class="btn btn-w" href="#">Call (201) 646-5936</a></div>
+    <div class="note">Offers as published by ARD Waterproofing. Confirm current terms at your estimate.</div>
+  </div></section>
+</div>
+<div class="cap" id="capA"><b>A &middot; Dark Spotlight.</b> The offers sit on a navy band with a rust glow, so they break out of the white sections around them. Four equal cards, each with an icon and a value label. <b>Best when</b> you want all four offers weighted the same and the section to read as a clear break in the page. Closest to what is on the page now.</div>
+
+<!-- ================= B ================= -->
+<div class="pane" id="B">
+  <section class="sect center b-wrap"><div class="in">
+    <h2 class="big">Current offers</h2>
+    <p style="color:var(--mute);max-width:60ch;margin:0 auto 30px">Mention these when you call or note them on the form, and David will apply them at your estimate.</p>
+    <div class="b-grid">
+      <div class="ticket">
+        <div class="stub"><div class="big">FREE</div><div class="sm">Add-on</div></div><div class="perf"></div>
+        <div class="body"><h3>Dual sump pump</h3><p>Free with every whole house French drain.</p>
+          <a class="claim" href="#">Claim this offer &rarr;</a></div>
+      </div>
+      <div class="ticket">
+        <div class="stub"><div class="big">12%</div><div class="sm">Off</div></div><div class="perf"></div>
+        <div class="body"><h3>Military &amp; first responder</h3><p>12% off all services. Just ask when you call.</p>
+          <a class="claim" href="#">Claim this offer &rarr;</a></div>
+      </div>
+      <div class="ticket">
+        <div class="stub"><div class="big">0%</div><div class="sm">APR</div></div><div class="perf"></div>
+        <div class="body"><h3>Financing to $200,000</h3><p>Subject to approval. Ask about the options at your estimate.</p>
+          <a class="claim" href="#">Ask about financing &rarr;</a></div>
+      </div>
+      <div class="ticket">
+        <div class="stub"><div class="big">$0</div><div class="sm">Estimate</div></div><div class="perf"></div>
+        <div class="body"><h3>Free estimate</h3><p>No obligation, and we price-match any reasonable estimate.</p>
+          <a class="claim" href="#">Book my estimate &rarr;</a></div>
+      </div>
+    </div>
+    <div class="b-strip">
+      <div><b>Not sure which you qualify for?</b><span>Tell David when he comes out and he will work out what applies to your job.</span></div>
+      <a class="btn btn-p" href="#">Get my free estimate</a>
+    </div>
+    <div class="note">Offers as published by ARD Waterproofing. Confirm current terms at your estimate.</div>
+  </div></section>
+</div>
+<div class="cap" id="capB"><b>B &middot; Claim Tickets.</b> Each offer is a voucher with a tear-off stub carrying the number, so the value reads first and the whole thing feels claimable rather than informational. Every ticket has its own link. <b>Best when</b> you want the promos to drive the click themselves, and the navy strip is a natural place for a combining-offers line once David confirms which of these can stack.</div>
+
+<!-- ================= C ================= -->
+<div class="pane" id="C">
+  <section class="sect center c-wrap"><div class="in">
+    <h2 class="big">Current offers</h2>
+    <div class="c-hero">
+      <div class="pic">
+        <span class="c-flag">This month</span>
+        <img src="video/img-sump.jpg" alt="Sump pump installed in a basement">
+      </div>
+      <div class="body">
+        <h3>Free dual sump pump with every whole house French drain</h3>
+        <p>The backup pump is the part homeowners skip and then regret during a nor'easter. On a whole house French drain, ARD puts the second pump in at no cost.</p>
+        <div class="ctarow" style="margin-top:0"><a class="btn btn-p" href="#">Claim this offer</a>
+          <a class="btn btn-ghost" href="#">Call (201) 646-5936</a></div>
+      </div>
+    </div>
+    <div class="c-row">
+      <div class="c-mini"><div class="k">12%</div><div><h4>Military &amp; first responder</h4><p>Off all services. Just ask when you call.</p></div></div>
+      <div class="c-mini"><div class="k">0%</div><div><h4>APR financing</h4><p>Up to $200,000, subject to approval.</p></div></div>
+      <div class="c-mini"><div class="k">$0</div><div><h4>Free estimate</h4><p>No obligation, price-matched.</p></div></div>
+    </div>
+    <div class="note">Offers as published by ARD Waterproofing. Confirm current terms at your estimate.</div>
+  </div></section>
+</div>
+<div class="cap" id="capC"><b>C &middot; Headline Offer.</b> One offer gets the weight, with a photo and its own CTA, and the other three sit underneath as a compact supporting row. <b>Best when</b> the free sump pump is the strongest hook and you want it doing the selling. Uses a real job photo, so the section is not all type.</div>
+
+<!-- ================= COMPARE ================= -->
+<div id="cmp">
+  <div class="cmpbar">
+    <select id="selL"><option value="A">A &middot; Dark Spotlight</option><option value="B">B &middot; Claim Tickets</option><option value="C">C &middot; Headline Offer</option></select>
+    <select id="selR"><option value="B">B &middot; Claim Tickets</option><option value="A">A &middot; Dark Spotlight</option><option value="C">C &middot; Headline Offer</option></select>
+  </div>
+  <div class="cmpwrap">
+    <div class="cmpcol"><iframe id="frL" title="Left"></iframe></div>
+    <div class="cmpcol"><iframe id="frR" title="Right"></iframe></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var PANES=['A','B','C'];
+function show(p){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.dataset.p===p);});
+  var isCmp=p==='cmp';
+  document.getElementById('cmp').classList.toggle('on',isCmp);
+  PANES.forEach(function(id){
+    document.getElementById(id).classList.toggle('on', !isCmp && id===p);
+    document.getElementById('cap'+id).style.display=(!isCmp && id===p)?'':'none';
+  });
+  if(isCmp) loadFrames();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){show(t.dataset.p);};});
+function loadFrames(){
+  document.getElementById('frL').src=location.pathname+'?only='+document.getElementById('selL').value;
+  document.getElementById('frR').src=location.pathname+'?only='+document.getElementById('selR').value;
+}
+document.getElementById('selL').onchange=loadFrames;
+document.getElementById('selR').onchange=loadFrames;
+// hide captions that are not active on first paint
+PANES.forEach(function(id){ if(id!=='A') document.getElementById('cap'+id).style.display='none'; });
+(function(){
+  var m=location.search.match(/only=([ABC])/); if(!m) return;
+  document.querySelector('.chrome').style.display='none';
+  document.getElementById('cmp').style.display='none';
+  var st=document.querySelector('.stage'); st.style.paddingTop='0'; st.style.paddingBottom='0';
+  PANES.forEach(function(id){
+    document.getElementById(id).classList.toggle('on', id===m[1]);
+    document.getElementById('cap'+id).style.display=(id===m[1])?'':'none';
+  });
+  document.querySelectorAll('.pane').forEach(function(p){p.style.boxShadow='none';p.style.maxWidth='none';});
+  document.documentElement.style.setProperty('--chrome','0px');
+})();
+</script>
+</body>
+</html>
