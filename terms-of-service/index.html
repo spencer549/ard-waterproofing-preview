@@ -1,0 +1,1155 @@
+<div class="pvbar"><span><b>Preview</b> of the redesigned ARD Waterproofing
+website. Not published, and not visible in search.</span></div>
+<style>.pvbar{background:#0b1520;color:#c6d6e4;font:500 13px/1.4 -apple-system,
+BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:7px 16px;text-align:center;
+border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Terms of Service | ARD Waterproofing</title>
+<meta name="description" content="Terms of Service for ardwaterproofing.com, ARD Waterproofing, West Caldwell, New Jersey.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&family=Bitter:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ARD service page templates. Tokens are Direction B's, unchanged. */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --navy:#112337; --navy-2:#1b3a55;
+  --blue:#125e98; --blue-lt:#2e88c0; --blue-dk:#0b4570;
+  --rust:#db3c11; --rust-dk:#b02f0b;
+  --ink:#23262a; --mute:#5d6672; --line:#dde4ea;
+  --soft:#f4f7f9; --sand:#f3ede4; --sand-2:#e6dccd; --clay:#8c7a63;
+  --r-sharp:3px; --r-soft:12px;
+  --head:'Fira Sans',system-ui,sans-serif;
+  --body:'Source Sans 3',system-ui,sans-serif;
+  --num:'Bitter',Georgia,serif;
+}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#e9edf1;
+  -webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3,h4{font-family:var(--head);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0}
+p{margin:0 0 1em;line-height:1.68}
+a{color:inherit}
+img,video{max-width:100%;display:block}
+ul{margin:0;padding:0}
+
+/* ---------------- review chrome ---------------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#0a1420;color:#fff;display:flex;
+  align-items:center;gap:12px;padding:9px 16px;font-size:13px;flex-wrap:wrap;font-family:var(--head)}
+.bar b{font-weight:700}
+.bar .sub{color:#8ea6bd;font-weight:400;font-size:12px}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tab{background:rgba(255,255,255,.1);color:#fff;border:0;padding:7px 15px;border-radius:999px;
+  font:600 13px var(--head);cursor:pointer}
+.tab.on{background:#fff;color:#0a1420}
+.tab.cmp.on{background:var(--rust);color:#fff}
+.stage{padding-top:42px}
+.pane{display:none;background:#fff}.pane.on{display:block}
+#cmp{display:none}#cmp.on{display:block}
+.cmpbar{display:flex;gap:10px;align-items:center;padding:9px 16px;background:#fff;
+  border-bottom:1px solid var(--line);position:sticky;top:42px;z-index:50}
+.cmpbar select{font:600 13px var(--head);padding:7px 10px;border:1px solid var(--line);border-radius:6px}
+.cmphint{font:500 12.5px var(--head);color:var(--mute)}
+.cmpwrap{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 90px)}
+.cmpwrap iframe{width:100%;height:100%;border:0;border-right:1px solid var(--line)}
+body.solo .bar{display:none}
+body.solo .stage{padding-top:0}
+
+/* ---------------- shared primitives ---------------- */
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.narrow{max-width:860px;margin:0 auto;padding:0 24px}
+/* BUTTONS. Spencer, 2026-08-13: "the buttons is not that good."
+   Two real defects, both measured on the Summit matrix page.
+   1. `border:0` here against `border:2px` on .btn-o made a PAIRED primary and secondary
+      differ by 4px in height, 57 against 61 in the CTA band. Every variant now carries a
+      2px transparent border, so the box is identical and only the colour changes.
+   2. THREE size scales existed for the same two actions on one page: the base at 15px,
+      .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
+      438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
+      and the CTA band uses lg rather than inventing a third. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
+  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer}
+.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
+.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.btn-d{background:var(--navy);color:#fff}
+.btn-w{background:#fff;color:var(--navy)}
+.btn.wide{width:100%}
+.eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
+.eyebrow.dk{color:var(--rust)}
+.stars{color:#f2a71b;letter-spacing:2px}
+.lede{font-size:19px;color:var(--mute)}
+.pane section{padding:78px 0}
+.band-white{background:#fff}
+.band-sand{background:var(--sand)}
+.band-navy{background:var(--navy);color:#fff}
+.pane h2{font-size:clamp(26px,3.2vw,38px);color:var(--navy);max-width:24ch}
+.band-navy h2{color:#fff}
+.band-navy .lede,.band-navy p{color:#b6c9da}
+.shead{margin-bottom:36px}
+.shead .lede{margin-top:12px;max-width:64ch}
+.shead.center{text-align:center}
+.shead.center h2,.shead.center .lede{margin-left:auto;margin-right:auto}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cols2 p{margin:0}
+.tnote{margin-top:22px;font:600 15px var(--head);color:var(--mute)}
+.band-navy .tnote{color:#93aec6}
+
+/* promo strip */
+.promo{background:var(--rust);color:#fff;font:600 13px var(--head);padding:8px 0}
+.promo .in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.promo .rt{margin-left:auto;display:flex;align-items:center;gap:7px}
+.promo a{color:#fff;text-decoration:underline}
+
+/* breadcrumbs */
+.crumbs{font:600 13px var(--head);color:var(--mute);margin-bottom:16px}
+.crumbs a{text-decoration:none;color:var(--blue)}
+.crumbs i{font-style:normal;opacity:.5;margin:0 6px}
+.crumbs.lt{color:var(--mute)}
+
+/* mega menu, identical behaviour across all three headers */
+.mm{position:relative}
+.mm>a{display:flex;align-items:center;gap:5px}
+.mm .drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);
+  background:#fff;border-radius:var(--r-soft);box-shadow:0 24px 60px rgba(17,35,55,.24);
+  padding:26px 30px;opacity:0;visibility:hidden;transition:.18s;z-index:200;border-top:3px solid var(--rust)}
+.mm:hover .drop,.mm:focus-within .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.mm .drop.svc{display:grid;grid-template-columns:1fr 1fr;gap:30px;width:600px}
+.mm .drop.area{width:430px;display:grid;grid-template-columns:1fr 1fr;gap:4px 26px}
+.mm .drop h5{font:700 11.5px var(--head);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--clay);margin:0 0 12px}
+.mm .drop.area h5{grid-column:1/-1}
+.mm .drop ul{list-style:none}
+.mm .drop li a{display:block;padding:7px 0;font:500 15px var(--body);color:var(--ink);
+  text-decoration:none;border-bottom:1px solid #f0f3f6}
+.mm .drop li a:hover{color:var(--rust)}
+.mm .drop.area a{font-size:14.5px;padding:6px 0}
+.mm .drop .allsvc{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+  font:700 14px var(--head);color:var(--rust);text-decoration:none}
+.mm .drop.area .allsvc{grid-column:1/-1}
+.burger{display:none;background:transparent;border:0;cursor:pointer;padding:9px;margin-left:12px;color:inherit}
+.burger span{display:block;width:25px;height:2px;background:currentColor;border-radius:2px;
+  transition:.2s;margin:5px 0}
+.lg{font:800 22px var(--head);letter-spacing:-.03em;text-decoration:none}
+.lg i{color:var(--rust);font-style:normal}
+
+/* trust badges */
+.tbadges{display:flex;gap:22px;flex-wrap:wrap}
+.tbadge{display:flex;align-items:center;gap:9px;font:600 14px var(--head)}
+.tbadge .ic{width:20px;height:20px;border-radius:50%;background:var(--rust);flex:none;position:relative}
+.tbadge .ic::after{content:"";position:absolute;left:6px;top:9px;width:8px;height:4px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+
+/* estimate form */
+.qform{background:#fff;border-radius:var(--r-soft);padding:28px;box-shadow:0 18px 44px rgba(17,35,55,.16)}
+.qform.dk{background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.qform h3{font-size:22px;color:var(--navy);margin-bottom:6px}
+.qform .fsub{font-size:14.5px;color:var(--mute);margin-bottom:16px}
+.qform input,.qform select{width:100%;padding:13px 14px;border:1px solid var(--line);
+  border-radius:var(--r-sharp);font:400 15.5px var(--body);margin-bottom:11px;background:#fff;color:var(--ink)}
+.qform .frow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.qform .fine{font-size:12.5px;color:var(--mute);margin:12px 0 0;line-height:1.5}
+.qform .fine a{color:var(--blue)}
+
+/* FAQ */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font:700 17.5px var(--head);
+  color:var(--navy);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:8px;top:15px;font:400 26px var(--head);color:var(--rust)}
+.faq details[open] summary::after{content:"\2212"}
+.faq .ans{padding:0 40px 22px 0;color:var(--mute);font-size:16px;line-height:1.7}
+.faq .ans p{margin:0}
+.band-sand .faq summary{color:var(--navy)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.chips a{text-decoration:none;padding:9px 16px;border-radius:999px;font:600 14px var(--head);
+  background:#fff;border:1px solid var(--line);color:var(--navy)}
+.band-navy .chips a{background:rgba(255,255,255,.1);border-color:transparent;color:#dceaf5}
+
+/* reviews */
+.rvgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.rv{background:#fff;border-radius:var(--r-soft);padding:24px;box-shadow:0 10px 28px rgba(17,35,55,.1)}
+.rv p{font-size:15.5px;line-height:1.65;font-style:italic;color:var(--ink)}
+.rv .who{font:700 14.5px var(--head);color:var(--navy)}
+.rv .who span{display:block;font-weight:500;font-size:13px;color:var(--mute);font-style:normal}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.gal figure{margin:0;background:#fff;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 10px 28px rgba(17,35,55,.1)}
+.gal img{width:100%;height:220px;object-fit:cover}
+.gal figcaption{padding:12px 14px;font:600 13.5px var(--head);color:var(--mute)}
+
+/* services grid */
+.svcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.svcitem{background:#fff;border-radius:var(--r-soft);text-decoration:none;display:block;overflow:hidden;
+  box-shadow:0 10px 28px rgba(17,35,55,.1)}
+.svcitem img{width:100%;height:150px;object-fit:cover}
+.svcitem h4{font-size:17px;margin:18px 20px 6px;color:var(--navy)}
+.svcitem p{font-size:14.5px;margin:0 20px 20px;color:var(--mute)}
+
+/* CTA band, shared closing element */
+.ctaband{background:var(--rust);color:#fff;padding:52px 0}
+.ctaband .in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;
+  gap:34px;flex-wrap:wrap}
+.ctaband h2{color:#fff;max-width:26ch;font-size:clamp(23px,2.8vw,33px)}
+.ctaband p{color:rgba(255,255,255,.92);margin:8px 0 0;max-width:48ch}
+.ctaband .sp{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
+
+/* footer */
+.sfoot{background:var(--navy);color:#a7bccf;padding:56px 0 26px;font-size:15px}
+.sfoot a{color:#fff;text-decoration:none}
+.sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
+.sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+.fg p{line-height:1.8;margin-bottom:.6em}
+.sfoot .lic{font-size:13.5px;color:#7e97ad}
+.fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:13px;color:#7e97ad;display:flex;gap:18px;flex-wrap:wrap}
+.soc{display:flex;gap:10px;margin-top:12px}
+.soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;
+  align-items:center;justify-content:center;font:700 12px var(--head)}
+
+/* =====================================================================
+   A, "DEEP SECTION"
+   offset-card over photo | transparent-over-hero | diagnose first
+   ===================================================================== */
+#A .ahero-wrap{position:relative;background:var(--navy)}
+#A .ahead{position:absolute;left:0;right:0;top:0;z-index:60;padding:18px 0}
+#A .ahead .in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:26px}
+#A .ahead .lg{color:#fff}
+#A .ahead nav{margin-left:auto;display:flex;gap:22px;font:600 14.5px var(--head);align-items:center}
+#A .ahead nav>a,#A .ahead .mm>a{color:rgba(255,255,255,.92);text-decoration:none}
+#A .ahead .tel{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;
+  padding:9px 17px;border-radius:999px;font:700 14px var(--head);text-decoration:none}
+#A .ahead .burger{color:#fff}
+#A .ahero{height:56vh;min-height:420px;position:relative;overflow:hidden}
+#A .ahero img{width:100%;height:100%;object-fit:cover;opacity:.8}
+#A .ahero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(17,35,55,.92) 0%,rgba(17,35,55,.48) 56%,rgba(17,35,55,.18) 100%)}
+#A .acard{max-width:1200px;margin:-160px auto 0;padding:0 24px;position:relative;z-index:20}
+#A .acard .inner{background:#fff;border-radius:var(--r-soft);padding:44px 48px;max-width:820px;
+  box-shadow:0 26px 60px rgba(17,35,55,.22)}
+#A .acard h1{font-size:clamp(31px,4.2vw,50px);color:var(--navy);margin:12px 0 16px;max-width:19ch}
+#A .acard .lede{max-width:56ch}
+#A .acta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+#A .acard .tbadges{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+#A .acard .tbadge{font-size:13.5px;color:var(--mute)}
+#A .asplit-intro{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:start}
+#A .asplit-intro p{margin-bottom:1.1em}
+#A .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+#A .rcard{background:#fff;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 10px 28px rgba(17,35,55,.1);display:flex;flex-direction:column}
+#A .rcard .sym{background:var(--navy);color:#fff;font:700 16.5px var(--head);padding:18px 20px;
+  line-height:1.3;display:flex;align-items:center;min-height:74px}
+#A .rcard .fix{padding:20px;flex:1}
+#A .rcard .fix b{font:700 11px var(--head);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rust);display:block;margin-bottom:7px}
+#A .rcard .fix h4{font-size:16.5px;color:var(--navy);margin-bottom:7px}
+#A .rcard .fix p{font-size:14.5px;color:var(--mute);margin:0}
+#A .mlist{display:grid;gap:0}
+#A .mstep{display:grid;grid-template-columns:120px 1fr;gap:34px;padding:34px 0;
+  border-top:1px solid var(--line)}
+#A .mstep:last-child{border-bottom:1px solid var(--line)}
+#A .mnum{font:800 54px var(--num);color:var(--sand-2);line-height:1}
+#A .mbody h3{font-size:22px;color:var(--navy);margin-bottom:12px}
+#A .mbody p{margin-bottom:.8em}
+#A .mmute{color:var(--mute);font-size:15.5px}
+#A .aform-split{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:start}
+
+/* =====================================================================
+   B, "FIELD NOTES"
+   split hero with a form rail | solid sticky header | sticky sub-nav, paired rows
+   ===================================================================== */
+#B .bhead2{position:sticky;top:42px;z-index:100;background:#fff;border-bottom:1px solid var(--line)}
+body.solo #B .bhead2{top:0}
+#B .bhead2 .in{max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;
+  align-items:center;gap:26px}
+#B .bhead2 .lg{color:var(--navy)}
+#B .bhead2 nav{margin-left:auto;display:flex;gap:22px;font:600 14.5px var(--head);align-items:center}
+#B .bhead2 nav>a,#B .bhead2 .mm>a{color:var(--ink);text-decoration:none}
+#B .bhead2 .tel{background:var(--navy);color:#fff;padding:9px 17px;border-radius:999px;
+  font:700 14px var(--head);text-decoration:none}
+#B .bhero{background:var(--soft);border-bottom:1px solid var(--line);padding:52px 0 60px}
+#B .bhero-in{display:grid;grid-template-columns:1.25fr .75fr;gap:54px;align-items:start}
+#B .bcopy h1{font-size:clamp(30px,3.9vw,46px);color:var(--navy);margin:12px 0 16px;max-width:19ch}
+#B .bcopy .lede{max-width:52ch}
+#B .bcopy .tbadges{margin-top:26px;padding-top:22px;border-top:1px solid var(--sand-2)}
+#B .bcopy .tbadge{font-size:13.5px;color:var(--mute)}
+#B .brail{position:sticky;top:130px}
+body.solo #B .brail{top:88px}
+#B .subnav{position:sticky;top:114px;z-index:80;background:var(--navy);
+  box-shadow:0 6px 18px rgba(17,35,55,.16)}
+body.solo #B .subnav{top:72px}
+#B .subnav .wrap{display:flex;gap:26px;overflow-x:auto;padding-top:0;padding-bottom:0}
+#B .subnav a{color:#c5d5e3;text-decoration:none;font:600 14px var(--head);padding:15px 0;
+  white-space:nowrap;border-bottom:3px solid transparent}
+#B .subnav a:hover{color:#fff;border-bottom-color:var(--rust)}
+#B .pairs{display:grid;gap:22px}
+#B .pair{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center;
+  background:#fff;border-radius:var(--r-soft);overflow:hidden;box-shadow:0 10px 28px rgba(17,35,55,.1)}
+#B .pair.flip .ppic{order:2}
+#B .pair .ppic img{width:100%;height:250px;object-fit:cover}
+#B .pair .pbody{padding:28px 34px 28px 0}
+#B .pair.flip .pbody{padding:28px 0 28px 34px}
+#B .pair h3{font-size:22px;color:var(--navy);margin:8px 0 12px}
+#B .pmeans{font:600 15px var(--head);color:var(--navy);background:var(--sand);
+  display:inline-block;padding:7px 13px;border-radius:var(--r-sharp);margin-bottom:12px}
+#B .pmeans b{color:var(--rust);text-transform:uppercase;font-size:11px;letter-spacing:.12em}
+#B .pair p{color:var(--mute);font-size:15.5px;margin-bottom:.9em}
+#B .plink{font:700 14.5px var(--head);color:var(--rust);text-decoration:none}
+#B .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+#B .mcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--rust);
+  border-radius:var(--r-sharp);padding:26px}
+#B .mcard h3{font-size:19px;color:var(--navy);margin-bottom:12px}
+#B .mcard p{font-size:15.5px}
+#B .mmute{color:var(--mute);font-size:14.5px;margin:0}
+#B .ftable{width:100%;border-collapse:collapse;font-size:16px}
+#B .ftable th{text-align:left;font:700 16.5px var(--head);color:#fff;padding:16px 24px 16px 0;
+  width:34%;vertical-align:top;border-bottom:1px solid rgba(255,255,255,.14)}
+#B .ftable td{color:#b6c9da;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.14);
+  vertical-align:top}
+
+/* =====================================================================
+   C, "THE ESTIMATE"
+   form-led hero, no photo | compact bar header | commercial first, timeline
+   ===================================================================== */
+#C .chead{background:var(--navy);color:#fff}
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+  align-items:center;gap:26px}
+#C .chead .lg{color:#fff}
+#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
+#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
+  font:700 14px var(--head);text-decoration:none}
+#C .chead .burger{color:#fff}
+#C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
+#C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
+#C .chero .crumbs{color:#8ea6bd}
+#C .chero .crumbs a{color:#9dc3e0}
+#C .chero h1{font-size:clamp(30px,3.9vw,46px);color:#fff;margin:12px 0 16px;max-width:18ch}
+#C .chero .lede{color:#b6c9da;max-width:50ch}
+/* Solid, not translucent. At 5% white these panels let a bright hero photograph
+   read straight through them and the copy lost all contrast. The hero image is
+   background; the panels sitting on it have to be their own surface. */
+#C .croute{list-style:none;margin:26px 0 0;display:grid;gap:1px;background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.16);border-radius:var(--r-sharp);overflow:hidden;
+  box-shadow:0 12px 30px rgba(4,12,22,.32)}
+/* Stacked, not inline. With a real description the inline version wrapped and left
+   the text dangling right-aligned on its own line. */
+#C .croute li{background:rgba(10,21,36,.88);padding:12px 18px;display:block}
+#C .croute b{display:block;font:700 15.5px var(--head);color:#fff}
+#C .croute span{display:block;margin-top:3px;font-size:14.5px;color:#adc3d6;line-height:1.5}
+#C .cmeta{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px;
+  padding-top:22px;border-top:1px solid rgba(255,255,255,.16)}
+#C .cmeta b{display:block;font:800 20px var(--num);color:#fff}
+#C .cmeta span{font:600 13px var(--head);color:#9ab3c8}
+#C .crail .railnote{margin-top:20px;padding:20px 22px;border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--r-sharp);background:rgba(10,21,36,.90);
+  box-shadow:0 12px 30px rgba(4,12,22,.32)}
+#C .crail .railnote b{display:block;font:700 15.5px var(--head);color:#fff;margin-bottom:6px}
+#C .crail .railnote p{font-size:14.5px;color:#adc3d6;margin:0}
+#C .crail .railnote a{color:#fff;font-weight:700;text-decoration:none;border-bottom:1px solid var(--rust)}
+#C .cstrip{background:var(--sand);border-bottom:1px solid var(--sand-2)}
+#C .cstrip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;
+  padding-top:26px;padding-bottom:26px}
+#C .cstrip b{display:block;font:800 24px var(--num);color:var(--navy);line-height:1.1}
+#C .cstrip span{font:600 13.5px var(--head);color:var(--mute)}
+#C .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+#C .fcard{border:1px solid var(--line);border-left:3px solid var(--rust);border-radius:var(--r-sharp);
+  padding:22px 24px;background:#fff}
+#C .fcard h4{font-size:17px;color:var(--navy);margin-bottom:8px}
+#C .fcard p{font-size:15px;color:var(--mute);margin:0}
+#C .timeline{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:24px;counter-reset:tl}
+#C .timeline li{border-top:3px solid var(--rust);padding-top:18px}
+#C .tk{font:800 11.5px var(--head);letter-spacing:.16em;color:var(--rust);display:block;margin-bottom:9px}
+#C .timeline h4{font-size:18.5px;color:var(--navy);margin-bottom:8px}
+#C .timeline p{font-size:15px;color:var(--mute);margin:0}
+#C .mrows{display:grid;gap:0}
+#C .mrow{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;padding:30px 0;
+  border-top:1px solid var(--line)}
+#C .mrow:last-child{border-bottom:1px solid var(--line)}
+#C .mrow h3{font-size:20px;color:var(--navy)}
+#C .mrow p{font-size:15.5px;margin-bottom:.8em}
+#C .mmute{color:var(--mute);font-size:14.5px;margin:0}
+#C .incgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+#C .inc{background:#fff;border-radius:var(--r-sharp);padding:24px;border-top:3px solid var(--navy)}
+#C .inc h4{font-size:17px;color:var(--navy);margin-bottom:8px}
+#C .inc p{font-size:15px;color:var(--mute);margin:0}
+#C .cgal .shead{margin-bottom:28px}
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+@media (max-width:1000px){
+  .pane section{padding:56px 0}
+  .cols2,#A .asplit-intro,#A .aform-split,#B .bhero-in,#C .chero-in{grid-template-columns:1fr;gap:34px}
+  #B .brail,#B .subnav{position:static}
+  #A .acard{margin-top:-90px}
+  #A .acard .inner{padding:32px 26px}
+  #A .mstep{grid-template-columns:1fr;gap:10px}
+  #A .mnum{font-size:38px}
+  #B .pair,#B .pair.flip .ppic{grid-template-columns:1fr;order:0}
+  #B .pair .pbody,#B .pair.flip .pbody{padding:24px}
+  #C .mrow{grid-template-columns:1fr;gap:12px}
+  #C .cmeta{grid-template-columns:1fr}
+  #C .fgrid{grid-template-columns:1fr 1fr}
+  .fg{grid-template-columns:1fr 1fr}
+  .cmpwrap{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  /* Specificity matters here. The per-template rules above are id-scoped
+     (#A .ahead nav), so a class-only override would silently lose and the
+     desktop nav would stay visible on phones. Match the id scope. */
+  #A .ahead nav,#B .bhead2 nav,#C .chead nav{display:none}
+  #A .ahead .burger,#B .bhead2 .burger,#C .chead .burger{display:block}
+  #A .ahead.navopen nav,#B .bhead2.navopen nav,#C .chead.navopen nav{
+    display:flex;position:absolute;top:100%;left:0;right:0;background:#fff;
+    flex-direction:column;align-items:stretch;gap:0;padding:14px 24px 20px;margin-left:0;
+    box-shadow:0 24px 50px rgba(17,35,55,.24);max-height:72vh;overflow:auto;z-index:300}
+  #A .ahead.navopen nav>a,#A .ahead.navopen .mm>a,
+  #B .bhead2.navopen nav>a,#B .bhead2.navopen .mm>a,
+  #C .chead.navopen nav>a,#C .chead.navopen .mm>a{color:var(--ink);padding:12px 0;
+    border-bottom:1px solid var(--line)}
+  .navopen .mm{position:static}
+  .navopen .mm .drop,.navopen .mm:hover .drop{position:static;transform:none;opacity:1;
+    visibility:visible;box-shadow:none;padding:8px 0 14px;width:auto;border-top:0;
+    grid-template-columns:1fr}
+  #A .ahead.navopen .tel,#B .bhead2.navopen .tel,#C .chead.navopen .tel{
+    background:var(--navy);color:#fff;text-align:center;margin-top:12px;justify-content:center}
+  #A .ahead,#C .chead{position:relative}
+  #A .ahero{height:300px;min-height:0}
+  #A .acard{margin-top:-60px}
+  .promo .rt{margin-left:0}
+  .fg{grid-template-columns:1fr}
+  .ctaband .sp{margin-left:0}
+  .gal img{height:190px}
+  #C .fgrid{grid-template-columns:1fr}
+  #C .croute li{flex-direction:column;gap:2px}
+  #C .croute span{margin-left:0}
+  #B .ftable th,#B .ftable td{display:block;width:auto;padding:12px 0 4px}
+  #B .ftable td{padding:0 0 14px}
+}
+
+
+/* ---- real client logo, 2026-08-14 ------------------------------------------------
+   Replaces the text wordmark with ARD's own file from the live site. Height is set on
+   the IMG itself, not only on the link, so nothing collapses if a converter ever wraps
+   it in a <picture>. */
+.lg img{display:block;height:54px;width:auto;max-height:54px}
+.sfoot .lg img{height:58px;max-height:58px}
+.chead .lg{display:inline-flex;align-items:center}
+@media(max-width:640px){.lg img{height:44px;max-height:44px}}
+
+/* standalone service pages, on top of template C */
+body{background:#fff}
+.chead .drop li a.here{color:var(--rust);font-weight:700}
+
+/* ---- HERO STRIP, picked 2026-08-06, shared by the service AND city pages ---------
+   Lives here rather than in the city generator so both families read one source: the
+   city build imports EXTRA_CSS. Replaces the old .croute dark table, which printed the
+   LIFTED service titles (60 to 85 characters) into a 604px slot and truncated every
+   title and description, stacking six ellipses in one block. The badges moved up into
+   the hero, so the separate .cstrip badgestrip below it is gone; rendering the same four
+   twice about 100px apart is duplication, not emphasis. */
+#C .hstrip{margin-top:26px;max-width:640px}
+#C .hline{margin:0 0 18px;font:500 16.5px var(--body);color:#cddcea;line-height:1.85}
+#C .hline b{font-weight:700;color:#fff}
+#C .hline a{color:#fff;font-weight:700;text-decoration:none;
+  border-bottom:2px solid var(--rust);padding-bottom:1px;transition:.16s}
+#C .hline a:hover{color:var(--rust)}
+#C .hproof{list-style:none;margin:0;padding:18px 0 0;
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px}
+#C .hproof li{position:relative;padding-left:26px;line-height:1.4;
+  font:600 14.5px var(--head);color:#dbe7f1}
+#C .hproof li::before{content:"";position:absolute;left:0;top:1px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+#C .hproof li::after{content:"";position:absolute;left:5px;top:6.5px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+@media (max-width:1000px){#C .hproof{grid-template-columns:1fr}}
+
+/* The rail note is part of the form card now, not a second box below it.
+   NOTE THE #C. The base rule is "#C .crail .railnote{margin-top:20px}", an ID selector,
+   so a plain ".crail.joined" override loses on specificity and the 20px gap survives.
+   That gap exposed a bright patch of the background photograph between the two boxes,
+   which read as a rendering artifact. Verified at 0px, not assumed. */
+#C .crail.joined .qform{border-radius:var(--r-soft) var(--r-soft) 0 0;margin:0;
+  box-shadow:0 18px 44px rgba(4,12,22,.36)}
+#C .crail.joined .railnote{margin-top:0;border-radius:0 0 var(--r-soft) var(--r-soft);
+  border:0;background:rgba(9,20,34,.95);padding:18px 26px;box-shadow:none}
+#C .crail.joined .railnote b{margin-bottom:4px}
+
+/* BANNER. Template C shipped as a flat navy gradient with a tall dead zone under the
+   form. A real photograph sits behind it now, with a left-weighted scrim so the copy
+   keeps contrast, and the columns align to the top so the panel is only as tall as
+   its content. */
+.chero.haspic{position:relative;overflow:hidden;padding:52px 0 58px}
+.chero .cbg{position:absolute;inset:0;z-index:0}
+.chero .cbg img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+/* Weighted left. The copy needs a dark bed; the right can stay open because the
+   estimate card sitting over it is opaque white, so nothing there needs the scrim. */
+.chero.haspic::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(11,24,39,.95) 0%,rgba(12,27,44,.88) 34%,
+    rgba(15,32,51,.60) 58%,rgba(17,35,55,.34) 80%,rgba(17,35,55,.26) 100%)}
+.chero.haspic .wrap{position:relative;z-index:2}
+.chero.haspic .chero-in{align-items:start}
+
+.cstrip.badgestrip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  align-items:center}
+.cstrip.badgestrip b{font:700 15px var(--head);color:var(--navy);display:block;line-height:1.35;
+  padding-left:15px;border-left:3px solid var(--rust)}
+
+/* cost block, with a supporting photograph instead of an empty right half */
+/* Centred, not top-aligned. The cost answer is a lifted FAQ and its length varies by
+   page, so top-aligning dumped all the leftover height under the text as dead space.
+   Centring splits it and the photograph stays a fixed size on every page. */
+.costsplit{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.costbody h2{margin-bottom:18px}
+.costlede{font-size:18px;line-height:1.7}
+.costpic{margin:0;border-radius:var(--r-soft);overflow:hidden;box-shadow:0 14px 34px rgba(17,35,55,.16)}
+.costpic img{width:100%;height:320px;object-fit:cover;display:block}
+
+/* LONG-FORM ROWS, DIRECTION A "THE WALL" (picked 2026-08-13).
+   The photo was a fixed 300px column beside a text column that runs to 1,494px on the
+   longest matrix rows, and `align-items:center` split the 1,132px difference into a void
+   above the photo and a void below it. Spencer circled both.
+
+   Sticky positioning only mitigated that, because the real problem is structural: one
+   photograph cannot fill a 1,500px column. So the two-column pairing is GONE. The prose
+   runs at a single readable measure and the photograph becomes a full-width band, which
+   makes the void impossible by construction rather than merely smaller.
+
+   `.flip` alternates the band above and below the prose, so consecutive rows do not read
+   as the same block twice. column-reverse changes visual order only; the figure stays
+   after the text in the DOM, which is the right reading order for an illustrative photo. */
+.mpic{display:flex;flex-direction:column;gap:32px;
+  padding:36px 0;border-top:1px solid var(--line)}
+.mpic.flip{flex-direction:column-reverse}
+.mpic figure{margin:0;border-radius:var(--r-soft);overflow:hidden;
+  box-shadow:0 14px 34px rgba(17,35,55,.13)}
+.mpic figure img{width:100%;height:clamp(240px,27vw,380px);object-fit:cover;display:block}
+/* TWO COLUMNS, FULL WIDTH. A centred 68ch measure used about half of an 1180px wrap and
+   left the rest empty on both sides, which Spencer read as dead space (2026-08-13) and he
+   is right: symmetric whitespace is still whitespace. Two columns put the width to work
+   and halve the height of the same copy, the same treatment the matrix pages already use
+   for their expanded bodies. Headings keep their first paragraph via break-after. */
+.mpic .mtxt{width:100%;max-width:none;column-count:2;column-gap:40px;
+  column-rule:1px solid var(--line)}
+/* Centred over the pair, with real air under it. The heading spans both columns, so
+   left-aligning it hung it off the left edge of a 1,152px block and read as
+   detached from the two columns beneath. 26px below it separates the heading from
+   its own copy; the 40px column gutter already separates the columns. */
+.mpic .mtxt h3{break-after:avoid;break-inside:avoid;column-span:all;
+  text-align:center;margin:0 auto 26px;max-width:none;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+/* One line. The 38ch cap deliberately wrapped these to two balanced lines; Spencer wants
+   a single line, so the cap goes and the size steps down just enough that the longest
+   real heading still fits the 1,152px block. Measured, not guessed: the longest across
+   all 22 service and city pages is 70 characters. */
+.mpic .mtxt h3{font-size:clamp(17px,1.55vw,21px)}
+@media(max-width:900px){.mpic .mtxt h3{white-space:normal;text-wrap:balance}}
+.mpic .mtxt h4{break-after:avoid;break-inside:avoid}
+.mpic .mtxt p{margin:0 0 .95em}
+@media(max-width:900px){.mpic .mtxt{column-count:1;column-rule:0}}
+.mpic h3{font-size:22px;color:var(--navy);margin-bottom:12px}
+.mpic .mtxt p{font-size:16.5px;margin-bottom:.9em}
+.mrows .mpic:last-child{border-bottom:1px solid var(--line)}
+
+/* WHY. Was a heading over two ragged text columns. Now a lead paragraph carries the
+   argument and the supporting detail sits in a called-out panel. */
+.whysplit{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:start}
+.whymain h2{margin:10px 0 16px}
+.whylead{font-size:20px;line-height:1.62;color:var(--ink)}
+.whymap{border-radius:var(--r-soft);overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(17,35,55,.12);background:#fff}
+/* The iframe sits over a tinted bed. Map tiles load async, so a blank white box is what
+   a slow or blocked embed looks like; this keeps that state looking deliberate. */
+.whymap .mapbed{position:relative;height:330px;background:
+  repeating-linear-gradient(0deg,rgba(17,35,55,.06) 0 1px,transparent 1px 44px),
+  repeating-linear-gradient(90deg,rgba(17,35,55,.06) 0 1px,transparent 1px 44px),var(--soft)}
+/* Write percentages here SINGLY. EXTRA_CSS is passed as an ARGUMENT to page_shell's
+   format string, not used as one, so a doubled percent is never unescaped: it shipped
+   verbatim inside the inset declaration, the browser dropped that declaration as
+   invalid, and the placeholder fell out of its container onto the map caption where it
+   was visible on every page. z-index 0 keeps it behind the iframe once tiles paint. */
+.whymap .mapbed::after{content:"Map loading";position:absolute;left:0;right:0;top:50%;
+  transform:translateY(-50%);z-index:0;text-align:center;
+  font:600 13px var(--head);color:var(--mute)}
+.whymap iframe{position:relative;z-index:1;width:100%;height:330px;border:0;display:block;
+  filter:saturate(.92)}
+.mapcap{padding:16px 20px;border-top:1px solid var(--line)}
+.mapcap b{display:block;font:700 15px var(--head);color:var(--navy)}
+.mapcap span{display:block;margin-top:3px;font-size:14px;color:var(--mute);line-height:1.5}
+.whyrest{font-size:16px;color:var(--mute);margin-top:14px;max-width:56ch}
+.whyaside{background:var(--sand);border-left:3px solid var(--rust);
+  border-radius:0 var(--r-sharp) var(--r-sharp) 0;padding:26px 28px}
+.whytag{font:700 11.5px var(--head);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--clay);margin-bottom:12px}
+.whyaside p{font-size:15.5px;color:var(--mute);margin-bottom:.9em}
+.whyaside p:last-child{margin-bottom:0}
+
+/* WHAT THE WORK COVERS. Numbered, equal height, top rule. */
+.incgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:16px;
+  align-items:stretch}
+.inc{position:relative;background:#fff;border-radius:var(--r-sharp);padding:22px 20px 20px;
+  border-top:3px solid var(--navy);box-shadow:0 8px 22px rgba(17,35,55,.07);
+  display:flex;flex-direction:column}
+.inc .incnum{font:800 12px var(--num);letter-spacing:.08em;color:var(--rust);display:block;
+  margin-bottom:9px}
+.inc h4{font-size:16.5px;color:var(--navy);margin-bottom:8px;line-height:1.25}
+.inc p{font-size:14.5px;color:var(--mute);margin:0;line-height:1.6}
+
+/* CTA BANNER. Edge to edge, a real banner rather than a card sitting inside a section.
+   Background is that service's own photograph under a navy scrim, so it stays relevant
+   to the page it closes. Height is deliberately held down: one line of heading, a row of
+   proof points, and the action, around 250px. The previous version ran past 460px and
+   read as another content block. */
+/* CTA BANNER.
+   Spencer, 2026-08-13: "the CTA banner looks like the same section with the
+   testimonials." Measured and true: on both parent pages the banner computes to
+   rgb(17,35,55) and the reviews band directly beneath computes to rgb(17,35,55). Same
+   navy, touching, 840px of it, no boundary to see.
+   The fleet already solved this three different ways and none of them is "hope nobody
+   notices": Big Easy Pool Designs puts a 3px brass rule on the CTA's bottom edge, Turnkey
+   Siding makes the next band meaningfully darker, and Big Easy Patios alternates light
+   and dark. This takes the rule, because it works whatever follows the banner and does
+   not require every page to know its own section order. The top rule matters as much as
+   the bottom one on the matrix pages, where a sand band leads into it. */
+.ctabanner{position:relative;background:var(--navy);overflow:hidden;
+  border-top:4px solid var(--rust);border-bottom:4px solid var(--rust)}
+.ctabanner .ctabg{position:absolute;inset:0;z-index:0}
+.ctabanner .ctabg img{width:100%;height:100%;object-fit:cover;object-position:center 45%}
+/* Two layers on purpose. The linear pass beds the headline on the left; the radial pass
+   re-darkens the right, where the action sits, because a bright patch of the photograph
+   was landing behind the phone link and killing its contrast. */
+.ctabanner::after{content:"";position:absolute;inset:0;z-index:1;
+  background:radial-gradient(80% 150% at 88% 50%,rgba(9,20,34,.70) 0%,rgba(9,20,34,.30) 55%,
+      rgba(9,20,34,0) 100%),
+    linear-gradient(96deg,rgba(11,24,39,.95) 0%,rgba(12,29,48,.90) 46%,
+      rgba(15,34,55,.78) 74%,rgba(17,35,55,.70) 100%)}
+.ctabar{position:relative;z-index:2;display:flex;align-items:center;gap:44px;
+  flex-wrap:wrap;padding-top:44px;padding-bottom:44px;min-height:250px}
+.ctatext{flex:1 1 460px}
+.ctabanner h2{color:#fff;margin:0;max-width:22ch;font-size:clamp(24px,2.6vw,33px);
+  line-height:1.14}
+.ctachecks{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;
+  gap:8px 26px}
+.ctachecks li{position:relative;padding-left:26px;font:600 14.5px var(--head);
+  color:#dbe7f1;line-height:1.4}
+.ctachecks li::before{content:"";position:absolute;left:0;top:2px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+.ctachecks li::after{content:"";position:absolute;left:5px;top:7px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+.ctaact{flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ctaact .btn-o{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.65)}
+.ctaact .btn-o:hover{background:rgba(255,255,255,.16)}
+.ctaact .btn{padding:17px 34px;font-size:16.5px;letter-spacing:.01em;
+  box-shadow:0 10px 26px rgba(0,0,0,.28)}
+.ctatel{color:#fff;font:600 16px var(--head);text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.42);padding-bottom:3px}
+.ctatel:hover{border-bottom-color:var(--rust)}
+
+/* SEE MORE disclosure. Native details/summary, no JS, same mechanic as the FAQ so the
+   content is in the DOM and indexable rather than injected on click. */
+.more{margin-top:22px}
+/* A <summary> always paints at the top of its <details>, so once opened the control sat
+   between the visible cards and the revealed ones. Reversing the open state puts the
+   revealed content first and drops Show less underneath it, where it belongs. */
+.more[open]{display:flex;flex-direction:column-reverse;align-items:stretch}
+.more>summary{align-self:flex-start}
+.more[open]>summary{margin-top:24px}
+.more>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:9px;
+  font:700 15px var(--head);color:var(--rust);padding:11px 20px;border:1px solid var(--rust);
+  border-radius:var(--r-sharp);background:transparent;transition:.16s}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary:hover{background:var(--rust);color:#fff}
+.more>summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;flex:none;transition:.16s;
+  /* translate BEFORE rotate. The other order moves the chevron along its rotated axis,
+     which drove it diagonally into the label text once open. */
+  transform:translateY(-2px) rotate(45deg)}
+.more[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+/* SCOPED TO THE DISCLOSURE'S OWN SUMMARY, with `>`.
+   As descendant selectors these leaked: a nested disclosure inherited its ANCESTOR's
+   open state, so opening "See all 3 sections" flipped the collapsed "Read the full
+   detail" inside it to "Show less". Spencer caught it on the Summit page 2026-08-13.
+   `> summary` confines each rule to the details it belongs to. */
+.more > summary .moreshut{display:none}
+.more[open] > summary .moreopen{display:none}
+.more[open] > summary .moreshut{display:inline}
+.more .incgrid,.more .mrows{margin-top:22px}
+/* auto-FILL here, not auto-fit. The visible grid uses auto-fit so a page with only
+   three services still fills the row. The revealed remainder is usually one or two
+   cards, and stretching those to full width breaks the column rhythm, so keep the
+   empty tracks and let the cards line up with the four above. */
+.more .incgrid{grid-template-columns:repeat(auto-fill,minmax(228px,1fr))}
+.morefaq{margin-top:0}
+.morefaq>summary{margin:20px 0 0}
+.morefaq[open]>summary{margin:22px 0 0}
+.faqmore details{border-bottom:1px solid var(--line)}
+
+/* shared action pair, used by the local-conditions and cities sections */
+.btn-lg{padding:17px 34px;font-size:16.5px}
+.actrow{margin-top:26px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.actrow.center{justify-content:center;margin-top:30px}
+.actel{font:600 15.5px var(--head);color:var(--navy);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:3px}
+.actel:hover{border-bottom-color:var(--rust)}
+
+@media (max-width:1000px){
+  .ctabar{gap:26px;padding-top:36px;padding-bottom:36px;min-height:0}
+  .ctaact{width:100%}
+  .ctabanner h2{max-width:none}
+}
+
+/* CITIES. Modelled on the fleet section--cities pattern. */
+.citygrid{display:grid;grid-template-columns:repeat(var(--cols,5),minmax(0,1fr));gap:12px}
+@media (max-width:1240px){.citygrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:980px){.citygrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.citygrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.citygrid{grid-template-columns:1fr}}
+.citycard{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-sharp);padding:15px 18px;text-decoration:none;
+  font:600 15.5px var(--head);color:var(--navy);transition:.16s}
+.citycard:hover{border-color:var(--rust);box-shadow:0 8px 22px rgba(17,35,55,.1)}
+.citycard{min-width:0}
+.citycard .cpin{flex:none;display:flex;color:var(--rust)}
+.citycard .cpin svg{width:20px;height:20px}
+.citycard .ctxt{flex:1;min-width:0}
+.citycard .ctxt b{display:block;font:700 16px var(--head);color:var(--navy);line-height:1.2}
+.citycard .ctxt em{display:block;font:500 13px var(--body);font-style:normal;color:var(--mute);
+  margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.citycard .carrow{color:var(--rust);font-size:17px}
+.citynote{margin-top:20px;font:500 14px var(--head);color:var(--mute);text-align:center}
+
+@media (max-width:1000px){
+  .costsplit,.whysplit{grid-template-columns:1fr;gap:24px}
+  .mpic figure img{height:210px}
+  .cstrip.badgestrip .wrap{grid-template-columns:1fr 1fr}
+  .whylead{font-size:18px}
+}
+@media (max-width:620px){
+  .cstrip.badgestrip .wrap{grid-template-columns:1fr}
+}
+.idx{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.idxcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--rust);
+  border-radius:var(--r-sharp);padding:24px;text-decoration:none;display:block}
+.idxcard h3{font-size:19px;color:var(--navy);margin-bottom:8px}
+.idxcard p{font-size:15px;color:var(--mute);margin:0}
+
+
+/* ---- support pages, added 2026-08-14 -------------------------------------------- */
+.lead{max-width:76ch}
+.lead{font:400 18px/1.75 var(--body);color:var(--ink)}
+.factgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+.factgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:900px){.factgrid,.factgrid.two{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.factgrid,.factgrid.two{grid-template-columns:1fr}}
+.factcard{background:#fff;border:1px solid var(--line);border-left:3px solid var(--rust);
+  border-radius:3px;padding:16px 18px}
+.factcard h3{margin:0 0 6px;font:700 14px/1.2 var(--head);text-transform:uppercase;
+  letter-spacing:.06em;color:var(--blue)}
+.factcard p{margin:0;font:500 16px/1.5 var(--body);color:var(--ink)}
+.factcard p a{color:var(--ink);font-weight:700;text-decoration:none;
+  border-bottom:2px solid var(--rust)}
+.factcard .fnote{margin-top:6px;font:400 13.5px/1.5 var(--body);color:var(--mut)}
+.paywrap{margin-top:22px}
+.paywrap h3{margin:0 0 10px;font:700 14px/1.2 var(--head);text-transform:uppercase;
+  letter-spacing:.06em;color:var(--blue)}
+.paylist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.paylist li{background:#fff;border:1px solid var(--line);border-radius:2px;
+  padding:6px 12px;font:600 14px var(--head);color:var(--ink)}
+
+.cgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:34px}
+@media(max-width:960px){.cgrid{grid-template-columns:1fr}}
+.ccol{min-width:0}
+
+/* The base sheet caps .pane h2 at 24ch, which is correct for a marketing heading and
+   wrong for a legal section title that has to stay on one line. */
+.legal h2.numbered{max-width:none}
+
+
+/* blog outbound links, 2026-08-14 */
+.linkgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+@media(max-width:1000px){.linkgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.linkgrid{grid-template-columns:1fr}}
+.linkcard{display:flex;flex-direction:column;gap:5px;background:#fff;border:1px solid var(--line);
+  border-left:3px solid var(--rust);border-radius:3px;padding:14px 16px;text-decoration:none;
+  transition:.15s}
+.linkcard b{font:700 15px/1.35 var(--head);color:var(--ink)}
+.linkcard i{font-style:normal;font:600 12.5px var(--head);color:var(--rust)}
+@media(hover:hover) and (pointer:fine){.linkcard:hover{background:var(--navy)}
+  .linkcard:hover b{color:#fff}}
+.shead.spaced{margin-top:34px}
+
+
+/* Legal section headings are H2s and must READ as H2s. The site's content H2 measures
+   24.75px / 800, so these match it. Body copy stays at the document reading size.
+
+   LAYOUT: the number sits in a fixed gutter and the title is its own block, so a heading
+   that wraps ("1 AGREEMENT TO OUR LEGAL / TERMS") keeps its second line aligned with the
+   first instead of falling back to the left margin under the number. The rust rule is on
+   the title only, so it starts under the text and not under the number. */
+.legal h2.numbered{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 12px;
+  align-items:baseline;font:800 clamp(1.02rem,2.4vw,1.55rem)/1.3 var(--head);
+  color:var(--ink);margin:34px 0 14px;padding:0;letter-spacing:-.01em}
+.legal h2.numbered::after{content:none}
+.legal h2 .lnum{color:var(--rust);font-variant-numeric:tabular-nums;min-width:0}
+.legal h2 .ltxt{position:relative;padding-bottom:11px}
+.legal h2 .ltxt::after{content:"";position:absolute;left:0;bottom:0;width:48px;height:3px;
+  background:var(--rust)}
+.legal h2.numbered:first-child{margin-top:0}
+/* Narrow screens: tighten the number gutter and let the title use the full column, so the
+   most headings possible stay on one line. Three Terms headings are genuinely too long for
+   a 390px screen at any readable size (the worst needs 1.9x the width, which would mean
+   10px type), so those wrap. The grid keeps a wrapped second line aligned under the first
+   instead of sliding back under the number. */
+@media(max-width:640px){
+  .legal h2.numbered{gap:0 8px;margin:26px 0 11px}
+  .legal h2 .ltxt{padding-bottom:9px}
+  .legal h2 .ltxt::after{width:40px;height:2px}
+}
+.legal p{margin:0 0 13px;font:400 16px/1.75 var(--body);color:var(--ink)}
+.legal ul.llist li{font:400 16px/1.72 var(--body)}
+.legal h3.lsub{margin:22px 0 8px;font:700 17.5px/1.35 var(--head);color:var(--ink)}
+
+
+/* legal tables and folded sections, 2026-08-14 */
+.tblwrap{overflow-x:auto;margin:6px 0 18px}
+.ltable{border-collapse:collapse;width:100%;font:400 15px/1.5 var(--body)}
+.ltable th,.ltable td{border:1px solid var(--line);padding:9px 13px;text-align:left;
+  vertical-align:top}
+.ltable th{background:var(--sand);font:700 12.5px var(--head);text-transform:uppercase;
+  letter-spacing:.06em;color:var(--blue)}
+.ltable th:first-child,.ltable td:first-child{width:62px;color:var(--rust);font-weight:700}
+.ltable tbody tr:nth-child(even){background:#fafbfc}
+details.legalmore{margin:0 0 18px}
+details.legalmore>summary{cursor:pointer;list-style:none;display:inline-flex;gap:8px;
+  align-items:center;font:700 14px var(--head);color:var(--rust);padding:7px 0}
+details.legalmore>summary::-webkit-details-marker{display:none}
+details.legalmore>summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--rust);
+  border-bottom:2px solid var(--rust);transform:rotate(45deg);margin-bottom:3px}
+details.legalmore[open]>summary::after{transform:rotate(225deg);margin-bottom:-3px}
+details.legalmore[open]>summary .moreopen{display:none}
+details.legalmore:not([open])>summary .moreshut{display:none}
+
+
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px}
+@media(max-width:980px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.pgrid{grid-template-columns:1fr}}
+.ptag{font:700 11.5px/1 var(--head);text-transform:uppercase;letter-spacing:.09em;
+  color:var(--blue)}
+
+/* ---- More from the blog, as a carousel. Spencer, 2026-08-14.
+   Scroll-snap track so it works with a trackpad, a touch swipe and the keyboard even if
+   the JS never runs; the arrows only enhance it. Every other article is in here, the six
+   remaining West Caldwell pieces first, then everything already published. */
+.carowrap{position:relative;margin-top:14px}
+.carotrack{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(272px,300px);
+  gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:4px 2px 14px;scrollbar-width:thin}
+.carotrack>*{scroll-snap-align:start}
+.carotrack::-webkit-scrollbar{height:8px}
+.carotrack::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+.caronav{display:flex;gap:8px;justify-content:flex-end;margin-bottom:6px}
+.caro{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  cursor:pointer;font:700 17px/1 var(--head);color:var(--navy);transition:.15s}
+@media(hover:hover) and (pointer:fine){.caro:hover{background:var(--navy);color:#fff;
+  border-color:var(--navy)}}
+.caro[disabled]{opacity:.34;cursor:default}
+.carocount{margin:0 auto 0 0;align-self:center;font:600 13.5px var(--head);color:var(--mut)}
+
+
+/* ---- restored 2026-08-14. An over-greedy cleanup regex removed these while replacing
+   the legal block; they are the gallery grid, the single-post column and the legal
+   section numbers. */
+.ggrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:4px}
+@media(max-width:900px){.ggrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.ggrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gtile{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:3px;background:var(--sand)}
+.gtile img{width:100%;height:100%;object-fit:cover;display:block;transition:.25s}
+@media(hover:hover) and (pointer:fine){.gtile:hover img{transform:scale(1.04)}}
+
+.pmeta{margin:10px 0 0;font:500 14.5px var(--body);color:#cddcea}
+.postwrap{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:44px;align-items:start}
+@media(max-width:1040px){.postwrap{grid-template-columns:1fr}}
+article.post{max-width:72ch}
+article.post p{margin:0 0 14px;font:400 17px/1.78 var(--body);color:var(--ink)}
+.qanswer{background:#fff;border-left:3px solid var(--rust);border-radius:3px;
+  padding:16px 20px;font:500 17px/1.72 var(--body);margin-bottom:18px}
+.srcnote{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);
+  font:400 14px/1.7 var(--body);color:var(--mut)}
+.prail{position:sticky;top:96px}
+.lnum{display:inline-block;min-width:32px;color:var(--rust)}
+
+
+/* legal layout, rebuilt 2026-08-14. The reading column is capped ONCE, by the grid, and
+   the sidebar column only exists when there is a contents list to sit in it. */
+.legalwrap{display:grid;grid-template-columns:minmax(0,minmax(56ch,74ch)) minmax(240px,300px);
+  gap:52px;align-items:start;justify-content:start}
+@media(max-width:1040px){.legalwrap{grid-template-columns:1fr;gap:30px}}
+.legal.solo{max-width:74ch}
+.legal ul.llist{margin:0 0 16px;padding-left:22px}
+.legal ul.llist li{margin:7px 0;font:400 16px/1.7 var(--body);color:var(--ink)}
+.legal h2:first-child{margin-top:0}
+.ltoc{position:sticky;top:96px;background:var(--sand);border-radius:3px;padding:18px 20px;
+  max-height:calc(100vh - 130px);overflow:auto}
+.ltoc h3{margin:0 0 8px;font:700 13px var(--head);text-transform:uppercase;
+  letter-spacing:.07em;color:var(--blue)}
+.ltoc ol{margin:0;padding:0;list-style:none}
+.ltoc li{border-bottom:1px solid var(--line)}
+.ltoc li:last-child{border-bottom:0}
+.ltoc a{display:flex;gap:9px;padding:7px 0;text-decoration:none;
+  font:500 14px/1.45 var(--body);color:var(--ink)}
+.ltoc a span{color:var(--rust);font-weight:700;min-width:20px}
+@media(hover:hover) and (pointer:fine){.ltoc a:hover{color:var(--rust)}}
+
+
+.cform{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:34px;align-items:start}
+@media(max-width:980px){.cform{grid-template-columns:1fr}}
+.formcol .qform{margin:0}
+
+
+/* ---- contact page, rebuilt 2026-08-14 ------------------------------------------- */
+.psteps{list-style:none;margin:14px 0 0;padding:0;counter-reset:none}
+.pstep{display:flex;gap:15px;padding:15px 0;border-bottom:1px solid var(--line)}
+.pstep:last-child{border-bottom:0}
+.pnum{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--rust);
+  color:#fff;font:800 14px/30px var(--head);text-align:center}
+.pstep b{display:block;font:700 17px/1.3 var(--head);color:var(--ink);margin-bottom:4px}
+.pstep p{margin:0;font:400 15px/1.65 var(--body);color:var(--mut)}
+.townwrap{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 6px}
+.townlink{background:#fff;border:1px solid var(--line);border-left:3px solid var(--rust);
+  border-radius:2px;padding:9px 15px;font:600 15px var(--head);color:var(--ink);
+  text-decoration:none;transition:.15s}
+@media(hover:hover) and (pointer:fine){.townlink:hover{background:var(--navy);color:#fff}}
+
+
+/* ---- gallery segregation, 2026-08-14 -------------------------------------------- */
+.gfilters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 22px;
+  padding-bottom:16px;border-bottom:1px solid var(--line)}
+.gfilt{background:#fff;border:1px solid var(--line);border-radius:2px;cursor:pointer;
+  padding:8px 14px;font:600 14px var(--head);color:var(--ink);transition:.15s;
+  display:inline-flex;align-items:center;gap:8px}
+.gfilt i{font-style:normal;font:700 11.5px var(--head);color:var(--mut);
+  background:var(--sand);border-radius:9px;padding:2px 7px}
+@media(hover:hover) and (pointer:fine){.gfilt:hover{border-color:var(--rust)}}
+.gfilt.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.gfilt.on i{background:rgba(255,255,255,.16);color:#fff}
+.gpane{display:none}.gpane.on{display:block}
+.gblurb{margin:0 0 16px;max-width:70ch;font:400 16px/1.7 var(--body);color:var(--mut)}
+
+/* ---- blog cards, bigeasypatios pattern ------------------------------------------ */
+.pcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+  border-radius:3px;overflow:hidden;text-decoration:none;transition:.18s}
+@media(hover:hover) and (pointer:fine){.pcard:hover{border-color:var(--rust)}}
+.pthumb{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--sand)}
+.pthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.pbody{display:flex;flex-direction:column;gap:7px;padding:17px 19px 20px}
+.pdate{font:500 13px var(--body);color:var(--mut)}
+.pex{font:400 14.5px/1.6 var(--body);color:var(--mut)}
+.lrows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin-top:6px}
+@media(max-width:820px){.lrows{grid-template-columns:1fr}}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:13px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.lrow span{font:600 15.5px/1.45 var(--head);color:var(--ink)}
+.lrow i{font-style:normal;font:700 13px var(--head);color:var(--rust);white-space:nowrap}
+@media(hover:hover) and (pointer:fine){.lrow:hover span{color:var(--rust)}}
+
+/* ---- single post ---------------------------------------------------------------- */
+/* the rule sits on EVERY post and legal H2, matching the reference, not just the ones
+   the generator tags. Scoping it beats remembering to add a class. */
+h2.ruled,article.post h2,.legal h2{position:relative;padding-bottom:11px;margin-top:34px}
+h2.ruled::after,article.post h2::after,.legal h2::after{content:"";position:absolute;
+  left:0;bottom:0;width:54px;height:3px;background:var(--rust)}
+.tkaway{margin:4px 0 26px;padding-left:20px}
+.tkaway li{margin:9px 0;font:400 16.5px/1.72 var(--body);color:var(--ink)}
+.ctacard{background:var(--navy);border-radius:3px;padding:22px 22px 24px;
+  border-top:3px solid var(--rust)}
+.ctacard h3{margin:0 0 8px;font:800 19px/1.25 var(--head);color:#fff}
+.ctacard p{margin:0 0 16px;font:400 14.5px/1.65 var(--body);color:#c6d6e4}
+.ctacard .btn{display:block;text-align:center;margin-bottom:9px}
+.btn-w{background:#fff;color:var(--navy);border:1px solid #fff}
+@media(hover:hover) and (pointer:fine){.btn-w:hover{background:#eef3f7}}
+.guides{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:3px;
+  padding:18px 20px 8px}
+.guides h3{margin:0 0 6px;font:700 13px var(--head);text-transform:uppercase;
+  letter-spacing:.07em;color:var(--blue)}
+.guides a{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);
+  text-decoration:none;font:600 14.5px/1.45 var(--head);color:var(--ink)}
+.guides a:last-child{border-bottom:0}
+.guides a i{font-style:normal;color:var(--rust);font-weight:700}
+@media(hover:hover) and (pointer:fine){.guides a:hover{color:var(--rust)}}
+
+
+.rvgrid.wide{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:960px){.rvgrid.wide{grid-template-columns:1fr}}
+.formwrap{max-width:520px;margin:0 auto}
+
+/* ---- city x service routing rows, added 2026-08-12 with the matrix build. */
+.mxgrid{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:14px;margin-top:12px}
+@media(max-width:820px){.mxgrid{grid-template-columns:1fr}}
+.mxrow{display:flex;flex-direction:column;gap:5px;background:var(--navy);border-radius:3px;
+  padding:16px 18px;text-decoration:none;border-left:3px solid var(--rust)}
+.mxrow b{font:700 16px/1.32 var(--head);color:#fff}
+.mxrow .mxgo{font:600 13px/1 var(--head);color:#f0c9bb;letter-spacing:.01em}
+@media(hover:hover) and (pointer:fine){.mxrow:hover .mxgo{color:#fff}}
+
+/* ---- HERO STRIP, picked 2026-08-06 ---------------------------------------------- */
+/* Option B's visual language, boxless with hairline rules and rust accents, carrying the
+   sentence-plus-badges content. Replaces the old .croute dark table, which truncated
+   every title and description because it printed the lifted 60-to-85 character service
+   names into a 604px slot. */
+#C .hstrip{margin-top:26px;max-width:640px}
+#C .hline{margin:0 0 18px;font:500 16.5px var(--body);color:#cddcea;line-height:1.85}
+#C .hline b{font-weight:700;color:#fff}
+#C .hline a{color:#fff;font-weight:700;text-decoration:none;
+  border-bottom:2px solid var(--rust);padding-bottom:1px;transition:.16s}
+#C .hline a:hover{color:var(--rust)}
+#C .hproof{list-style:none;margin:0;padding:18px 0 0;
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px}
+#C .hproof li{position:relative;padding-left:26px;line-height:1.4;
+  font:600 14.5px var(--head);color:#dbe7f1}
+#C .hproof li::before{content:"";position:absolute;left:0;top:1px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+#C .hproof li::after{content:"";position:absolute;left:5px;top:6.5px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+@media (max-width:1000px){#C .hproof{grid-template-columns:1fr}}
+
+/* The rail note is part of the form card now, not a second box below it.
+   NOTE THE #C. The base rule is "#C .crail .railnote{margin-top:20px}", an ID selector,
+   so a plain ".crail.joined" override loses on specificity and the 20px gap survives.
+   That gap was exposing a bright patch of the background photograph between the two
+   boxes, which read as a rendering artifact. Verified as 0px, not assumed. */
+#C .crail.joined .qform{border-radius:var(--r-soft) var(--r-soft) 0 0;margin:0;
+  box-shadow:0 18px 44px rgba(4,12,22,.36)}
+#C .crail.joined .railnote{margin-top:0;border-radius:0 0 var(--r-soft) var(--r-soft);
+  border:0;background:rgba(9,20,34,.95);padding:18px 26px;box-shadow:none}
+#C .crail.joined .railnote b{margin-bottom:4px}
+
+/* ---- city pages, on top of template C and the service page rules ---------------- */
+/* Scope cards are links here, not static tiles, because a city page's job is to route
+   the reader onward to the service page. Keeps .inc's look, adds affordance. */
+a.inc{text-decoration:none;transition:.16s}
+a.inc:hover{border-top-color:var(--rust);box-shadow:0 12px 28px rgba(17,35,55,.13);
+  transform:translateY(-2px)}
+a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:var(--rust)}
+
+/* NEIGHBORHOODS. Chips rather than cards: these are names, not destinations, and ten
+   full cards would compete with the Other cities grid further down the same page. */
+.hoodwrap{display:flex;flex-wrap:wrap;gap:10px}
+.hood{display:inline-flex;align-items:center;gap:9px;background:#fff;
+  border:1px solid var(--line);border-radius:999px;padding:10px 18px 10px 14px;
+  font:600 15px var(--head);color:var(--navy)}
+.hood .cpin{display:flex;color:var(--rust)}
+.hood .cpin svg{width:17px;height:17px}
+
+.lmkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.lmkcol h4{font:700 15px var(--head);color:var(--navy);margin-bottom:10px;
+  padding-bottom:8px;border-bottom:2px solid var(--rust)}
+.lmkcol ul{list-style:none;margin:0;padding:0}
+.lmkcol li{font-size:14.5px;color:var(--mute);line-height:1.5;padding:5px 0;
+  border-bottom:1px solid var(--line)}
+.lmkcol li:last-child{border-bottom:0}
+
+/* Routing row for services this city's own page does not describe. */
+.alsohead{margin:26px 0 12px;font:700 11.5px var(--head);letter-spacing:.15em;
+  text-transform:uppercase;color:var(--clay)}
+.incgrid+.alsohead,.more+.alsohead{margin-top:30px}
+.svcnavgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.svcnav{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--navy);
+  border-radius:var(--r-sharp);padding:16px 18px;text-decoration:none;
+  font:700 15.5px var(--head);color:var(--navy);transition:.16s}
+.svcnav:hover{border-left-color:var(--rust);box-shadow:0 8px 22px rgba(17,35,55,.1)}
+.svcnav span{color:var(--rust);font-size:17px}
+
+.cityidx{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.cityidx .idxcard{border-top-color:var(--navy)}
+.cityidx .idxcard .cnty{display:block;margin-bottom:8px;font:700 11.5px var(--head);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+
+</style>
+<div id="C" class="pane on">
+  <header class="chead">
+    <div class="in">
+      <a class="lg" href="../" aria-label="ARD Waterproofing home"><img src="../video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
+      <nav>
+        <div class="mm"><a href="../services/">Our Services &#9662;</a>
+          <div class="drop svc"><div><h5>Waterproofing &amp; Basement</h5><ul><li><a href="../services/basement-waterproofing/">Basement Waterproofing</a></li><li><a href="../services/foundation-waterproofing/">Foundation Waterproofing</a></li><li><a href="../services/interior-french-drains/">Interior French Drains</a></li><li><a href="../services/exterior-french-drains/">Exterior French Drains</a></li><li><a href="../services/channel-drains/">Channel Drains</a></li><li><a href="../services/crawl-space-encapsulation/">Crawlspace Encapsulation</a></li><li><a href="../services/sump-pumps/">Sump Pumps</a></li><li><a href="../services/window-wells-egress-windows/">Window Wells & Egress Windows</a></li></ul></div><div><h5>Outdoor Services</h5><ul><li><a href="../services/retaining-walls/">Retaining Walls</a></li><li><a href="../services/patios-pavers/">Patios & Pavers</a></li><li><a href="../services/walkways/">Driveway & Walkway</a></li><li><a href="../services/masonry/">Masonry</a></li></ul><a class="allsvc" href="../services/">View all services &rarr;</a></div></div>
+        </div>
+        <div class="mm"><a href="../areas/">Areas We Serve &#9662;</a>
+          <div class="drop area">
+            <h5>Essex, Passaic, Union, and Morris Counties</h5>
+            <ul><li><a href="../areas/west-caldwell/">West Caldwell</a></li><li><a href="../areas/livingston/">Livingston</a></li><li><a href="../areas/montclair/">Montclair</a></li><li><a href="../areas/north-caldwell/">North Caldwell</a></li><li><a href="../areas/short-hills/">Short Hills</a></li></ul><ul><li><a href="../areas/south-orange/">South Orange</a></li><li><a href="../areas/summit/">Summit</a></li><li><a href="../areas/verona/">Verona</a></li><li><a href="../areas/wayne/">Wayne</a></li><li><a href="../areas/west-orange/">West Orange</a></li></ul>
+            <a class="allsvc" href="../areas/">All service areas &rarr;</a>
+          </div>
+        </div>
+        <a href="../gallery/">Gallery</a><a href="../reviews/">Reviews</a><a href="../blog/">Blog</a><a href="../about/">About</a><a href="../contact/">Contact</a>
+        <a class="tel" href="tel:+19176918411">(917) 691-8411</a>
+      </nav>
+      <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="chero slim">
+    <div class="wrap chero-in">
+      <div>
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <i>/</i>
+          <span>Legal</span></nav>
+        <div class="eyebrow">Legal</div>
+        <h1>Terms Of Service</h1>
+        <p class="pmeta">ARD Waterproofing &middot; 98 Smull Ave, West Caldwell, NJ 07006
+        &middot; 26 sections</p>
+      </div>
+    </div>
+  </div>
+  <section class="band-white">
+    <div class="wrap"><div class="legalwrap"><div class="legal"><h2 class="ruled numbered" id="s1"><span class="ltxt">AGREEMENT TO OUR LEGAL TERMS</span></h2><p>We are ARD Waterproofing (“ Company ,” “ we ,” “ us ,” “ our “), a company registered in New Jersey, United States at 98 Smull Avenue, West Caldwell, NJ 07006.</p><p>We operate the website http://www.ardwaterproofing.com (the “ Site “), as well as any other related products and services that refer or link to these legal terms (the “ Legal Terms “) (collectively, the “ Services “).</p><p>You can contact us by phone at 917-691-8411, email at info@ardwaterproofing.com, or by mail to 98 Smull Avenue, West Caldwell, NJ 07006, United States.</p><p>These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“ you “), and ARD Waterproofing LLC , concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.</p><details class="more legalmore"><summary><span class="moreopen">Read the full section</span><span class="moreshut">Show less</span></summary><p>Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Legal Terms at any time and for any reason. We will alert you about any changes by updating the “Last updated” date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.The Services are intended for users who are at least 18 years old. Persons under the age of 18 are not permitted to use or register for the Services.</p><p>We recommend that you print a copy of these Legal Terms for your records.</p></details><h2 class="ruled numbered" id="s2"><span class="ltxt">TABLE OF CONTENTS</span></h2><div class="tblwrap"><table class="ltable"><thead><tr><th>#</th><th>Section</th></tr></thead><tbody><tr><td>1</td><td>OUR SERVICES</td></tr><tr><td>2</td><td>INTELLECTUAL PROPERTY RIGHTS</td></tr><tr><td>3</td><td>USER REPRESENTATIONS</td></tr><tr><td>4</td><td>USER REGISTRATION</td></tr><tr><td>5</td><td>PROHIBITED ACTIVITIES</td></tr><tr><td>6</td><td>USER GENERATED CONTRIBUTIONS</td></tr><tr><td>7</td><td>CONTRIBUTION LICENSE</td></tr><tr><td>8</td><td>GUIDELINES FOR REVIEWS</td></tr><tr><td>9</td><td>SERVICES MANAGEMENT</td></tr><tr><td>10</td><td>PRIVACY POLICY</td></tr><tr><td>11</td><td>TERM AND TERMINATION</td></tr><tr><td>12</td><td>MODIFICATIONS AND INTERRUPTIONS</td></tr><tr><td>13</td><td>GOVERNING LAW</td></tr><tr><td>14</td><td>DISPUTE RESOLUTION</td></tr><tr><td>15</td><td>CORRECTIONS</td></tr><tr><td>16</td><td>DISCLAIMER</td></tr><tr><td>17</td><td>LIMITATIONS OF LIABILITY</td></tr><tr><td>18</td><td>INDEMNIFICATION</td></tr><tr><td>19</td><td>USER DATA</td></tr><tr><td>20</td><td>ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</td></tr><tr><td>21</td><td>SMS TEXT MESSAGING</td></tr><tr><td>22</td><td>CALIFORNIA USERS AND RESIDENTS</td></tr><tr><td>23</td><td>MISCELLANEOUS</td></tr><tr><td>24</td><td>CONTACT US</td></tr></tbody></table></div><h2 class="ruled numbered" id="s3"><span class="lnum">1</span><span class="ltxt">OUR SERVICES</span></h2><p>The information provided when using the Services is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject us to any registration requirement within such jurisdiction or country. Accordingly, those persons who choose to access the Services from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.</p><p>The Services are not tailored to comply with industry-specific regulations (Health Insurance Portability and Accountability Act (HIPAA), Federal Information Security Management Act (FISMA), etc.), so if your interactions would be subjected to such laws, you may not use the Services. You may not use the Services in a way that would violate the Gramm-Leach-Bliley Act (GLBA).</p><h2 class="ruled numbered" id="s4"><span class="lnum">2</span><span class="ltxt">INTELLECTUAL PROPERTY RIGHTS</span></h2><h3 class="lsub">Our intellectual property</h3><p>We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics in the Services (collectively, the “Content”), as well as the trademarks, service marks, and logos contained therein (the “Marks”).</p><p>Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in the United States and around the world.</p><p>The Content and Marks are provided in or through the Services “AS IS” for your personal, non-commercial use or internal business purpose only.</p><h3 class="lsub">Your use of our Services</h3><p>Subject to your compliance with these Legal Terms, including the “ PROHIBITED ACTIVITIES “ section below, we grant you a non-exclusive, non-transferable, revocable license to:</p><ul class="llist"><li>access the Services; and</li><li>download or print a copy of any portion of the Content to which you have properly gained access,</li></ul><p>solely for your personal, non-commercial use or internal business purpose.</p><p>Except as set out in this section or elsewhere in our Legal Terms, no part of the Services and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.</p><p>If you wish to make any use of the Services, Content, or Marks other than as set out in this section or elsewhere in our Legal Terms, please address your request to: info@ardwaterproofing.com. If we ever grant you the permission to post, reproduce, or publicly display any part of our Services or Content, you must identify us as the owners or licensors of the Services, Content, or Marks and ensure that any copyright or proprietary notice appears or is visible on posting, reproducing, or displaying our Content.</p><p>We reserve all rights not expressly granted to you in and to the Services, Content, and Marks.</p><p>Any breach of these Intellectual Property Rights will constitute a material breach of our Legal Terms and your right to use our Services will terminate immediately.</p><h3 class="lsub">Your submissions</h3><p>Please review this section and the “ PROHIBITED ACTIVITIES “ section carefully prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or upload any content through the Services.</p><p>Submissions: By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services (“Submissions”), you agree to assign to us all intellectual property rights in such Submission. You agree that we shall own this Submission and be entitled to its unrestricted use and dissemination for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you.</p><p>You are responsible for what you post or upload: By sending us Submissions through any part of the Services you:</p><ul class="llist"><li>confirm that you have read and agree with our “ PROHIBITED ACTIVITIES “ and will not post, send, publish, upload, or transmit through the Services any Submission that is illegal, harassing, hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, threatening to any person or group, sexually explicit, false, inaccurate, deceitful, or misleading;</li><li>to the extent permissible by applicable law, waive any and all moral rights to any such Submission;</li><li>warrant that any such Submission are original to you or that you have the necessary rights and licenses to submit such Submissions and that you have full authority to grant us the above-mentioned rights in relation to your Submissions; and</li><li>warrant and represent that your Submissions do not constitute confidential information.</li></ul><p>You are solely responsible for your Submissions</p><p>and you expressly agree to reimburse us for any and all losses that we may suffer because of your breach of (a) this section, (b) any third party’s intellectual property rights, or (c) applicable law.</p><h2 class="ruled numbered" id="s5"><span class="lnum">3</span><span class="ltxt">USER REPRESENTATIONS</span></h2><p>By using the Services, you represent and warrant that: (1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy of such information and promptly update such registration information as necessary;</p><p>(3) you have the legal capacity and you agree to comply with these Legal Terms; (4) you are not a minor in the jurisdiction in which you reside; (5) you will not access the Services through automated or non-human means, whether through a bot, script or otherwise; (6) you will not use the Services for any illegal or unauthorized purpose; and (7) your use of the Services will not violate any applicable law or regulation.</p><p>If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Services (or any portion thereof).</p><h2 class="ruled numbered" id="s6"><span class="lnum">4</span><span class="ltxt">USER REGISTRATION</span></h2><p>You may be required to register to use the Services. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable.</p><h2 class="ruled numbered" id="s7"><span class="lnum">5</span><span class="ltxt">PROHIBITED ACTIVITIES</span></h2><p>You may not access or use the Services for any purpose other than that for which we make the Services available. The Services may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.</p><p>As a user of the Services, you agree not to:</p><ul class="llist"><li>Systematically retrieve data or other content from the Services to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.</li><li>Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.</li><li>Circumvent, disable, or otherwise interfere with security-related features of the Services, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the Services and/or the Content contained therein.</li></ul><details class="more legalmore"><summary><span class="moreopen">Read the full section</span><span class="moreshut">Show less</span></summary><ul class="llist"><li>Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Services.</li><li>Use any information obtained from the Services in order to harass, abuse, or harm another person.</li><li>Make improper use of our support services or submit false reports of abuse or misconduct.</li><li>Use the Services in a manner inconsistent with any applicable laws or regulations.</li><li>Engage in unauthorized framing of or linking to the Services.</li><li>Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party’s uninterrupted use and enjoyment of the Services or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Services.</li><li>Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</li><li>Delete the copyright or other proprietary rights notice from any Content.</li><li>Attempt to impersonate another user or person or use the username of another user.</li><li>Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats (“gifs”), 1×1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as “spyware” or “passive collection mechanisms” or “pcms”).</li><li>Interfere with, disrupt, or create an undue burden on the Services or the networks or services connected to the Services.</li><li>Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Services to you.</li><li>Attempt to bypass any measures of the Services designed to prevent or restrict access to the Services, or any portion of the Services.</li><li>Copy or adapt the Services’ software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</li><li>Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Services.</li><li>Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Services, or use or launch any unauthorized script or other software.</li><li>Use a buying agent or purchasing agent to make purchases on the Services.</li><li>Make any unauthorized use of the Services, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.</li><li>Use the Services as part of any effort to compete with us or otherwise use the Services and/or the Content for any revenue-generating endeavor or commercial enterprise.</li><li>Use the Services to advertise or offer to sell goods and services.</li><li>Sell or otherwise transfer your profile.</li></ul></details><h2 class="ruled numbered" id="s8"><span class="lnum">6</span><span class="ltxt">USER GENERATED CONTRIBUTIONS</span></h2><p>The Services does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Services, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, “Contributions”). Contributions may be viewable by other users of the Services and through third-party websites. As such, any Contributions you transmit may be treated in accordance with the Services’ Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:</p><ul class="llist"><li>The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.</li></ul><details class="more legalmore"><summary><span class="moreopen">Read the full section</span><span class="moreshut">Show less</span></summary><ul class="llist"><li>You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Services, and other users of the Services to use your Contributions in any manner contemplated by the Services and these Legal Terms.</li><li>You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Services and these Legal Terms.</li><li>Your Contributions are not false, inaccurate, or misleading.</li><li>Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.</li><li>Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).</li><li>Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.</li><li>Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.</li><li>Your Contributions do not violate any applicable law, regulation, or rule.</li><li>Your Contributions do not violate the privacy or publicity rights of any third party.</li><li>Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.</li><li>Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.</li><li>Your Contributions do not otherwise violate, or link to material that violates, any provision of these Legal Terms, or any applicable law or regulation.</li></ul><p>Any use of the Services in violation of the foregoing violates these Legal Terms and may result in, among other things, termination or suspension of your rights to use the Services.</p></details><h2 class="ruled numbered" id="s9"><span class="lnum">7</span><span class="ltxt">CONTRIBUTION LICENSE</span></h2><p>You and Services agree that we may access, store, process, and use any information and personal data that you provide following the terms of the Privacy Policy and your choices (including settings).</p><p>By submitting suggestions or other feedback regarding the Services, you agree that we can use and share such feedback for any purpose without compensation to you.</p><p>We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any intellectual property rights or other proprietary rights associated with your Contributions. We are not liable for any statements or representations in your Contributions provided by you in any area on the Services. You are solely responsible for your Contributions to the Services and you expressly agree to exonerate us from any and all responsibility and to refrain from any legal action against us regarding your Contributions.</p><h2 class="ruled numbered" id="s10"><span class="lnum">8</span><span class="ltxt">GUIDELINES FOR REVIEWS</span></h2><p>We may provide you areas on the Services to leave reviews or ratings. When posting a review, you must comply with the following criteria: (1) you should have firsthand experience with the person/entity being reviewed; (2) your reviews should not contain offensive profanity, or abusive, racist, offensive, or hateful language; (3) your reviews should not contain discriminatory references based on religion, race, gender, national origin, age, marital status, sexual orientation, or disability; (4) your reviews should not contain references to illegal activity; (5) you should not be affiliated with competitors if posting negative reviews; (6) you should not make any conclusions as to the legality of conduct; (7) you may not post any false or misleading statements; and (8) you may not organize a campaign encouraging others to post reviews, whether positive or negative.</p><p>We may accept, reject, or remove reviews in our sole discretion. We have absolutely no obligation to screen reviews or to delete reviews, even if anyone considers reviews objectionable or inaccurate. Reviews are not endorsed by us, and do not necessarily represent our opinions or the views of any of our affiliates or partners. We do not assume liability for any review or for any claims, liabilities, or losses resulting from any review. By posting a review, you hereby grant to us a perpetual, non-exclusive, worldwide, royalty-free, fully paid, assignable, and sublicensable right and license to reproduce, modify, translate, transmit by any means, display, perform, and/or distribute all content relating to review.</p><h2 class="ruled numbered" id="s11"><span class="lnum">9</span><span class="ltxt">SERVICES MANAGEMENT</span></h2><p>We reserve the right, but not the obligation, to: (1) monitor the Services for violations of these Legal Terms; (2) take appropriate legal action against anyone who, in our sole discretion, violates the law or these Legal Terms, including without limitation, reporting such user to law enforcement authorities; (3) in our sole discretion and without limitation, refuse, restrict access to, limit the availability of, or disable (to the extent technologically feasible) any of your Contributions or any portion thereof; (4) in our sole discretion and without limitation, notice, or liability, to remove from the Services or otherwise disable all files and content that are excessive in size or are in any way burdensome to our systems; and (5) otherwise manage the Services in a manner designed to protect our rights and property and to facilitate the proper functioning of the Services.</p><h2 class="ruled numbered" id="s12"><span class="lnum">10</span><span class="ltxt">PRIVACY POLICY</span></h2><p>We care about data privacy and security. Please review our Privacy Policy: https://ardwaterproofing.com/terms-of-service/ . By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in the United States. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Services, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.</p><h2 class="ruled numbered" id="s13"><span class="lnum">11</span><span class="ltxt">TERM AND TERMINATION</span></h2><p>These Legal Terms shall remain in full force and effect while you use the Services. WITHOUT LIMITING ANY OTHER PROVISION OF THESE LEGAL TERMS, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SERVICES (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE LEGAL TERMS OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE SERVICES OR DELETE YOUR ACCOUNT AND ANY CONTENT OR INFORMATION THAT YOU POSTED AT ANY TIME, WITHOUT WARNING, IN OUR SOLE DISCRETION.</p><p>If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party, even if you may be acting on behalf of the third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including without limitation pursuing civil, criminal, and injunctive redress.</p><h2 class="ruled numbered" id="s14"><span class="lnum">12</span><span class="ltxt">MODIFICATIONS AND INTERRUPTIONS</span></h2><p>We reserve the right to change, modify, or remove the contents of the Services at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Services. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Services.</p><p>We cannot guarantee the Services will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the Services, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the Services at any time or for any reason without notice to you. You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Services during any downtime or discontinuance of the Services. Nothing in these Legal Terms will be construed to obligate us to maintain and support the Services or to supply any corrections, updates, or releases in connection therewith.</p><h2 class="ruled numbered" id="s15"><span class="lnum">13</span><span class="ltxt">GOVERNING LAW</span></h2><p>These Legal Terms and your use of the Services are governed by and construed in accordance with the laws of the State of New Jersey applicable to agreements made and to be entirely performed within the State of New Jersey, without regard to its conflict of law principles.</p><h2 class="ruled numbered" id="s16"><span class="lnum">14</span><span class="ltxt">DISPUTE RESOLUTION</span></h2><p>Any legal action of whatever nature brought by either you or us (collectively, the “Parties” and individually, a “Party”) shall be commenced or prosecuted in the state and federal courts located in United States, New Jersey, and the Parties hereby consent to, and waive all defenses of lack of personal jurisdiction and forum non conveniens with respect to venue and jurisdiction in such state and federal courts. Application of the United Nations Convention on Contracts for the International Sale of Goods and the Uniform Computer Information Transaction Act (UCITA) are excluded from these Legal Terms. In no event shall any claim, action, or proceeding brought by either Party related in any way to the Services be commenced more than one (1) years after the cause of action arose.</p><h2 class="ruled numbered" id="s17"><span class="lnum">15</span><span class="ltxt">CORRECTIONS</span></h2><p>There may be information on the Services that contains typographical errors, inaccuracies, or omissions, including descriptions, pricing, availability, and various other information. We reserve the right to correct any errors, inaccuracies, or omissions and to change or update the information on the Services at any time, without prior notice.</p><h2 class="ruled numbered" id="s18"><span class="lnum">16</span><span class="ltxt">DISCLAIMER</span></h2><p>THE SERVICES ARE PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES’ CONTENT OR THE CONTENT OF ANY WEBSITES OR MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2) PERSONAL INJURY OR PROPERTY DAMAGE, OF ANY NATURE WHATSOEVER, RESULTING FROM YOUR ACCESS TO AND USE OF THE SERVICES, (3) ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION AND/OR FINANCIAL INFORMATION STORED THEREIN, (4) ANY INTERRUPTION OR CESSATION OF TRANSMISSION TO OR FROM THE SERVICES, (5) ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE WHICH MAY BE TRANSMITTED TO OR THROUGH THE SERVICES BY ANY THIRD PARTY, AND/OR (6) ANY ERRORS OR OMISSIONS IN ANY CONTENT AND MATERIALS OR FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF ANY CONTENT POSTED, TRANSMITTED, OR OTHERWISE MADE AVAILABLE VIA THE SERVICES. WE DO NOT WARRANT, ENDORSE, GUARANTEE, OR ASSUME RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE SERVICES, ANY HYPERLINKED WEBSITE, OR ANY WEBSITE OR MOBILE APPLICATION FEATURED IN ANY BANNER OR OTHER ADVERTISING, AND WE WILL NOT BE A PARTY TO OR IN ANY WAY BE RESPONSIBLE FOR MONITORING ANY TRANSACTION BETWEEN YOU AND ANY THIRD-PARTY PROVIDERS OF PRODUCTS OR SERVICES. AS WITH THE PURCHASE OF A PRODUCT OR SERVICE THROUGH ANY MEDIUM OR IN ANY ENVIRONMENT, YOU SHOULD USE YOUR BEST JUDGMENT AND EXERCISE CAUTION WHERE APPROPRIATE.</p><h2 class="ruled numbered" id="s19"><span class="lnum">17</span><span class="ltxt">LIMITATIONS OF LIABILITY</span></h2><p>IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, OUR LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE LESSER OF THE AMOUNT PAID, IF ANY, BY YOU TO US DURING THE six (6) MONTH PERIOD PRIOR TO ANY CAUSE OF ACTION ARISING OR $5,000.00 USD. CERTAIN US STATE LAWS AND INTERNATIONAL LAWS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES OR THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR ALL OF THE ABOVE DISCLAIMERS OR LIMITATIONS MAY NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.</p><h2 class="ruled numbered" id="s20"><span class="lnum">18</span><span class="ltxt">INDEMNIFICATION</span></h2><p>You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys’ fees and expenses, made by any third party due to or arising out of: (1) use of the Services; (2) breach of these Legal Terms; (3) any breach of your representations and warranties set forth in these Legal Terms; (4) your violation of the rights of a third party, including but not limited to intellectual property rights; or (5) any overt harmful act toward any other user of the Services with whom you connected via the Services. Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.</p><h2 class="ruled numbered" id="s21"><span class="lnum">19</span><span class="ltxt">USER DATA</span></h2><p>We will maintain certain data that you transmit to the Services for the purpose of managing the performance of the Services, as well as data relating to your use of the Services. Although we perform regular routine backups of data, you are solely responsible for all data that you transmit or that relates to any activity you have undertaken using the Services. You agree that we shall have no liability to you for any loss or corruption of any such data, and you hereby waive any right of action against us arising from any such loss or corruption of such data.</p><h2 class="ruled numbered" id="s22"><span class="lnum">20</span><span class="ltxt">ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</span></h2><p>Visiting the Services, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Services, satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SERVICES. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means.</p><h2 class="ruled numbered" id="s23"><span class="lnum">21</span><span class="ltxt">SMS TEXT MESSAGING</span></h2><h3 class="lsub">Opting Out</h3><p>If at any time you wish to stop receiving SMS messages from us, simply reply to the text with “STOP.” You may receive an SMS message confirming your opt out.</p><h3 class="lsub">Message and Data Rates</h3><p>Please be aware that message and data rates may apply to any SMS messages sent or received. The rates are determined by your carrier and the specifics of your mobile plan.</p><h3 class="lsub">Support</h3><p>If you have any questions or need assistance regarding our SMS communications, please email us at info@ardwaterproofing.com or call at 917-691-8411 .</p><h2 class="ruled numbered" id="s24"><span class="lnum">22</span><span class="ltxt">CALIFORNIA USERS AND RESIDENTS</span></h2><p>If any complaint with us is not satisfactorily resolved, you can contact the Complaint Assistance Unit of the Division of Consumer Services of the California Department of Consumer Affairs in writing at 1625 North Market Blvd., Suite N 112, Sacramento, California 95834 or by telephone at (800) 952-5210 or (916) 445-1254.</p><h2 class="ruled numbered" id="s25"><span class="lnum">23</span><span class="ltxt">MISCELLANEOUS</span></h2><p>These Legal Terms and any policies or operating rules posted by us on the Services or in respect to the Services constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Legal Terms shall not operate as a waiver of such right or provision. These Legal Terms operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. We shall not be responsible or liable for any loss, damage, delay, or failure to act caused by any cause beyond our reasonable control. If any provision or part of a provision of these Legal Terms is determined to be unlawful, void, or unenforceable, that provision or part of the provision is deemed severable from these Legal Terms and does not affect the validity and enforceability of any remaining provisions. There is no joint venture, partnership, employment or agency relationship created between you and us as a result of these Legal Terms or use of the Services. You agree that these Legal Terms will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Legal Terms and the lack of signing by the parties hereto to execute these Legal Terms.</p><h2 class="ruled numbered" id="s26"><span class="lnum">24</span><span class="ltxt">CONTACT US</span></h2><p>In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:</p></div><nav class="ltoc"><h3>On this page</h3><ol><li><a href="#s1"><span>&middot;</span>AGREEMENT TO OUR LEGAL TERMS</a></li><li><a href="#s2"><span>&middot;</span>TABLE OF CONTENTS</a></li><li><a href="#s3"><span>1</span>OUR SERVICES</a></li><li><a href="#s4"><span>2</span>INTELLECTUAL PROPERTY RIGHTS</a></li><li><a href="#s5"><span>3</span>USER REPRESENTATIONS</a></li><li><a href="#s6"><span>4</span>USER REGISTRATION</a></li><li><a href="#s7"><span>5</span>PROHIBITED ACTIVITIES</a></li><li><a href="#s8"><span>6</span>USER GENERATED CONTRIBUTIONS</a></li><li><a href="#s9"><span>7</span>CONTRIBUTION LICENSE</a></li><li><a href="#s10"><span>8</span>GUIDELINES FOR REVIEWS</a></li><li><a href="#s11"><span>9</span>SERVICES MANAGEMENT</a></li><li><a href="#s12"><span>10</span>PRIVACY POLICY</a></li><li><a href="#s13"><span>11</span>TERM AND TERMINATION</a></li><li><a href="#s14"><span>12</span>MODIFICATIONS AND INTERRUPTIONS</a></li><li><a href="#s15"><span>13</span>GOVERNING LAW</a></li><li><a href="#s16"><span>14</span>DISPUTE RESOLUTION</a></li><li><a href="#s17"><span>15</span>CORRECTIONS</a></li><li><a href="#s18"><span>16</span>DISCLAIMER</a></li><li><a href="#s19"><span>17</span>LIMITATIONS OF LIABILITY</a></li><li><a href="#s20"><span>18</span>INDEMNIFICATION</a></li><li><a href="#s21"><span>19</span>USER DATA</a></li><li><a href="#s22"><span>20</span>ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</a></li><li><a href="#s23"><span>21</span>SMS TEXT MESSAGING</a></li><li><a href="#s24"><span>22</span>CALIFORNIA USERS AND RESIDENTS</a></li><li><a href="#s25"><span>23</span>MISCELLANEOUS</a></li><li><a href="#s26"><span>24</span>CONTACT US</a></li></ol></nav></div></div>
+  </section>
+  <footer class="sfoot">
+    <div class="wrap">
+      <div class="fg">
+        <div>
+          <a class="lg" href="../" aria-label="ARD Waterproofing home"><img src="../video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
+          <p>Waterproofing and foundation drainage across West Essex, Union, Passaic and
+          Morris Counties. Owner on site, estimates in writing.</p>
+          <p class="lic">98 Smull Ave, West Caldwell, NJ 07006<br>
+          NJ Home Improvement Contractor License 13VH12460700</p>
+          <div class="soc"><a href="https://facebook.com/253363541191373" target="_blank" rel="noopener" aria-label="ARD Waterproofing on Facebook">f</a><a href="https://maps.app.goo.gl/mikUgfBJE3xvPnxb6" target="_blank" rel="noopener" aria-label="ARD Waterproofing on Google">G</a></div>
+        </div>
+        <div><h4>Services</h4><p><a href="../services/basement-waterproofing/">Basement Waterproofing</a><br><a href="../services/foundation-waterproofing/">Foundation Waterproofing</a><br><a href="../services/interior-french-drains/">Interior French Drains</a><br><a href="../services/exterior-french-drains/">Exterior French Drains</a><br><a href="../services/channel-drains/">Channel Drains</a><br><a href="../services/crawl-space-encapsulation/">Crawlspace Encapsulation</a><br></p></div>
+        <div><h4>Areas we serve</h4><p><a href="../areas/west-caldwell/">West Caldwell</a><br><a href="../areas/livingston/">Livingston</a><br><a href="../areas/montclair/">Montclair</a><br><a href="../areas/north-caldwell/">North Caldwell</a><br><a href="../areas/short-hills/">Short Hills</a><br><a href="../areas/south-orange/">South Orange</a><br><a href="../areas/">All service areas</a></p></div>
+        <div><h4>Company</h4><p><a href="../about/">About</a><br><a href="../gallery/">Gallery</a><br><a href="../reviews/">Reviews</a><br><a href="../blog/">Blog</a><br><a href="../contact/">Contact</a></p></div>
+        <div>
+          <h4>Get in touch</h4>
+          <p><a href="tel:+19176918411"><b>(917) 691-8411</b></a><br>Call or text, open 24 hours</p>
+          <p>Free estimate, no obligation.<br>We price-match any reasonable estimate.</p>
+        </div>
+      </div>
+      <div class="fbot">
+        <span>&copy; 2026 ARD Waterproofing</span>
+        <a href="../privacy-policy/">Privacy policy</a><a href="../terms-of-service/">Terms of service</a>
+        <span>Design preview. Colors are read from the client's own logo and are a placeholder
+        until Grace Design supplies the official palette.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+document.querySelectorAll('.burger').forEach(function(b){
+  b.addEventListener('click', function(){
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!open));
+    b.closest('header').classList.toggle('navopen', !open);
+  });
+});
+</script>
