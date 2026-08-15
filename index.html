@@ -448,6 +448,289 @@ body.solo .stage{padding-top:0}
 #B .chipnote{margin-top:14px;font:500 13.5px var(--body);color:#9fb6c9}
 #B .chipnote a{color:#fff;border-bottom:1px solid var(--rust);text-decoration:none}
 
+
+/* ARD homepage chrome sync v2 */
+
+/* Shared header, rescoped from #C to #B so the homepage renders the
+   same navigation component as every inner page. */
+#B /* mega menu,#B identical behaviour across all three headers */
+.mm{position:relative}
+#B .mm>a{display:flex;align-items:center;gap:5px}
+#B .mm .drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);
+  background:#fff;border-radius:var(--r-soft);box-shadow:0 24px 60px rgba(17,35,55,.24);
+  padding:26px 30px;opacity:0;visibility:hidden;transition:.18s;z-index:200;border-top:3px solid var(--rust)}
+#B .mm:hover .drop,#B .mm:focus-within .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+#B .mm .drop.svc{display:grid;grid-template-columns:1fr 1fr;gap:30px;width:600px}
+#B .mm .drop.area{width:430px;display:grid;grid-template-columns:1fr 1fr;gap:4px 26px}
+#B .mm .drop h5{font:700 11.5px var(--head);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--clay);margin:0 0 12px}
+#B .mm .drop.area h5{grid-column:1/-1}
+#B .mm .drop ul{list-style:none}
+#B .mm .drop li a{display:block;padding:7px 0;font:500 15px var(--body);color:var(--ink);
+  text-decoration:none;border-bottom:1px solid #f0f3f6}
+#B .mm .drop li a:hover{color:var(--rust)}
+#B .mm .drop.area a{font-size:14.5px;padding:6px 0}
+#B .mm .drop .allsvc{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+  font:700 14px var(--head);color:var(--rust);text-decoration:none}
+#B .mm .drop.area .allsvc{grid-column:1/-1}
+#B .burger{display:none;background:transparent;border:0;cursor:pointer;padding:9px;margin-left:12px;color:inherit}
+#B .burger span{display:block;width:25px;height:2px;background:currentColor;border-radius:2px;
+  transition:.2s;margin:5px 0}
+#B #A .ahead nav>a,#B #A .ahead .mm>a{color:rgba(255,255,255,.92);text-decoration:none}
+#B #A .ahead .burger{color:#fff}
+#B #B .bhead2 nav>a,#B #B .bhead2 .mm>a{color:var(--ink);text-decoration:none}
+#B /* =====================================================================
+   C,#B "THE ESTIMATE"
+   form-led hero,#B no photo | compact bar header | commercial first,#B timeline
+   ===================================================================== */
+/* HEADER NAVIGATION,#B enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding,#B which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target,#B with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px,#B which also gives the rust phone pill
+   room to read as the primary action it is. */
+.chead{background:var(--navy);color:#fff}
+#B .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
+  align-items:center;gap:26px}
+#B .chead .lg{color:#fff}
+#B .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#B .chead nav>a,#B .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+#B .chead nav>a:focus-visible,#B .chead .mm>a:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+#B /* The current section stays legible against the lighter default. */
+.chead .mm>a[aria-expanded="true"],#B .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#B .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+#B .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#B .chead .burger{color:#fff}
+#B .chead .lg{display:inline-flex;align-items:center}
+#B .chead .drop li a.here{color:var(--rust);font-weight:700}
+/* B's hero assumed an ABSOLUTE header sitting over it. The shared header
+   is in normal flow, so the hero no longer needs to reserve room for it. */
+#B .bhero{margin-top:0}
+
+/* Shared footer, rescoped from #C to #B so the homepage renders the
+   same footer component as every inner page. */
+#B /* footer */
+.sfoot{background:var(--navy);color:#a7bccf;padding:56px 0 26px;font-size:15px}
+#B .sfoot a{color:#fff;text-decoration:none}
+#B .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
+#B .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
+#B /* FIVE columns,#B not four. The footer has always had five children (brand,#B Services,#B Areas
+   we serve,#B Company,#B Get in touch) and only four tracks,#B so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
+#B .fg p{line-height:1.8;margin-bottom:.6em}
+#B .sfoot .lic{font-size:13.5px;color:#7e97ad}
+#B .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:13px;color:#7e97ad;display:flex;gap:18px;flex-wrap:wrap}
+#B .soc{display:flex;gap:10px;margin-top:12px}
+#B .soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;
+  align-items:center;justify-content:center;font:700 12px var(--head)}
+#B .sfoot .lg img{height:58px;max-height:58px}
+#B .sfoot .lg img{height:58px;width:auto;display:block}
+#B .sfoot .lg{display:inline-block;line-height:0;margin-bottom:14px}
+
+/* Client logo in the homepage header, 2026-08-15. Direction B shipped a
+   text wordmark; every other page shows the real logo at 187x54. */
+#B .bhead .lg img,#B .chead .lg img{height:54px;width:auto;display:block}
+#B .bhead .lg,#B .chead .lg{display:inline-block;line-height:0}
+
+/* Standard CTA band, ported from template C 2026-08-15 so the homepage
+   matches the other 65 pages. Scoped to #B on purpose: the A and C decks
+   in this same document keep whatever they were shown with. */
+#B /* BUTTONS. Spencer,#B 2026-08-13: "the buttons is not that good."
+   Two real defects,#B both measured on the Summit matrix page.
+   1. `border:0` here against `border:2px` on .btn-o made a PAIRED primary and secondary
+      differ by 4px in height,#B 57 against 61 in the CTA band. Every variant now carries a
+      2px transparent border,#B so the box is identical and only the colour changes.
+   2. THREE size scales existed for the same two actions on one page: the base at 15px,#B .btn-lg at 16.5px,#B and the CTA band's own 17px. "Get my free estimate" rendered at
+      438x46,#B 225x53 and 241x57 on a single page. There are now two sizes,#B base and lg,#B and the CTA band uses lg rather than inventing a third. */
+/* BUTTONS,#B strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems,#B all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band,#B so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border,#B which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding,#B small for the primary conversion action on the page.
+   Primary stays rust and stays alone,#B per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+#B .btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+#B .btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+#B /* .btn-d stays a solid navy button,#B because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only,#B immediately below. */
+.btn-d{background:var(--navy);color:#fff}
+#B .btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+#B /* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card,#B so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,#B .band-navy .btn-d,#B .midcta .btn-d,#B .chero .btn-d,#B .ctasplit .btn-d,#B .herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+#B .btn-o:focus-visible,#B .ctabanner .btn-d:focus-visible,#B .band-navy .btn-d:focus-visible,#B .chero .btn-d:focus-visible{outline-color:#fff}
+#B /* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+#B /* CTA BANNER. Edge to edge,#B a real banner rather than a card sitting inside a section.
+   Background is that service's own photograph under a navy scrim,#B so it stays relevant
+   to the page it closes. Height is deliberately held down: one line of heading,#B a row of
+   proof points,#B and the action,#B around 250px. The previous version ran past 460px and
+   read as another content block. */
+/* CTA BANNER.
+   Spencer,#B 2026-08-13: "the CTA banner looks like the same section with the
+   testimonials." Measured and true: on both parent pages the banner computes to
+   rgb(17,#B 35,#B 55) and the reviews band directly beneath computes to rgb(17,#B 35,#B 55). Same
+   navy,#B touching,#B 840px of it,#B no boundary to see.
+   The fleet already solved this three different ways and none of them is "hope nobody
+   notices": Big Easy Pool Designs puts a 3px brass rule on the CTA's bottom edge,#B Turnkey
+   Siding makes the next band meaningfully darker,#B and Big Easy Patios alternates light
+   and dark. This takes the rule,#B because it works whatever follows the banner and does
+   not require every page to know its own section order. The top rule matters as much as
+   the bottom one on the matrix pages,#B where a sand band leads into it. */
+.ctabanner{position:relative;background:var(--navy);overflow:hidden;
+  border-top:4px solid var(--rust);border-bottom:4px solid var(--rust)}
+#B .ctabanner .ctabg{position:absolute;inset:0;z-index:0}
+#B .ctabanner .ctabg img{width:100%;height:100%;object-fit:cover;object-position:center 45%}
+#B /* Two layers on purpose. The linear pass beds the headline on the left; the radial pass
+   re-darkens the right,#B where the action sits,#B because a bright patch of the photograph
+   was landing behind the phone link and killing its contrast. */
+.ctabanner::after{content:"";position:absolute;inset:0;z-index:1;
+  background:radial-gradient(80% 150% at 88% 50%,rgba(9,20,34,.70) 0%,rgba(9,20,34,.30) 55%,
+      rgba(9,20,34,0) 100%),
+    linear-gradient(96deg,rgba(11,24,39,.95) 0%,rgba(12,29,48,.90) 46%,
+      rgba(15,34,55,.78) 74%,rgba(17,35,55,.70) 100%)}
+#B .ctabar{position:relative;z-index:2;display:flex;align-items:center;gap:44px;
+  flex-wrap:wrap;padding-top:44px;padding-bottom:44px;min-height:250px}
+#B .ctatext{flex:1 1 460px}
+#B .ctabanner h2{color:#fff;margin:0;max-width:22ch;font-size:clamp(24px,2.6vw,33px);
+  line-height:1.14}
+#B .ctachecks{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;
+  gap:8px 26px}
+#B .ctachecks li{position:relative;padding-left:26px;font:600 14.5px var(--head);
+  color:#dbe7f1;line-height:1.4}
+#B .ctachecks li::before{content:"";position:absolute;left:0;top:2px;width:17px;height:17px;
+  border-radius:50%;background:var(--rust)}
+#B .ctachecks li::after{content:"";position:absolute;left:5px;top:7px;width:7px;height:3.5px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+#B .ctaact .btn-o{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.65)}
+#B .ctaact .btn-o:hover{background:rgba(255,255,255,.16)}
+
+/* Live-site video in the hero card, 2026-08-15. The card's .inner was a single
+   column in a full-width card, so its right half was empty on every load. Two
+   columns now: copy left, video right. That removes the dead space and lifts the
+   video to the top of the page, which is what Spencer asked for.
+   The 790px cap on .inner is what actually created the dead space: the card's
+   container is 1200px wide, so a 790px inner left ~410px of empty white inside
+   the card itself. Released, so the two columns fill it.
+   Column split favours the VIDEO, 2026-08-15: Spencer asked for it bigger, and it
+   was rendering 430px against a 640px native source. 0.86/1 puts it near 600px,
+   close to native without upscaling. ASPECT IS 16/9, measured off the file
+   (640x360). The first pass guessed 16/10 with object-fit:cover, which silently
+   cropped the top and bottom of every frame.
+   NOTE: this is ONE comment block. A second one was once opened after this
+   block's terminator, leaving bare text plus a stray terminator in the
+   stylesheet, which silently swallowed the grid rule below and dropped the video
+   under the copy at every width. Keep it as a single block, and do not write a
+   comment marker inside prose: the balance guard counts them. */
+#B .bcard .inner{display:grid;grid-template-columns:.86fr 1fr;gap:44px;
+  align-items:center;max-width:none}
+#B .bcard h1{max-width:none}
+#B .bcard .hpcol{min-width:0}
+#B .hpvid{min-width:0;border-radius:3px;overflow:hidden;background:#0b1827;
+  box-shadow:0 2px 6px rgba(11,24,39,.14),0 18px 44px rgba(11,24,39,.16)}
+#B .hpvid video{display:block;width:100%;aspect-ratio:16/9;height:auto;
+  background:#0b1827}
+#B .hpvidcap{margin:0;padding:11px 15px;font:500 13.5px var(--body);
+  color:#c2d6e6;background:#0b1827}
+/* Transparent click layer so the whole picture starts the video, stopping short
+   of the 46px control strip. Removed on first play, see VIDEO_JS. */
+#B .hpvid{position:relative}
+#B .vidhit{position:absolute;left:0;right:0;top:0;bottom:46px;padding:0;
+  border:0;background:transparent;cursor:pointer;z-index:3}
+#B .vidhit:focus-visible{outline:3px solid var(--rust);outline-offset:-3px}
+/* Stacked, the video was running the full card width and dominating the page.
+   Capped and centred so it stays a supporting element. */
+@media(max-width:980px){#B .bcard .inner{grid-template-columns:1fr;gap:26px}
+  #B .hpvid{max-width:560px;margin-left:0}}
+@media(max-width:600px){#B .hpvid{max-width:none}}
+
+/* Section headings. The shared cap wrapped a 39 character heading onto two
+   lines above a four column step row, which reads as a ragged block over a tidy
+   grid. 46ch lets a short heading sit on one line and still wraps a long one
+   before it runs the full page width. */
+#B section .shead h2{max-width:46ch;text-wrap:balance}
+
+/* Services grid, 2026-08-15: six cards, three across, two clean rows. */
+#B .svcgrid{grid-template-columns:repeat(3,1fr)}
+#B .actrow.center{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+@media(max-width:1000px){#B .svcgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){#B .svcgrid{grid-template-columns:1fr}}
+
+/* Split-section photography, capped 2026-08-15. Portrait sources were running
+   735px tall against a ~500px text column. */
+#B .bsplit img{max-height:520px;height:auto;object-fit:cover;object-position:center;
+  width:100%;display:block;border-radius:3px}
+@media(max-width:900px){#B .bsplit img{max-height:340px}}
+
+/* ---- motion, 2026-08-15 ------------------------------------------------------
+   One easing token, scroll reveals, and hover feedback on the things that are
+   actually clickable. See animation-library.md for the full system. */
+#B{--ease-out:cubic-bezier(.16,1,.3,1)}
+#B .reveal{opacity:0;transform:translate3d(0,18px,0);
+  transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);
+  will-change:opacity,transform}
+#B .reveal.shown{opacity:1;transform:translate3d(0,0,0)}
+/* The hero card is the first thing on screen, so it rises further and a touch
+   slower. Everything else is a short lift. */
+#B .bcard.reveal{transform:translate3d(0,26px,0);
+  transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+
+/* Hover feedback. Gated, and on named properties. */
+@media(hover:hover) and (pointer:fine){
+  #B .svcitem{transition:transform .18s var(--ease-out),
+    box-shadow .18s var(--ease-out)}
+  #B .svcitem:hover{transform:translate3d(0,-4px,0);
+    box-shadow:0 10px 30px rgba(17,35,55,.16)}
+  #B .svcitem img{transition:transform .32s var(--ease-out)}
+  #B .svcitem:hover img{transform:scale(1.04)}
+  #B .hpvid{transition:box-shadow .18s var(--ease-out)}
+  #B .hpvid:hover{box-shadow:0 4px 10px rgba(11,24,39,.18),
+    0 22px 54px rgba(11,24,39,.24)}}
+#B .svcitem{overflow:hidden}
+
+/* Reduced motion: keep the fade, drop the travel and the zoom. */
+@media(prefers-reduced-motion:reduce){
+  #B .reveal,#B .bcard.reveal{transform:none;transition:opacity .4s ease}
+  #B .reveal.shown{transform:none}
+  #B .svcitem:hover{transform:none}
+  #B .svcitem:hover img{transform:none}}
+
+/* Hero height, 2026-08-15. B reserved 78vh with a 560px floor for the
+   photograph alone, so the page opened on a wall of texture and the
+   offset card sat below the fold. Sized so the card is visible on load. */
+#B .bhero .pic{height:46vh;min-height:320px;max-height:440px}
+@media(max-width:760px){#B .bhero .pic{height:34vh;min-height:220px}}
 .stage{padding-top:0}body{background:#fff}#B .lg img{display:block;height:54px;width:auto;max-height:54px}#B .lg{display:inline-flex;align-items:center}@media(max-width:640px){#B .lg img{height:42px;max-height:42px}}</style>
 </head>
 <body>
@@ -469,68 +752,35 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
   </div></div>
 
   <div style="position:relative">
-    <header class="bhead">
-      <div class="in">
-        <a class="lg" href="./" aria-label="ARD Waterproofing home"><img src="video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
-        <nav>
-          <div class="mm"><a href="services/">Our Services &#9662;</a>
-            <div class="drop svc">
-              <div><h5>Waterproofing &amp; Basement</h5><ul>
-                <li><a href="services/basement-waterproofing/">Basement Waterproofing</a></li><li><a href="services/foundation-waterproofing/">Foundation Waterproofing</a></li>
-                <li><a href="services/interior-french-drains/">Interior French Drains</a></li><li><a href="services/exterior-french-drains/">Exterior French Drains</a></li>
-                <li><a href="services/channel-drains/">Channel Drains</a></li><li><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a></li>
-                <li><a href="services/sump-pumps/">Sump Pumps</a></li><li><a href="services/window-wells-egress-windows/">Window Wells &amp; Egress Windows</a></li>
-              </ul></div>
-              <div><h5>Outdoor Services</h5><ul>
-                <li><a href="services/retaining-walls/">Retaining Walls</a></li><li><a href="services/patios-pavers/">Patios &amp; Pavers</a></li>
-                <li><a href="services/walkways/">Driveway &amp; Walkway</a></li><li><a href="services/masonry/">Masonry</a></li>
-              </ul><a class="allsvc" href="services/">View all services &rarr;</a></div>
-            </div>
-          </div>
-          <div class="mm"><a href="areas/">Areas We Serve &#9662;</a>
-            <div class="drop area">
-              <h5>Essex, Passaic, and Morris Counties</h5>
-              <ul><li><a href="areas/west-caldwell/">West Caldwell</a></li><li><a href="areas/livingston/">Livingston</a></li>
-                <li><a href="areas/montclair/">Montclair</a></li><li><a href="areas/north-caldwell/">North Caldwell</a></li><li><a href="areas/short-hills/">Short Hills</a></li></ul>
-              <ul><li><a href="areas/south-orange/">South Orange</a></li><li><a href="areas/summit/">Summit</a></li>
-                <li><a href="areas/verona/">Verona</a></li><li><a href="areas/wayne/">Wayne</a></li><li><a href="areas/west-orange/">West Orange</a></li></ul>
-              <a class="allsvc" href="areas/">All service areas &rarr;</a>
-            </div>
-          </div>
-          <a href="gallery/">Gallery</a><a href="#b-reviews">Reviews</a><a href="about/">About</a><a href="contact/">Contact</a>
-          <a class="tel" href="tel:+19176918411">(917) 691-8411</a>
-        </nav>
-        <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      </div>
-      <div class="mobnav"><div class="in">
-        <h5>Waterproofing &amp; Basement</h5>
-        <a href="services/basement-waterproofing/">Basement Waterproofing</a><a href="services/foundation-waterproofing/">Foundation Waterproofing</a>
-        <a href="services/interior-french-drains/">Interior French Drains</a><a href="services/exterior-french-drains/">Exterior French Drains</a>
-        <a href="services/channel-drains/">Channel Drains</a><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a>
-        <a href="services/sump-pumps/">Sump Pumps</a><a href="services/window-wells-egress-windows/">Window Wells &amp; Egress Windows</a>
-        <h5>Outdoor Services</h5>
-        <a href="services/retaining-walls/">Retaining Walls</a><a href="services/patios-pavers/">Patios &amp; Pavers</a>
-        <a href="services/walkways/">Driveway &amp; Walkway</a><a href="services/masonry/">Masonry</a>
-        <h5>Areas We Serve</h5>
-        <a href="areas/west-caldwell/">West Caldwell</a><a href="areas/livingston/">Livingston</a><a href="areas/montclair/">Montclair</a>
-        <a href="areas/north-caldwell/">North Caldwell</a><a href="areas/short-hills/">Short Hills</a><a href="areas/south-orange/">South Orange</a>
-        <a href="areas/summit/">Summit</a><a href="areas/verona/">Verona</a><a href="areas/wayne/">Wayne</a><a href="areas/west-orange/">West Orange</a>
-        <h5>More</h5>
-        <a href="gallery/">Gallery</a><a href="#b-reviews">Reviews</a><a href="about/">About</a><a href="contact/">Contact</a>
-        <div class="mcta">
-          <a class="btn btn-p" href="#b-estimate">Request free estimate</a>
-          <a class="btn btn-d" href="tel:+19176918411">(917) 691-8411</a>
+      <header class="chead">
+    <div class="in">
+      <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
+      <nav>
+        <div class="mm"><a href="services/">Our Services &#9662;</a>
+          <div class="drop svc"><div><h5>Waterproofing &amp; Basement</h5><ul><li><a href="services/basement-waterproofing/">Basement Waterproofing</a></li><li><a href="services/foundation-waterproofing/">Foundation Waterproofing</a></li><li><a href="services/interior-french-drains/">Interior French Drains</a></li><li><a href="services/exterior-french-drains/">Exterior French Drains</a></li><li><a href="services/channel-drains/">Channel Drains</a></li><li><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a></li><li><a href="services/sump-pumps/">Sump Pumps</a></li><li><a href="services/window-wells-egress-windows/">Window Wells & Egress Windows</a></li></ul></div><div><h5>Outdoor Services</h5><ul><li><a href="services/retaining-walls/">Retaining Walls</a></li><li><a href="services/patios-pavers/">Patios & Pavers</a></li><li><a href="services/walkways/">Driveway & Walkway</a></li><li><a href="services/masonry/">Masonry</a></li></ul><a class="allsvc" href="services/">View all services &rarr;</a></div></div>
         </div>
-      </div></div>
-    </header>
+        <div class="mm"><a href="areas/">Areas We Serve &#9662;</a>
+          <div class="drop area">
+            <h5>Essex, Passaic, Union, and Morris Counties</h5>
+            <ul><li><a href="areas/west-caldwell/">West Caldwell</a></li><li><a href="areas/livingston/">Livingston</a></li><li><a href="areas/montclair/">Montclair</a></li><li><a href="areas/north-caldwell/">North Caldwell</a></li><li><a href="areas/short-hills/">Short Hills</a></li></ul><ul><li><a href="areas/south-orange/">South Orange</a></li><li><a href="areas/summit/">Summit</a></li><li><a href="areas/verona/">Verona</a></li><li><a href="areas/wayne/">Wayne</a></li><li><a href="areas/west-orange/">West Orange</a></li></ul>
+            <a class="allsvc" href="areas/">All service areas &rarr;</a>
+          </div>
+        </div>
+        <a href="gallery/">Gallery</a><a href="reviews/">Reviews</a><a href="blog/">Blog</a><a href="about/">About</a><a href="contact/">Contact</a>
+        <a class="tel" href="tel:+19176918411">(917) 691-8411</a>
+      </nav>
+      <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
 
     <div class="bhero">
-      <div class="pic"><img src="video/img-hero.jpg" alt="ARD Waterproofing crew coring a basement floor in New Jersey"></div>
+      <div class="pic"><img src="gallery/full/022.jpg" alt="Interior perimeter drainage system installed by ARD Waterproofing"></div>
     </div>
   </div>
 
   <div class="bcard">
-    <div class="inner">
+    <div class="inner"><div class="hpcol">
       <div class="eyebrow">Waterproofing Contractor in New Jersey</div>
       <h1>Dry basement, or we have not finished the job.</h1>
       <p class="lede">ARD Waterproofing dispatches from West Caldwell to serve homeowners across West Essex, Union, Passaic, and Morris Counties. Owner David Roth inspects and prices every property himself.</p>
@@ -541,6 +791,13 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
       <p class="hline"><b>We handle</b> <a href="services/interior-french-drains/">interior french drains</a>, <a href="services/sump-pumps/">sump pumps</a>, <a href="services/foundation-waterproofing/">foundation waterproofing</a> and <a href="services/">nine more services</a> across New Jersey.</p>
         <ul class="hproof"><li>Same-day emergency service</li><li>100% lifetime guarantee</li><li>NJ licensed and insured</li><li>12% military and first responder discount</li></ul>
     </div>
+      <div class="hpvid">
+        <video controls preload="none" playsinline
+               poster="video/ard-home-video-poster.jpg"
+               src="video/ard-home-video.mp4"></video>
+        <p class="hpvidcap">ARD's own footage, from the live site.</p>
+      </div>
+    </div>
   </div>
 
   <!-- PROOF first -->
@@ -548,7 +805,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
     <div class="wrap">
       <div class="shead">
         <div class="eyebrow">What customers say</div>
-        <h2>Excellent, based on 180 Google reviews.</h2>
+        <h2>Rated 5.0 by New Jersey homeowners</h2>
         <p class="lede">ARD is not a franchise routing leads through a call center. It is a New Jersey outfit, founded in 2015, whose owner still shows up to look at your foundation.</p>
       </div>
       <div class="bstats">
@@ -568,7 +825,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
           <p>Everything went incredibly well. Men who worked on the job were skilled and respectable. The owner of the company was easy to deal with, honest, personable. I recommend 100%.</p>
           <div class="who">Sam Weissbard<span>Google review</span></div></div>
       </div>
-      <a class="btn btn-d" href="reviews/" style="margin-top:24px">Read more reviews</a>
+      <a class="btn btn-d"  style="margin-top:24px" href="reviews/">Read more reviews</a>
     </div>
   </section>
 
@@ -588,22 +845,28 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
           <li>Horizontal cracking in block walls after repeated freeze and thaw</li>
         </ul>
       </div>
-      <div><img src="video/img-flooded.jpg" alt="Standing water across a New Jersey basement floor after heavy rain"></div>
+      <div><img src="gallery/full/030.jpg" alt="Interior perimeter drainage system installed by ARD Waterproofing"></div>
     </div>
   </section>
 
-  <div class="bcta-band">
-    <div class="in">
-      <div>
-        <h2>Get a real number before you commit to anything.</h2>
-        <p>Free estimate, free drainage design and advice, free consultation. Price matching available, and the quote is honored even when the job turns out more complex.</p>
+  <div class="ctabanner">
+    <div class="ctabg"><img src="gallery/full/051.jpg" alt="" aria-hidden="true"></div>
+    <div class="wrap ctabar">
+      <div class="ctatext">
+        <h2>Get a written basement waterproofing price in New Jersey</h2>
+        <ul class="ctachecks">
+          <li>Free estimate, in writing</li>
+          <li>100% lifetime transferable warranty</li>
+          <li>We price-match any reasonable estimate</li>
+        </ul>
       </div>
-      <div class="sp">
-        <a class="btn btn-w" href="#b-estimate">Request free estimate</a>
-        <a class="btn btn-o" href="tel:+19176918411">(917) 691-8411</a>
+      <div class="ctaacts">
+        <a class="btn btn-p btn-lg" href="contact/">Get my free estimate</a>
+        <a class="btn btn-d btn-lg" href="tel:+19176918411">Call or text (917) 691-8411</a>
       </div>
     </div>
   </div>
+  
 
   <!-- SOLUTION -->
   <section class="band-white">
@@ -614,25 +877,27 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
         <p class="lede">Conflicting advice usually reflects a company's preferred product, not your home's drainage profile. These three solve different root causes.</p>
       </div>
       <div class="svcgrid">
-        <a class="svcitem" href="services/interior-french-drains/" style="padding:0;overflow:hidden">
-          <img src="video/img-interior.jpg" alt="Interior French drain installed along a basement perimeter" style="height:186px;object-fit:cover;width:100%">
-          <div style="padding:22px"><h4>Interior French Drains</h4><p>Intercept water at the footing inside and carry it to a sump, relieving hydrostatic pressure. Typically completed in a single day.</p></div></a>
-        <a class="svcitem" href="services/exterior-french-drains/" style="padding:0;overflow:hidden">
-          <img src="video/img-exterior.jpg" alt="Exterior French drain line laid beside a New Jersey foundation" style="height:186px;object-fit:cover;width:100%">
-          <div style="padding:22px"><h4>Exterior French Drains</h4><p>Excavate to the footing, grade properly, and carry runoff away before it reaches the wall. Landscaping is restored after.</p></div></a>
-        <a class="svcitem" href="services/sump-pumps/" style="padding:0;overflow:hidden">
-          <img src="video/img-sump.jpg" alt="Sump pump basin and discharge line" style="height:186px;object-fit:cover;width:100%">
-          <div style="padding:22px"><h4>Sump Pump Systems</h4><p>Sized to your pit's actual drainage volume, never a default unit, and always with battery backup.</p></div></a>
+          <a class="svcitem" style="padding:0;overflow:hidden" href="services/interior-french-drains/">
+          <img src="gallery/full/031.jpg" alt="Interior perimeter drainage system installed by ARD Waterproofing" loading="lazy" style="height:172px;object-fit:cover;width:100%;display:block">
+          <div style="padding:20px 22px"><h4>Interior French Drains</h4><p>Intercept water at the footing inside and carry it to a sump, relieving hydrostatic pressure. Typically completed in a single day.</p></div></a>
+          <a class="svcitem" style="padding:0;overflow:hidden" href="services/exterior-french-drains/">
+          <img src="gallery/full/033.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy" style="height:172px;object-fit:cover;width:100%;display:block">
+          <div style="padding:20px 22px"><h4>Exterior French Drains</h4><p>Excavate to the footing, grade properly, and carry runoff away before it reaches the wall. Landscaping is restored after.</p></div></a>
+          <a class="svcitem" style="padding:0;overflow:hidden" href="services/sump-pumps/">
+          <img src="gallery/full/013.jpg" alt="Sump pump and discharge line installed by ARD Waterproofing" loading="lazy" style="height:172px;object-fit:cover;width:100%;display:block">
+          <div style="padding:20px 22px"><h4>Sump Pump Systems</h4><p>Sized to your pit's actual drainage volume, never a default unit, and always with battery backup.</p></div></a>
+          <a class="svcitem" style="padding:0;overflow:hidden" href="services/basement-waterproofing/">
+          <img src="gallery/full/006.jpg" alt="Interior perimeter drainage system installed by ARD Waterproofing" loading="lazy" style="height:172px;object-fit:cover;width:100%;display:block">
+          <div style="padding:20px 22px"><h4>Basement Waterproofing</h4><p>The anchor service, diagnosed before it is priced.</p></div></a>
+          <a class="svcitem" style="padding:0;overflow:hidden" href="services/foundation-waterproofing/">
+          <img src="gallery/full/000.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy" style="height:172px;object-fit:cover;width:100%;display:block">
+          <div style="padding:20px 22px"><h4>Foundation Waterproofing</h4><p>Membrane and drainage on the structure itself.</p></div></a>
+          <a class="svcitem" style="padding:0;overflow:hidden" href="services/crawl-space-encapsulation/">
+          <img src="gallery/full/057.jpg" alt="Crawl space work by ARD Waterproofing" loading="lazy" style="height:172px;object-fit:cover;width:100%;display:block">
+          <div style="padding:20px 22px"><h4>Crawlspace Encapsulation</h4><p>Vapor barrier for high-humidity crawl spaces.</p></div></a>
       </div>
-      <div class="svcgrid" style="margin-top:18px">
-        <a class="svcitem" href="services/basement-waterproofing/"><h4>Basement Waterproofing</h4><p>The anchor service, diagnosed before it is priced.</p></a>
-        <a class="svcitem" href="services/foundation-waterproofing/"><h4>Foundation Waterproofing</h4><p>Membrane and drainage on the structure itself.</p></a>
-        <a class="svcitem" href="services/crawl-space-encapsulation/"><h4>Crawlspace Encapsulation</h4><p>Vapor barrier for high-humidity crawl spaces.</p></a>
-        <a class="svcitem" href="services/channel-drains/"><h4>Channel Drains</h4><p>Surface water intercepted before it pools.</p></a>
-        <a class="svcitem" href="services/window-wells-egress-windows/"><h4>Window Wells &amp; Egress</h4><p>Drainage plus code-compliant egress windows.</p></a>
-        <a class="svcitem" href="services/retaining-walls/"><h4>Retaining Walls</h4><p>Outdoor structural work and grade control.</p></a>
-        <a class="svcitem" href="services/patios-pavers/"><h4>Patios &amp; Pavers</h4><p>Hardscaping, rebuilt neatly after any excavation.</p></a>
-        <a class="svcitem" href="services/walkways/"><h4>Driveway, Walkway &amp; Masonry</h4><p>The rest of the outdoor service list.</p></a>
+      <div class="actrow center" style="margin-top:26px">
+        <a class="btn btn-p btn-lg" href="services/">See all 12 services</a>
       </div>
     </div>
   </section>
@@ -642,7 +907,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
     <div class="wrap">
       <div class="shead">
         <div class="eyebrow dk">What happens when you call</div>
-        <h2>From the first call to the final cleanup.</h2>
+        <h2>How a waterproofing job runs</h2>
       </div>
       <div class="proc">
         <div><b>STEP 01</b><h4>You hear back within the hour</h4><p>Call or text any time. ARD is open 24 hours for active flooding.</p></div>
@@ -662,13 +927,13 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
   <!-- EVIDENCE -->
   <section class="band-white">
     <div class="wrap bsplit">
-      <div><img src="video/h-foundation.jpeg" alt="New foundation slab with rebar before the pour"></div>
+      <div><img src="gallery/full/003.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing"></div>
       <div>
         <div class="eyebrow dk">Licensed and accountable</div>
         <h2>Excavation is the honest part of this trade.</h2>
         <p class="lede">ARD holds NJ HIC License #13VH12460700 from the New Jersey Division of Consumer Affairs. Permits are pulled before work begins and every installation meets local building code for your county.</p>
         <p class="lede">David Roth founded ARD in 2015 after more than 20 years focused solely on foundation waterproofing and drainage.</p>
-        <a class="btn btn-d" href="gallery/">See recent jobs</a>
+        <a class="btn btn-d"  href="gallery/">See recent jobs</a>
       </div>
     </div>
   </section>
@@ -679,7 +944,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
       <div class="ctasplit">
         <div class="ctaleft">
           <div class="eyebrow">Start your project today</div>
-          <h2>Write to us, call or text to get your estimate.</h2>
+          <h2>Contact ARD Waterproofing in West Caldwell, NJ</h2>
           <p class="lede">Free estimate, free drainage design and advice, and a free
           consultation. ARD is open 24 hours for emergency basement flooding across
           Passaic, Morris, Union, and West Essex Counties.</p>
@@ -713,7 +978,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
       <div class="eyebrow dk">Frequently asked questions</div>
       <h2 style="margin:10px 0 28px">Waterproofing in New Jersey</h2>
       <div class="faq">
-        <details open><summary>Rising water table, or poor surface drainage?</summary>
+        <details><summary>Rising water table, or poor surface drainage?</summary>
           <div class="ans">The entry point and timing tell you. Water along the wall-floor joint, especially near the Passaic River flood zones in Wayne and Little Falls, is typically hydrostatic pressure. Water entering higher on the wall, or appearing shortly after rain starts, is more likely surface runoff from grading or overwhelmed gutters. In older homes near Parsippany-Troy Hills both often occur together.</div></details>
         <details><summary>Why do companies disagree on interior versus exterior?</summary>
           <div class="ans">Both are legitimate for different root causes. Interior drains suit hydrostatic pressure from a high water table, common in low-lying Passaic and West Essex County. Exterior excavation suits surface runoff, typical on hillier Morris County terrain. Conflicting advice usually means a company is defaulting to its preferred system rather than diagnosing yours.</div></details>
@@ -729,35 +994,34 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
     </div>
   </section>
 
-  <footer class="sfoot">
-    <div class="wrap fg">
-      <div>
-        <div style="font:800 23px var(--head);color:#fff;margin-bottom:12px">ARD<i style="color:var(--rust);font-style:normal">.</i> Waterproofing</div>
-        <p>Waterproofing and drainage dispatched from West Caldwell since 2015.</p>
-        <p class="lic">NJ Contractors License: 13VH12460700</p>
-        <div class="soc"><a href="https://facebook.com/253363541191373" target="_blank" rel="noopener">f</a><a href="https://maps.app.goo.gl/mikUgfBJE3xvPnxb6" target="_blank" rel="noopener">G</a><a href="https://facebook.com/253363541191373" target="_blank" rel="noopener">ig</a></div>
+    <footer class="sfoot">
+    <div class="wrap">
+      <div class="fg">
+        <div>
+          <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
+          <p>Waterproofing and foundation drainage across West Essex, Union, Passaic and
+          Morris Counties. Owner on site, estimates in writing.</p>
+          <p class="lic">98 Smull Ave, West Caldwell, NJ 07006<br>
+          NJ Home Improvement Contractor License 13VH12460700</p>
+          <div class="soc"><a href="https://facebook.com/253363541191373" target="_blank" rel="noopener" aria-label="ARD Waterproofing on Facebook">f</a><a href="https://maps.app.goo.gl/mikUgfBJE3xvPnxb6" target="_blank" rel="noopener" aria-label="ARD Waterproofing on Google">G</a></div>
+        </div>
+        <div><h4>Services</h4><p><a href="services/basement-waterproofing/">Basement Waterproofing</a><br><a href="services/foundation-waterproofing/">Foundation Waterproofing</a><br><a href="services/interior-french-drains/">Interior French Drains</a><br><a href="services/exterior-french-drains/">Exterior French Drains</a><br><a href="services/channel-drains/">Channel Drains</a><br><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a><br></p></div>
+        <div><h4>Areas we serve</h4><p><a href="areas/west-caldwell/">West Caldwell</a><br><a href="areas/livingston/">Livingston</a><br><a href="areas/montclair/">Montclair</a><br><a href="areas/north-caldwell/">North Caldwell</a><br><a href="areas/short-hills/">Short Hills</a><br><a href="areas/south-orange/">South Orange</a><br><a href="areas/">All service areas</a></p></div>
+        <div><h4>Company</h4><p><a href="about/">About</a><br><a href="gallery/">Gallery</a><br><a href="reviews/">Reviews</a><br><a href="blog/">Blog</a><br><a href="contact/">Contact</a></p></div>
+        <div>
+          <h4>Get in touch</h4>
+          <p><a href="tel:+19176918411"><b>(917) 691-8411</b></a><br>Call or text, open 24 hours</p>
+          <p>Free estimate, no obligation.<br>We price-match any reasonable estimate.</p>
+        </div>
       </div>
-      <div><h4>Services</h4><p>
-        <a href="services/basement-waterproofing/">Basement Waterproofing</a><br><a href="services/foundation-waterproofing/">Foundation Waterproofing</a><br>
-        <a href="services/interior-french-drains/">Interior French Drains</a><br><a href="services/exterior-french-drains/">Exterior French Drains</a><br>
-        <a href="services/channel-drains/">Channel Drains</a><br><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a><br>
-        <a href="services/sump-pumps/">Sump Pumps</a><br><a href="services/window-wells-egress-windows/">Window Wells &amp; Egress</a></p></div>
-      <div><h4>Outdoor</h4><p>
-        <a href="services/retaining-walls/">Retaining Walls</a><br><a href="services/patios-pavers/">Patios &amp; Pavers</a><br>
-        <a href="services/walkways/">Driveway &amp; Walkway</a><br><a href="services/masonry/">Masonry</a><br><a href="gallery/">Gallery</a><br>
-        <a href="reviews/">Reviews</a><br><a href="about/">About</a><br><a href="contact/">Contact</a></p></div>
-      <div><h4>Get in touch</h4>
-        <p>98 Smull Ave, West Caldwell,<br>NJ 07006</p>
-        <p>Call or text: <a href="tel:+19176918411">(917) 691-8411</a><br>
-           Phone: <a href="tel:+12016465936">(201) 646-5936</a></p>
-        <p>Open 24 hours</p>
-        <p class="lic">West Essex County &middot; Passaic County &middot; Morris County</p>
+      <div class="fbot">
+        <span>&copy; 2026 ARD Waterproofing</span>
+        <a href="privacy-policy/">Privacy policy</a><a href="terms-of-service/">Terms of service</a><a href="conditions-of-use/">Conditions of use</a><a href="infringement-policy/">Infringement policy</a>
+        <span>Design preview. Colors are read from the client's own logo and are a placeholder
+        until Grace Design supplies the official palette.</span>
       </div>
-    </div>
-    <div class="wrap fbot">
-      <span>&copy; 2025 ARD Waterproofing. The content on this website is owned by us and our licensors.</span>
-      <a href="privacy-policy/">Privacy Policy</a><a href="terms-of-service/">Terms of Service</a><a href="conditions-of-use/">Conditions of Use</a>
     </div>
   </footer>
+
 </div>
 </body>

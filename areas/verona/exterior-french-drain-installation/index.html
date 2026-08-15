@@ -68,13 +68,57 @@ body.solo .stage{padding-top:0}
       .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
       438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
       and the CTA band uses lg rather than inventing a third. */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
-  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
-  border:2px solid transparent;cursor:pointer}
-.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
-.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+/* BUTTONS, strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems, all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band, so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border, which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding, small for the primary conversion action on the page.
+   Primary stays rust and stays alone, per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+.btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+.btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+/* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only, immediately below. */
 .btn-d{background:var(--navy);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
+.btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+
+/* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card, so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,.band-navy .btn-d,.midcta .btn-d,.chero .btn-d,
+.ctasplit .btn-d,.herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+
+@media(hover:hover) and (pointer:fine){
+  .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
+    0 8px 22px rgba(219,60,17,.36)}
+  .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
+  .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
+    background:#fff;color:var(--navy);border-color:#fff}
+  .btn-w:hover{background:var(--sand)}}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn-o:focus-visible,.ctabanner .btn-d:focus-visible,.band-navy .btn-d:focus-visible,
+.chero .btn-d:focus-visible{outline-color:#fff}
+
+/* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+@media(hover:hover) and (pointer:fine){
+  .chipnote a:hover{text-decoration-color:#fff}}
 .btn.wide{width:100%}
 .eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
 .eyebrow.dk{color:var(--rust)}
@@ -205,7 +249,13 @@ body.solo .stage{padding-top:0}
 .sfoot a{color:#fff;text-decoration:none}
 .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
 .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+/* FIVE columns, not four. The footer has always had five children (brand, Services, Areas
+   we serve, Company, Get in touch) and only four tracks, so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
 .fg p{line-height:1.8;margin-bottom:.6em}
 .sfoot .lic{font-size:13.5px;color:#7e97ad}
 .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
@@ -318,14 +368,37 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
+/* HEADER NAVIGATION, enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding, which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target, with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px, which also gives the rust phone pill
+   room to read as the primary action it is. */
 #C .chead{background:var(--navy);color:#fff}
-#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
   align-items:center;gap:26px}
 #C .chead .lg{color:#fff}
-#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
-#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
-#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
-  font:700 14px var(--head);text-decoration:none}
+#C .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead nav>a:hover,#C .chead .mm>a:hover{color:#fff;background:rgba(255,255,255,.10)}}
+#C .chead nav>a:focus-visible,#C .chead .mm>a:focus-visible{
+  outline:2px solid #fff;outline-offset:-2px}
+/* The current section stays legible against the lighter default. */
+#C .chead .mm>a[aria-expanded="true"],#C .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead .tel:hover{background:var(--rust-dk)}}
+#C .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #C .chead .burger{color:#fff}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
@@ -399,7 +472,10 @@ body.solo #B .subnav{top:72px}
   #C .mrow{grid-template-columns:1fr;gap:12px}
   #C .cmeta{grid-template-columns:1fr}
   #C .fgrid{grid-template-columns:1fr 1fr}
+  /* Five columns do not fit here. Two tracks with the brand block spanning both keeps the
+     four content columns paired instead of leaving one orphaned on its own row. */
   .fg{grid-template-columns:1fr 1fr}
+  .fg > :first-child{grid-column:1 / -1}
   .cmpwrap{grid-template-columns:1fr}
 }
 @media (max-width:820px){
@@ -1005,7 +1081,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   </header>
 
   <div class="chero haspic" id="estimate">
-    <div class="cbg"><img src="../../../video/g-excavation.jpeg" alt="ARD crew setting a drainage basin in a gravel bed"></div>
+    <div class="cbg"><img src="../../../gallery/full/044.jpg" alt="French drain and yard drainage work by ARD Waterproofing"></div>
     <div class="wrap chero-in">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Home</a> <i>/</i>
@@ -1073,13 +1149,13 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-white">
     <div class="wrap">
       <div class="shead"><h2>Exterior French Drain Installation in Verona, how we do it</h2></div>
-      <div class="mrows brief"><div class="topic hasinline"><div class="tlead"><h3>Interior French Drains in Verona</h3><p>For Verona homes, Interior French drains are often the right solution when water is showing up along the perimeter of your basement floor or seeping in where the walls meet the slab. Many homes in the area, especially older ones, were built before modern drainage systems were standard. Over time, changes in grading, clogged exterior drains, or increased rainfall can cause groundwater to push up around the foundation. An interior French drain relieves that pressure from inside, channeling water into a sump pump before it ever reaches your finished space.</p></div><figure class="tpic"><img src="../../../video/h-foundation.jpeg" alt="New foundation slab with rebar before the pour" loading="lazy"></figure><div class="tbody inline"><p>An interior French drain sits just below the edge of your basement slab, around the inside perimeter of selected walls. Installed properly, it’s nearly invisible once the work is complete, but quietly does the heavy lifting every time it rains. We typically recommend an interior system when water is entering from multiple directions, when exterior access is limited, or when basement finishing is planned, and you want a reliable, long-term solution. Because the drain is inside, we can control every step of the install, even during cold or wet weather that might delay exterior work.</p></div></div><div class="topic hasinline"><div class="tlead"><h3>Exterior French Drain Installation in Verona</h3><p>Exterior French drains are one of the most effective ways to keep water away from your foundation before it has a chance to seep into your basement. If you notice pooling water along the side of your home, soggy soil right up against the foundation, or a downhill slope that seems to send every storm straight toward your basement wall, an exterior French drain could be the right answer. Verona’s topography, with its mix of hills and flat streets, often causes water to collect along specific sides of a house. Over time, that repeated saturation can lead to seepage, cracked masonry, or a perpetually damp basement.</p></div><figure class="tpic"><img src="../../../video/g-landscape-drain.jpeg" alt="Channel drain being installed across a residential lawn" loading="lazy"></figure><div class="tbody inline"><p>An exterior French drain is installed in a trench along the exterior of your foundation or in strategic areas of your yard. Inside the trench, we place a perforated drain pipe, properly sloped and surrounded by washed stone and filter fabric to help keep soil out. That pipe collects groundwater and redirects it to a safe discharge point,away from your foundation, landscaping, and walkways. Done correctly, the system works with gravity and the natural flow of water, giving Verona homeowners a low-profile, long-term solution to heavy storm runoff and groundwater pressure.</p></div></div></div>
+      <div class="mrows brief"><div class="topic hasinline"><div class="tlead"><h3>Interior French Drains in Verona</h3><p>For Verona homes, Interior French drains are often the right solution when water is showing up along the perimeter of your basement floor or seeping in where the walls meet the slab. Many homes in the area, especially older ones, were built before modern drainage systems were standard. Over time, changes in grading, clogged exterior drains, or increased rainfall can cause groundwater to push up around the foundation. An interior French drain relieves that pressure from inside, channeling water into a sump pump before it ever reaches your finished space.</p></div><figure class="tpic"><img src="../../../gallery/full/045.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"></figure><div class="tbody inline"><p>An interior French drain sits just below the edge of your basement slab, around the inside perimeter of selected walls. Installed properly, it’s nearly invisible once the work is complete, but quietly does the heavy lifting every time it rains. We typically recommend an interior system when water is entering from multiple directions, when exterior access is limited, or when basement finishing is planned, and you want a reliable, long-term solution. Because the drain is inside, we can control every step of the install, even during cold or wet weather that might delay exterior work.</p></div></div><div class="topic hasinline"><div class="tlead"><h3>Exterior French Drain Installation in Verona</h3><p>Exterior French drains are one of the most effective ways to keep water away from your foundation before it has a chance to seep into your basement. If you notice pooling water along the side of your home, soggy soil right up against the foundation, or a downhill slope that seems to send every storm straight toward your basement wall, an exterior French drain could be the right answer. Verona’s topography, with its mix of hills and flat streets, often causes water to collect along specific sides of a house. Over time, that repeated saturation can lead to seepage, cracked masonry, or a perpetually damp basement.</p></div><figure class="tpic"><img src="../../../gallery/full/058.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"></figure><div class="tbody inline"><p>An exterior French drain is installed in a trench along the exterior of your foundation or in strategic areas of your yard. Inside the trench, we place a perforated drain pipe, properly sloped and surrounded by washed stone and filter fabric to help keep soil out. That pipe collects groundwater and redirects it to a safe discharge point,away from your foundation, landscaping, and walkways. Done correctly, the system works with gravity and the natural flow of water, giving Verona homeowners a low-profile, long-term solution to heavy storm runoff and groundwater pressure.</p></div></div></div>
       <details class="more"><summary><span class="moreopen">See all 4 sections</span><span class="moreshut">Show less</span></summary><div class="mrows brief"><div class="topic nopic hasinline"><div class="tlead"><h3>Channel Drains and Surface Drainage in Verona</h3><p>Not every water problem starts at the basement wall. Many Verona homeowners first notice issues on the surface: water pouring across the driveway, puddles that linger for days on the patio, or walkways that become slick and unsafe after a downpour. That surface water often finds the path of least resistance,and too often, that path leads straight to your foundation. Channel drains and other surface drainage solutions help intercept that water early, controlling where it goes so it doesn’t end up where it shouldn’t.</p></div><div class="tbody inline"><p>Channel drains are long, narrow drains set flush into surfaces like driveways, garage entrances, pool decks, or patios. They collect runoff across a wider area and funnel it into an underground pipe system that carries the water away from your home. In Verona, we frequently install channel drains at the bottom of sloped driveways that otherwise send water directly toward a garage or basement entry. Properly installed channel drains integrate cleanly into concrete, pavers, or asphalt and can be designed to handle the intense flow that comes with seasonal storms.</p></div></div><div class="topic nopic hasinline"><div class="tlead"><h3>Other Waterproofing and Drainage Solutions in Verona</h3><p>Water problems don’t always fit neatly into one category. Some Verona properties have a mix of issues: a damp basement corner, a soggy side yard, and a driveway that sends runoff toward the garage. That’s why we offer custom drainage design and a full range of waterproofing services that work together instead of in isolation. Our goal is to look at your home as a whole system and recommend only what you genuinely need to stay dry and protected.</p></div><div class="tbody inline"><p>When we inspect your Verona home, we take time to understand the history of the problem. Has the issue been getting worse over the years? Did it start after a particular renovation, landscaping project, or storm? We combine what you tell us with what we see on site,grading patterns, soil conditions, downspout locations, existing drains, and visible foundation details. From there, we may suggest a combination of exterior French drains, interior drains, channel drains, sump pumps, window well improvements, or minor grading changes.</p></div></div></div></details>
     </div>
   </section>
 
   <div class="ctabanner">
-    <div class="ctabg"><img src="../../../video/g-yard-water.jpg" alt="" aria-hidden="true"></div>
+    <div class="ctabg"><img src="../../../gallery/full/073.jpg" alt="" aria-hidden="true"></div>
     <div class="wrap ctabar">
       <div class="ctatext">
         <h2>Find out what your Verona home actually needs</h2>
@@ -1099,7 +1175,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-sand">
     <div class="wrap">
       <div class="shead"><div class="eyebrow dk">Also in Verona</div>
-      <h2>Other work we do on the same visit</h2>
+      <h2>Other waterproofing and drainage work in Verona</h2>
       <p class="lede">All of it on one estimate. Each one opens its full service
       page.</p></div>
       <div class="relgrid" style="--cols:2"><a class="relc" href="../../../services/foundation-waterproofing/"><span class="rh"><h4>Foundation Waterproofing in Verona</h4><span class="rar">&rarr;</span></span><span class="rp">Verona’s mix of older homes, sloped lots, and changing weather patterns creates a perfect recipe for foundation water problems.</span></a><a class="relc" href="../../../services/crawl-space-encapsulation/"><span class="rh"><h4>Crawlspace Encapsulation in Verona</h4><span class="rar">&rarr;</span></span><span class="rp">If your home has a crawlspace instead of a full basement, it’s easy to forget about it,until you start noticing musty odors, cold floors, or higher energy bills.</span></a><a class="relc" href="../../../services/sump-pumps/"><span class="rh"><h4>Sump Pump Installation and Repair in Verona</h4><span class="rar">&rarr;</span></span><span class="rp">A sump pump is often the quiet hero of a dry basement. Tucked away in a corner crock or in a mechanical room.</span></a><a class="relc" href="../../../services/window-wells-egress-windows/"><span class="rh"><h4>Window Wells and Egress Windows in Verona</h4><span class="rar">&rarr;</span></span><span class="rp">Basement window wells and egress windows bring light and safety to lower-level spaces, but they can also become a source of leaks if they’re not properly drained and sealed.</span></a></div>
@@ -1130,7 +1206,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-sand">
     <div class="wrap">
       <div class="shead center"><div class="eyebrow dk">Service area</div>
-      <h2>Find your town and your job</h2>
+      <h2>Waterproofing and drainage by New Jersey town</h2>
       <p class="lede">Waterproofing and foundation drainage across West Essex, Union,
       Passaic and Morris Counties, dispatched from Smull Ave in West Caldwell.</p></div>
       <div class="ggrid"><div class="gband"><div class="gbh"><h3>Exterior French Drain Installation in other towns</h3><a class="gall" href="../../../areas/">All service areas &rarr;</a></div><div class="gtiles" style="--cols:4"><a class="gtile" href="../../../areas/livingston/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Livingston</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/montclair/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Montclair</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/north-caldwell/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>North Caldwell</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/short-hills/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Short Hills</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/south-orange/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>South Orange</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/summit/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Summit</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/wayne/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Wayne</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/west-caldwell/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Caldwell</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a></div></div><div class="gband"><div class="gbh"><h3>More in Verona</h3><a class="gall" href="../../../areas/verona/">Everything we do in Verona &rarr;</a></div><div class="gtiles" style="--cols:2"><a class="gtile" href="../../../areas/verona/french-drain-service/"><span class="ctxt"><b>French Drain Service</b><em>in Verona</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/verona/waterproofing-services/"><span class="ctxt"><b>Waterproofing Services</b><em>in Verona</em></span><span class="carrow">&rarr;</span></a></div></div></div>
@@ -1145,14 +1221,14 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-white">
     <div class="narrow">
       <div class="shead center"><h2>Common questions about exterior french drain installation in Verona</h2></div>
-      <div class="faq"><details open><summary>How do I know if I need an exterior French drain versus an interior French drain?</summary><div class="ans"><p>Deciding between an exterior French drain and an interior French drain in Verona comes down to where the water is coming from, how it moves on your property, and what kind of access we have around your home.</p></div></details><details><summary>Will your waterproofing work require tearing up my entire yard or basement?</summary><div class="ans"><p>This is one of the biggest concerns Verona homeowners have, and it’s understandable. No one wants their property turned upside down if it can be avoided.</p></div></details><details><summary>How long does a typical French drain or sump pump installation take in Verona?</summary><div class="ans"><p>Most Verona homeowners are relieved to hear that many French drain and sump pump projects can be completed faster than they expect. For typical residential jobs, a straightforward interior French drain with a sump pump can often be installed in about a day, sometimes stretching into a second day depending on the size of the basement, the thickness of the slab, and access around the home.</p></div></details><details><summary>Do you honor your original quote if the waterproofing job becomes more complex?</summary><div class="ans"><p>Yes. Honoring our original quote is a core part of how ARD Waterproofing does business. We know that homeowners in Verona are often wary of contractors because they’ve heard stories of “surprise” charges that pop up once work is underway.</p></div></details><details><summary>What kind of warranty or guarantee do you provide on your drainage and waterproofing work?</summary><div class="ans"><p>When you invest in exterior French drains, interior French drains, sump pumps, or other waterproofing systems for your Verona home, you’re not just buying materials and labor; you’re buying peace of mind. That’s why we stand behind our work with strong, straightforward guarantees.</p></div></details></div>
+      <div class="faq"><details><summary>How do I know if I need an exterior French drain versus an interior French drain?</summary><div class="ans"><p>Deciding between an exterior French drain and an interior French drain in Verona comes down to where the water is coming from, how it moves on your property, and what kind of access we have around your home.</p></div></details><details><summary>Will your waterproofing work require tearing up my entire yard or basement?</summary><div class="ans"><p>This is one of the biggest concerns Verona homeowners have, and it’s understandable. No one wants their property turned upside down if it can be avoided.</p></div></details><details><summary>How long does a typical French drain or sump pump installation take in Verona?</summary><div class="ans"><p>Most Verona homeowners are relieved to hear that many French drain and sump pump projects can be completed faster than they expect. For typical residential jobs, a straightforward interior French drain with a sump pump can often be installed in about a day, sometimes stretching into a second day depending on the size of the basement, the thickness of the slab, and access around the home.</p></div></details><details><summary>Do you honor your original quote if the waterproofing job becomes more complex?</summary><div class="ans"><p>Yes. Honoring our original quote is a core part of how ARD Waterproofing does business. We know that homeowners in Verona are often wary of contractors because they’ve heard stories of “surprise” charges that pop up once work is underway.</p></div></details><details><summary>What kind of warranty or guarantee do you provide on your drainage and waterproofing work?</summary><div class="ans"><p>When you invest in exterior French drains, interior French drains, sump pumps, or other waterproofing systems for your Verona home, you’re not just buying materials and labor; you’re buying peace of mind. That’s why we stand behind our work with strong, straightforward guarantees.</p></div></details></div>
     </div>
   </section>
 
   <section class="band-sand">
     <div class="wrap">
-      <div class="shead"><h2>Recent work</h2></div>
-      <div class="gal"><figure><img src="../../../video/g-french-drain.jpg" alt="Interior French drain channel backfilled before the floor is closed" loading="lazy"><figcaption>Interior French drain, backfilled before closing</figcaption></figure><figure><img src="../../../video/g-basement-1.jpg" alt="Basement wall and floor joint after waterproofing" loading="lazy"><figcaption>Wall and floor joint, treated</figcaption></figure><figure><img src="../../../video/g-basement-2.jpg" alt="Empty unfinished basement after a drainage system installation" loading="lazy"><figcaption>Dry basement, system in</figcaption></figure><figure><img src="../../../video/g-jobsite.jpg" alt="Mini excavator on a residential exterior drainage job" loading="lazy"><figcaption>Exterior drainage excavation</figcaption></figure><figure><img src="../../../video/g-basement-3.jpg" alt="Finished basement interior with exposed beam" loading="lazy"><figcaption>Finished basement, protected</figcaption></figure><figure><img src="../../../video/h-window-wells.jpeg" alt="Covered window well with a drain and clean gravel bed" loading="lazy"><figcaption>Window well, drained and covered</figcaption></figure></div>
+      <div class="shead"><h2>Recent waterproofing work near Verona</h2></div>
+      <div class="gal"><figure><img src="../../../gallery/full/105.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/024.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../../gallery/full/056.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../../gallery/full/128.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../../gallery/full/129.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../../gallery/full/112.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure></div>
     </div>
   </section>
 
@@ -1178,7 +1254,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
       </div>
       <div class="fbot">
         <span>&copy; 2026 ARD Waterproofing</span>
-        <a href="../../../privacy-policy/">Privacy policy</a><a href="../../../terms-of-service/">Terms of service</a>
+        <a href="../../../privacy-policy/">Privacy policy</a><a href="../../../terms-of-service/">Terms of service</a><a href="../../../conditions-of-use/">Conditions of use</a><a href="../../../infringement-policy/">Infringement policy</a>
         <span>Design preview. Colors are read from the client's own logo and are a placeholder
         until Grace Design supplies the official palette.</span>
       </div>

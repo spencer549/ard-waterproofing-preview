@@ -68,13 +68,57 @@ body.solo .stage{padding-top:0}
       .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
       438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
       and the CTA band uses lg rather than inventing a third. */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
-  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
-  border:2px solid transparent;cursor:pointer}
-.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
-.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+/* BUTTONS, strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems, all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band, so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border, which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding, small for the primary conversion action on the page.
+   Primary stays rust and stays alone, per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+.btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+.btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+/* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only, immediately below. */
 .btn-d{background:var(--navy);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
+.btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+
+/* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card, so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,.band-navy .btn-d,.midcta .btn-d,.chero .btn-d,
+.ctasplit .btn-d,.herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+
+@media(hover:hover) and (pointer:fine){
+  .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
+    0 8px 22px rgba(219,60,17,.36)}
+  .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
+  .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
+    background:#fff;color:var(--navy);border-color:#fff}
+  .btn-w:hover{background:var(--sand)}}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn-o:focus-visible,.ctabanner .btn-d:focus-visible,.band-navy .btn-d:focus-visible,
+.chero .btn-d:focus-visible{outline-color:#fff}
+
+/* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+@media(hover:hover) and (pointer:fine){
+  .chipnote a:hover{text-decoration-color:#fff}}
 .btn.wide{width:100%}
 .eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
 .eyebrow.dk{color:var(--rust)}
@@ -205,7 +249,13 @@ body.solo .stage{padding-top:0}
 .sfoot a{color:#fff;text-decoration:none}
 .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
 .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+/* FIVE columns, not four. The footer has always had five children (brand, Services, Areas
+   we serve, Company, Get in touch) and only four tracks, so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
 .fg p{line-height:1.8;margin-bottom:.6em}
 .sfoot .lic{font-size:13.5px;color:#7e97ad}
 .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
@@ -318,14 +368,37 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
+/* HEADER NAVIGATION, enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding, which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target, with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px, which also gives the rust phone pill
+   room to read as the primary action it is. */
 #C .chead{background:var(--navy);color:#fff}
-#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
   align-items:center;gap:26px}
 #C .chead .lg{color:#fff}
-#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
-#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
-#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
-  font:700 14px var(--head);text-decoration:none}
+#C .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead nav>a:hover,#C .chead .mm>a:hover{color:#fff;background:rgba(255,255,255,.10)}}
+#C .chead nav>a:focus-visible,#C .chead .mm>a:focus-visible{
+  outline:2px solid #fff;outline-offset:-2px}
+/* The current section stays legible against the lighter default. */
+#C .chead .mm>a[aria-expanded="true"],#C .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead .tel:hover{background:var(--rust-dk)}}
+#C .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #C .chead .burger{color:#fff}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
@@ -399,7 +472,10 @@ body.solo #B .subnav{top:72px}
   #C .mrow{grid-template-columns:1fr;gap:12px}
   #C .cmeta{grid-template-columns:1fr}
   #C .fgrid{grid-template-columns:1fr 1fr}
+  /* Five columns do not fit here. Two tracks with the brand block spanning both keeps the
+     four content columns paired instead of leaving one orphaned on its own row. */
   .fg{grid-template-columns:1fr 1fr}
+  .fg > :first-child{grid-column:1 / -1}
   .cmpwrap{grid-template-columns:1fr}
 }
 @media (max-width:820px){
@@ -1005,7 +1081,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   </header>
 
   <div class="chero haspic" id="estimate">
-    <div class="cbg"><img src="../../../video/img-flooded.jpg" alt="Standing water across a flooded basement floor"></div>
+    <div class="cbg"><img src="../../../gallery/full/045.jpg" alt="French drain and yard drainage work by ARD Waterproofing"></div>
     <div class="wrap chero-in">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Home</a> <i>/</i>
@@ -1073,13 +1149,13 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-white">
     <div class="wrap">
       <div class="shead"><h2>French Drain Service in South Orange, how we do it</h2></div>
-      <div class="mrows brief"><div class="topic hasinline"><div class="tlead"><h3>Interior French Drains: Drainage Solutions for Basements in South Orange</h3><p>Interior French drains are a cornerstone of effective basement waterproofing in South Orange. These subsurface drainage systems capture and redirect water before it can rise above your basement floor, providing a proactive approach to flood prevention. ARD Waterproofing specializes in custom-designed interior French drains that seamlessly integrate with your existing basement infrastructure.</p></div><figure class="tpic"><img src="../../../video/g-basement-1.jpg" alt="Basement wall and floor joint after waterproofing" loading="lazy"></figure><div class="tbody inline"><p>Our installation process begins with a precise evaluation of your basement’s layout, including the identification of water entry points and the natural flow of groundwater. We carefully excavate a narrow trench along the interior perimeter, install perforated piping surrounded by gravel, and connect the system to a sump pump for active water removal.</p></div></div><div class="topic hasinline"><div class="tlead"><h3>The Role of Plumbing and Construction in Effective French Drain Service</h3><p>A successful French drain installation depends on more than just the right materials,it requires expert plumbing and construction knowledge. At ARD Waterproofing, our technicians combine years of hands-on experience with up-to-date training in the latest drainage technologies, ensuring that every project is completed to the highest standards.</p></div><figure class="tpic"><img src="../../../video/h-crawlspace.jpeg" alt="Crawl space finished with a sealed white encapsulation liner" loading="lazy"></figure><div class="tbody inline"><p>Effective French drain service starts with a careful assessment of your property’s plumbing and construction features. We evaluate the placement of existing pipes, the condition of your foundation, and the surrounding landscape to determine the optimal configuration for your drainage system. Our team works closely with homeowners to minimize disruption during installation, keeping your property clean and safe throughout the process.</p></div></div></div>
+      <div class="mrows brief"><div class="topic hasinline"><div class="tlead"><h3>Interior French Drains: Drainage Solutions for Basements in South Orange</h3><p>Interior French drains are a cornerstone of effective basement waterproofing in South Orange. These subsurface drainage systems capture and redirect water before it can rise above your basement floor, providing a proactive approach to flood prevention. ARD Waterproofing specializes in custom-designed interior French drains that seamlessly integrate with your existing basement infrastructure.</p></div><figure class="tpic"><img src="../../../gallery/full/058.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"></figure><div class="tbody inline"><p>Our installation process begins with a precise evaluation of your basement’s layout, including the identification of water entry points and the natural flow of groundwater. We carefully excavate a narrow trench along the interior perimeter, install perforated piping surrounded by gravel, and connect the system to a sump pump for active water removal.</p></div></div><div class="topic hasinline"><div class="tlead"><h3>The Role of Plumbing and Construction in Effective French Drain Service</h3><p>A successful French drain installation depends on more than just the right materials,it requires expert plumbing and construction knowledge. At ARD Waterproofing, our technicians combine years of hands-on experience with up-to-date training in the latest drainage technologies, ensuring that every project is completed to the highest standards.</p></div><figure class="tpic"><img src="../../../gallery/full/073.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"></figure><div class="tbody inline"><p>Effective French drain service starts with a careful assessment of your property’s plumbing and construction features. We evaluate the placement of existing pipes, the condition of your foundation, and the surrounding landscape to determine the optimal configuration for your drainage system. Our team works closely with homeowners to minimize disruption during installation, keeping your property clean and safe throughout the process.</p></div></div></div>
       <details class="more"><summary><span class="moreopen">See all 6 sections</span><span class="moreshut">Show less</span></summary><div class="mrows brief"><div class="topic nopic hasinline"><div class="tlead"><h3>Exterior French Drains: Drainage Service and Flood Prevention for South Orange Homes</h3><p>Exterior French drains in South Orange are a vital line of defense against flooding and water infiltration in the area’s homes. These systems are installed around the perimeter of your property, capturing and diverting surface water before it can reach your foundation. ARD Waterproofing offers expert exterior French drain installation, using durable materials and proven techniques to ensure maximum protection.</p></div><div class="tbody inline"><p>Our team assesses your property’s landscape, identifying areas where water tends to pool or where runoff is most intense. We design custom drainage solutions that blend seamlessly with your yard’s appearance, preserving curb appeal while providing robust flood prevention. Our installations include high-quality perforated pipes, gravel backfill, and filter fabrics to keep debris out and water flowing freely.</p></div></div><div class="topic nopic hasinline"><div class="tlead"><h3>Why Stormwater Drainage and Pipe Expertise Matter for Your Home’s Protection</h3><p>Stormwater management is a complex challenge in South Orange, where heavy rains and rapid snowmelt can quickly overwhelm traditional drainage systems. That’s why pipe expertise and stormwater solutions are at the core of ARD Waterproofing’s services. Our team brings deep knowledge of local plumbing codes, pipe materials, and installation methods to every project.</p></div><div class="tbody inline"><p>Effective stormwater drainage starts with a detailed assessment of your property’s needs. We analyze the flow of water around your home, the capacity of your existing pipes, and the potential for blockages or backups. Our recommendations may include upgrading downspouts, installing larger pipes, or integrating advanced filtration systems to keep your drainage network running smoothly.</p></div></div><div class="topic nopic hasinline"><div class="tlead"><h3>Channel Drains: Drainage System Experts Serving South Orange</h3><p>Channel drains are an ideal solution for managing surface water in driveways, patios, and walkways throughout South Orange. These linear drainage systems capture runoff before it can reach your foundation or basement, providing an extra layer of protection for your property. ARD Waterproofing specializes in the design and installation of channel drains, offering customized solutions for homes and businesses alike.</p></div><div class="tbody inline"><p>Our team evaluates your property’s layout to determine the best placement for channel drains, ensuring efficient water collection and discharge. We use durable materials that withstand New Jersey’s freeze-thaw cycles, preventing cracking and maintaining performance over time. Our installations are discreet and aesthetically pleasing, blending seamlessly with your existing landscaping and hardscaping.</p></div></div><div class="topic nopic hasinline"><div class="tlead"><h3>Pipe and Plumbing Solutions for Managing Stormwater Drainage</h3><p>Our team begins by evaluating your property’s stormwater challenges, including the volume and direction of runoff, soil permeability, and existing plumbing infrastructure. We recommend and install high-capacity pipes, backflow preventers, and catch basins to keep water moving away from your foundation and basement.</p></div><div class="tbody inline"><p>By integrating pipe and plumbing expertise with our broader drainage services, ARD Waterproofing delivers comprehensive stormwater management solutions for South Orange homes. Protect your property with a system designed to handle the region’s heaviest rains and safeguard your investment for the future.</p></div></div></div></details>
     </div>
   </section>
 
   <div class="ctabanner">
-    <div class="ctabg"><img src="../../../video/img-hero.jpg" alt="" aria-hidden="true"></div>
+    <div class="ctabg"><img src="../../../gallery/full/074.jpg" alt="" aria-hidden="true"></div>
     <div class="wrap ctabar">
       <div class="ctatext">
         <h2>Find out what your South Orange home actually needs</h2>
@@ -1099,7 +1175,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-sand">
     <div class="wrap">
       <div class="shead"><div class="eyebrow dk">Also in South Orange</div>
-      <h2>Other work we do on the same visit</h2>
+      <h2>Other waterproofing and drainage work in South Orange</h2>
       <p class="lede">All of it on one estimate. Each one opens its full service
       page.</p></div>
       <div class="relgrid" style="--cols:3"><a class="relc" href="../../../services/foundation-waterproofing/"><span class="rh"><h4>Foundation Waterproofing for Health and Flood Protection in South Orange</h4><span class="rar">&rarr;</span></span><span class="rp">Foundation waterproofing is more than just a preventative measure; it’s a vital investment in your home’s structural integrity and your family’s well-being.</span></a><a class="relc" href="../../../services/sump-pumps/"><span class="rh"><h4>How a Sump Pump and Professional Patch Solutions Prevent Water Damage</h4><span class="rar">&rarr;</span></span><span class="rp">At ARD Waterproofing, our process begins with a full assessment of your sump pump’s performance and the condition of your basement walls and floors.</span></a><a class="relc" href="../../../services/basement-waterproofing/"><span class="rh"><h4>Basement Waterproofing and Health Benefits of Drainage System Installation</h4><span class="rar">&rarr;</span></span><span class="rp">Basement waterproofing is not only about protecting your property from water damage,it’s also about creating a healthier living environment for your family. In South Orange.</span></a><a class="relc" href="../../../services/basement-waterproofing/"><span class="rh"><h4>How Professional Drain Service Improves Basement Waterproofing</h4><span class="rar">&rarr;</span></span><span class="rp">Professional drain service is the key to effective basement waterproofing in South Orange. At ARD Waterproofing.</span></a><a class="relc" href="../../../services/crawl-space-encapsulation/"><span class="rh"><h4>Crawlspace Encapsulation: Health and Flood Solutions for South Orange Properties</h4><span class="rar">&rarr;</span></span><span class="rp">Crawlspace encapsulation is a powerful way to protect your home from moisture, mold, and flooding. In South Orange.</span></a><a class="relc" href="../../../services/crawl-space-encapsulation/"><span class="rh"><h4>Managing Crawlspace Flood and Patch Issues with Professional Drain Service</h4><span class="rar">&rarr;</span></span><span class="rp">Our technicians conduct a thorough inspection to identify sources of water intrusion, such as plumbing leaks, poor grading, or inadequate drainage.</span></a><a class="relc" href="../../../services/sump-pumps/"><span class="rh"><h4>The Importance of Sump Pump and Drainage Solutions for Structural Health</h4><span class="rar">&rarr;</span></span><span class="rp">A robust sump pump and drainage system is essential for maintaining the structural health of your home. In South Orange, where high groundwater and heavy rains are common.</span></a><a class="relc" href="../../../services/sump-pumps/"><span class="rh"><h4>Sump Pumps: Reliable Flood and Health Protection for South Orange Basements</h4><span class="rar">&rarr;</span></span><span class="rp">Sump pumps are a vital component of flood prevention and health protection for South Orange basements.</span></a><a class="relc" href="../../../services/sump-pumps/"><span class="rh"><h4>Sump Pump Installation and Patch Services for Basement Waterproofing</h4><span class="rar">&rarr;</span></span><span class="rp">Professional sump pump installation is a cornerstone of effective basement waterproofing in South Orange.</span></a><a class="relc" href="../../../services/sump-pumps/"><span class="rh"><h4>Sump Pump Maintenance and Professional Drain Service for Flood Prevention</h4><span class="rar">&rarr;</span></span><span class="rp">Regular sump pump maintenance is essential for reliable flood prevention in South Orange. ARD Waterproofing offers professional maintenance services that keep your system in…</span></a><a class="relc" href="../../../services/window-wells-egress-windows/"><span class="rh"><h4>Window Wells &amp; Egress Windows: Drainage and Flood Protection in South Orange</h4><span class="rar">&rarr;</span></span><span class="rp">Window wells and egress windows are essential for both safety and drainage in South Orange basements.</span></a><a class="relc" href="../../../services/window-wells-egress-windows/"><span class="rh"><h4>The Role of Professional Construction and Plumbing in Window Well Drains</h4><span class="rar">&rarr;</span></span><span class="rp">Proper construction and plumbing are critical for effective window well drainage in South Orange homes.</span></a><a class="relc" href="../../../services/basement-waterproofing/"><span class="rh"><h4>Get Drainage Solutions and Basement Waterproofing from South Orange’s Experts</h4><span class="rar">&rarr;</span></span><span class="rp">Don’t wait for the next storm to take action,partner with ARD Waterproofing for the best drainage solutions and basement waterproofing in South Orange.</span></a></div>
@@ -1130,7 +1206,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-sand">
     <div class="wrap">
       <div class="shead center"><div class="eyebrow dk">Service area</div>
-      <h2>Find your town and your job</h2>
+      <h2>Waterproofing and drainage by New Jersey town</h2>
       <p class="lede">Waterproofing and foundation drainage across West Essex, Union,
       Passaic and Morris Counties, dispatched from Smull Ave in West Caldwell.</p></div>
       <div class="ggrid"><div class="gband"><div class="gbh"><h3>French Drain Service in other towns</h3><a class="gall" href="../../../areas/">All service areas &rarr;</a></div><div class="gtiles" style="--cols:4"><a class="gtile" href="../../../areas/livingston/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Livingston</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/montclair/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Montclair</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/north-caldwell/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>North Caldwell</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/summit/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Summit</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/verona/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Verona</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/wayne/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Wayne</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/west-caldwell/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Caldwell</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/west-orange/french-drain-service/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Orange</b><em>French Drain Service</em></span><span class="carrow">&rarr;</span></a></div></div><div class="gband"><div class="gbh"><h3>More in South Orange</h3><a class="gall" href="../../../areas/south-orange/">Everything we do in South Orange &rarr;</a></div><div class="gtiles" style="--cols:1"><a class="gtile" href="../../../areas/south-orange/exterior-french-drain-installation/"><span class="ctxt"><b>Exterior French Drain Installation</b><em>in South Orange</em></span><span class="carrow">&rarr;</span></a></div></div></div>
@@ -1145,14 +1221,14 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-white">
     <div class="narrow">
       <div class="shead center"><h2>Common questions about french drain service in South Orange</h2></div>
-      <div class="faq"><details open><summary>What is the best drain service for preventing basement floods in South Orange?</summary><div class="ans"><p>The best drain service combines multiple solutions,interior and exterior French drains, sump pumps, and expert patching,to address all potential water entry points. ARD Waterproofing customizes every system for the unique demands of South Orange homes, ensuring maximum protection against floods.</p></div></details><details><summary>How does basement waterproofing improve my home’s health and safety?</summary><div class="ans"><p>Basement waterproofing prevents mold, mildew, and moisture-related damage, improving indoor air quality and reducing the risk of respiratory issues. It also protects your foundation from water intrusion, maintaining the structural integrity and safety of your home.</p></div></details><details><summary>What’s involved in a professional French drain installation in South Orange?</summary><div class="ans"><p>Professional French drain installation begins with a detailed assessment of your property, followed by precise excavation, installation of perforated piping, and connection to a sump pump or exterior discharge system.</p></div></details><details><summary>How do sump pumps and drainage systems work together to stop floods?</summary><div class="ans"><p>Sump pumps and drainage systems form a comprehensive defense against basement flooding. French drains collect and channel water toward the sump pit, while the sump pump removes it from your basement, keeping your living space dry even during heavy storms.</p></div></details><details><summary>Why choose ARD Waterproofing for stormwater drainage and foundation patch repair?</summary><div class="ans"><p>ARD Waterproofing offers local expertise, quality materials, and a commitment to customer satisfaction. Our team provides personalized solutions, upfront pricing, and ongoing support, making us the trusted choice for stormwater drainage and foundation patch repair in South Orange.</p></div></details></div>
+      <div class="faq"><details><summary>What is the best drain service for preventing basement floods in South Orange?</summary><div class="ans"><p>The best drain service combines multiple solutions,interior and exterior French drains, sump pumps, and expert patching,to address all potential water entry points. ARD Waterproofing customizes every system for the unique demands of South Orange homes, ensuring maximum protection against floods.</p></div></details><details><summary>How does basement waterproofing improve my home’s health and safety?</summary><div class="ans"><p>Basement waterproofing prevents mold, mildew, and moisture-related damage, improving indoor air quality and reducing the risk of respiratory issues. It also protects your foundation from water intrusion, maintaining the structural integrity and safety of your home.</p></div></details><details><summary>What’s involved in a professional French drain installation in South Orange?</summary><div class="ans"><p>Professional French drain installation begins with a detailed assessment of your property, followed by precise excavation, installation of perforated piping, and connection to a sump pump or exterior discharge system.</p></div></details><details><summary>How do sump pumps and drainage systems work together to stop floods?</summary><div class="ans"><p>Sump pumps and drainage systems form a comprehensive defense against basement flooding. French drains collect and channel water toward the sump pit, while the sump pump removes it from your basement, keeping your living space dry even during heavy storms.</p></div></details><details><summary>Why choose ARD Waterproofing for stormwater drainage and foundation patch repair?</summary><div class="ans"><p>ARD Waterproofing offers local expertise, quality materials, and a commitment to customer satisfaction. Our team provides personalized solutions, upfront pricing, and ongoing support, making us the trusted choice for stormwater drainage and foundation patch repair in South Orange.</p></div></details></div>
     </div>
   </section>
 
   <section class="band-sand">
     <div class="wrap">
-      <div class="shead"><h2>Recent work</h2></div>
-      <div class="gal"><figure><img src="../../../video/g-french-drain.jpg" alt="Interior French drain channel backfilled before the floor is closed" loading="lazy"><figcaption>Interior French drain, backfilled before closing</figcaption></figure><figure><img src="../../../video/g-basement-2.jpg" alt="Empty unfinished basement after a drainage system installation" loading="lazy"><figcaption>Dry basement, system in</figcaption></figure><figure><img src="../../../video/g-jobsite.jpg" alt="Mini excavator on a residential exterior drainage job" loading="lazy"><figcaption>Exterior drainage excavation</figcaption></figure><figure><img src="../../../video/g-yard-water.jpg" alt="Standing water pooling on a residential lawn" loading="lazy"><figcaption>Yard water, the source of many calls</figcaption></figure><figure><img src="../../../video/g-basement-3.jpg" alt="Finished basement interior with exposed beam" loading="lazy"><figcaption>Finished basement, protected</figcaption></figure><figure><img src="../../../video/g-excavation.jpeg" alt="ARD crew setting a drainage basin in a gravel bed" loading="lazy"><figcaption>Drainage basin going in</figcaption></figure></div>
+      <div class="shead"><h2>Recent waterproofing work near South Orange</h2></div>
+      <div class="gal"><figure><img src="../../../gallery/full/101.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/105.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/007.jpg" alt="Channel drain installed by ARD Waterproofing" loading="lazy"><figcaption>Channel and driveway drains</figcaption></figure><figure><img src="../../../gallery/full/023.jpg" alt="Channel drain installed by ARD Waterproofing" loading="lazy"><figcaption>Channel and driveway drains</figcaption></figure><figure><img src="../../../gallery/full/027.jpg" alt="Channel drain installed by ARD Waterproofing" loading="lazy"><figcaption>Channel and driveway drains</figcaption></figure><figure><img src="../../../gallery/full/047.jpg" alt="Channel drain installed by ARD Waterproofing" loading="lazy"><figcaption>Channel and driveway drains</figcaption></figure></div>
     </div>
   </section>
 
@@ -1178,7 +1254,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
       </div>
       <div class="fbot">
         <span>&copy; 2026 ARD Waterproofing</span>
-        <a href="../../../privacy-policy/">Privacy policy</a><a href="../../../terms-of-service/">Terms of service</a>
+        <a href="../../../privacy-policy/">Privacy policy</a><a href="../../../terms-of-service/">Terms of service</a><a href="../../../conditions-of-use/">Conditions of use</a><a href="../../../infringement-policy/">Infringement policy</a>
         <span>Design preview. Colors are read from the client's own logo and are a placeholder
         until Grace Design supplies the official palette.</span>
       </div>

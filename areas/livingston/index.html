@@ -68,13 +68,57 @@ body.solo .stage{padding-top:0}
       .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
       438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
       and the CTA band uses lg rather than inventing a third. */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
-  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
-  border:2px solid transparent;cursor:pointer}
-.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
-.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+/* BUTTONS, strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems, all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band, so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border, which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding, small for the primary conversion action on the page.
+   Primary stays rust and stays alone, per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+.btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+.btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+/* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only, immediately below. */
 .btn-d{background:var(--navy);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
+.btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+
+/* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card, so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,.band-navy .btn-d,.midcta .btn-d,.chero .btn-d,
+.ctasplit .btn-d,.herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+
+@media(hover:hover) and (pointer:fine){
+  .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
+    0 8px 22px rgba(219,60,17,.36)}
+  .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
+  .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
+    background:#fff;color:var(--navy);border-color:#fff}
+  .btn-w:hover{background:var(--sand)}}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn-o:focus-visible,.ctabanner .btn-d:focus-visible,.band-navy .btn-d:focus-visible,
+.chero .btn-d:focus-visible{outline-color:#fff}
+
+/* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+@media(hover:hover) and (pointer:fine){
+  .chipnote a:hover{text-decoration-color:#fff}}
 .btn.wide{width:100%}
 .eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
 .eyebrow.dk{color:var(--rust)}
@@ -205,7 +249,13 @@ body.solo .stage{padding-top:0}
 .sfoot a{color:#fff;text-decoration:none}
 .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
 .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+/* FIVE columns, not four. The footer has always had five children (brand, Services, Areas
+   we serve, Company, Get in touch) and only four tracks, so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
 .fg p{line-height:1.8;margin-bottom:.6em}
 .sfoot .lic{font-size:13.5px;color:#7e97ad}
 .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
@@ -318,14 +368,37 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
+/* HEADER NAVIGATION, enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding, which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target, with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px, which also gives the rust phone pill
+   room to read as the primary action it is. */
 #C .chead{background:var(--navy);color:#fff}
-#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
   align-items:center;gap:26px}
 #C .chead .lg{color:#fff}
-#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
-#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
-#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
-  font:700 14px var(--head);text-decoration:none}
+#C .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead nav>a:hover,#C .chead .mm>a:hover{color:#fff;background:rgba(255,255,255,.10)}}
+#C .chead nav>a:focus-visible,#C .chead .mm>a:focus-visible{
+  outline:2px solid #fff;outline-offset:-2px}
+/* The current section stays legible against the lighter default. */
+#C .chead .mm>a[aria-expanded="true"],#C .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead .tel:hover{background:var(--rust-dk)}}
+#C .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #C .chead .burger{color:#fff}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
@@ -399,7 +472,10 @@ body.solo #B .subnav{top:72px}
   #C .mrow{grid-template-columns:1fr;gap:12px}
   #C .cmeta{grid-template-columns:1fr}
   #C .fgrid{grid-template-columns:1fr 1fr}
+  /* Five columns do not fit here. Two tracks with the brand block spanning both keeps the
+     four content columns paired instead of leaving one orphaned on its own row. */
   .fg{grid-template-columns:1fr 1fr}
+  .fg > :first-child{grid-column:1 / -1}
   .cmpwrap{grid-template-columns:1fr}
 }
 @media (max-width:820px){
@@ -857,7 +933,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
   </header>
 
   <div class="chero haspic" id="estimate">
-    <div class="cbg"><img src="../../video/h-interior-fd.webp" alt="Interior French drain going in against a block basement wall"></div>
+    <div class="cbg"><img src="../../gallery/full/073.jpg" alt="French drain and yard drainage work by ARD Waterproofing"></div>
     <div class="wrap chero-in">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Home</a> <i>/</i>
@@ -927,7 +1003,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
   </section>
 
   <div class="ctabanner">
-    <div class="ctabg"><img src="../../video/img-flooded.jpg" alt="" aria-hidden="true"></div>
+    <div class="ctabg"><img src="../../gallery/full/039.jpg" alt="" aria-hidden="true"></div>
     <div class="wrap ctabar">
       <div class="ctatext">
         <h2>Find out what your Livingston home actually needs</h2>
@@ -967,7 +1043,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
   <section class="band-sand cities">
     <div class="wrap">
       <div class="shead center"><div class="eyebrow dk">Service area</div>
-      <h2>Other cities we serve</h2>
+      <h2>Other New Jersey towns we waterproof</h2>
       <p class="lede">Waterproofing and foundation drainage across West Essex, Union, Passaic
       and Morris Counties, dispatched from Smull Ave in West Caldwell.</p></div>
       <div class="citygrid" style="--cols:3"><a class="citycard" href="../../areas/west-caldwell/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Caldwell</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/montclair/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Montclair</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/north-caldwell/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>North Caldwell</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/short-hills/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Short Hills</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/south-orange/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>South Orange</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/summit/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Summit</b><em>Union County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/verona/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Verona</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/wayne/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Wayne</b><em>Passaic County</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/west-orange/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Orange</b><em>Essex County</em></span><span class="carrow">&rarr;</span></a></div>
@@ -982,15 +1058,15 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
 
   <section class="band-white">
     <div class="wrap">
-      <div class="shead"><h2>Recent work</h2></div>
-      <div class="gal"><figure><img src="../../video/g-basement-1.jpg" alt="Basement wall and floor joint after waterproofing" loading="lazy"><figcaption>Wall and floor joint, treated</figcaption></figure><figure><img src="../../video/g-basement-2.jpg" alt="Empty unfinished basement after a drainage system installation" loading="lazy"><figcaption>Dry basement, system in</figcaption></figure><figure><img src="../../video/g-jobsite.jpg" alt="Mini excavator on a residential exterior drainage job" loading="lazy"><figcaption>Exterior drainage excavation</figcaption></figure><figure><img src="../../video/g-yard-water.jpg" alt="Standing water pooling on a residential lawn" loading="lazy"><figcaption>Yard water, the source of many calls</figcaption></figure><figure><img src="../../video/g-basement-3.jpg" alt="Finished basement interior with exposed beam" loading="lazy"><figcaption>Finished basement, protected</figcaption></figure><figure><img src="../../video/g-excavation.jpeg" alt="ARD crew setting a drainage basin in a gravel bed" loading="lazy"><figcaption>Drainage basin going in</figcaption></figure></div>
+      <div class="shead"><h2>Recent waterproofing and drainage work near Livingston</h2></div>
+      <div class="gal"><figure><img src="../../gallery/full/125.jpg" alt="Interior perimeter drainage system installed by ARD Waterproofing" loading="lazy"><figcaption>Interior drainage</figcaption></figure><figure><img src="../../gallery/full/116.jpg" alt="Sump pump and discharge line installed by ARD Waterproofing" loading="lazy"><figcaption>Sump pumps and discharge</figcaption></figure><figure><img src="../../gallery/full/004.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../gallery/full/008.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../gallery/full/015.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../gallery/full/018.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure></div>
     </div>
   </section>
 
   <section class="band-sand">
     <div class="narrow">
       <div class="shead center"><h2>Common questions about waterproofing in Livingston</h2></div>
-      <div class="faq"><details open><summary>How can I tell if my basement moisture is condensation or actual foundation seepage from Livingston's clay soil?</summary><div class="ans"><p>The test is straightforward: tape a piece of plastic sheeting to the damp wall section, seal all four edges, and leave it for 24 hours. If moisture appears on the wall side of the plastic, water is migrating through the foundation, a direct result of hydrostatic pressure from Livingston's clay-heavy soil holding rainwater against your foundation walls.</p></div></details><details><summary>Why do some contractors recommend exterior excavation while others push interior French drains for Livingston basements?</summary><div class="ans"><p>Both are legitimate solutions, but they work differently and suit different conditions. In Livingston's clay-dominant soil, exterior excavation addresses the source, it installs a waterproof membrane against the foundation wall and a drainage layer that redirects water before it ever contacts the structure.</p></div></details><details><summary>What happens to the water after it enters an interior perimeter drainage system in a Livingston home?</summary><div class="ans"><p>The interior channel system collects water at the base of the foundation wall, the point where hydrostatic pressure forces moisture through, and directs it through a perimeter trench to the sump basin.</p></div></details><details><summary>How long does a primary sump pump last, and why do Livingston homes burn through them faster than expected?</summary><div class="ans"><p>A properly sized primary sump pump typically runs 7 to 10 years under normal operating conditions. Livingston homes with undersized basins short-cycle during heavy storms, the pump activates, the basin refills within seconds, and the pump activates again.</p></div></details><details><summary>Does waterproofing a Livingston basement from the inside actually stop water from damaging the foundation walls?</summary><div class="ans"><p>Interior drainage manages water at the perimeter, it prevents flooding of your finished basement space, but it does not stop hydrostatic pressure from acting on the foundation wall itself.</p></div></details></div>
+      <div class="faq"><details><summary>How can I tell if my basement moisture is condensation or actual foundation seepage from Livingston's clay soil?</summary><div class="ans"><p>The test is straightforward: tape a piece of plastic sheeting to the damp wall section, seal all four edges, and leave it for 24 hours. If moisture appears on the wall side of the plastic, water is migrating through the foundation, a direct result of hydrostatic pressure from Livingston's clay-heavy soil holding rainwater against your foundation walls.</p></div></details><details><summary>Why do some contractors recommend exterior excavation while others push interior French drains for Livingston basements?</summary><div class="ans"><p>Both are legitimate solutions, but they work differently and suit different conditions. In Livingston's clay-dominant soil, exterior excavation addresses the source, it installs a waterproof membrane against the foundation wall and a drainage layer that redirects water before it ever contacts the structure.</p></div></details><details><summary>What happens to the water after it enters an interior perimeter drainage system in a Livingston home?</summary><div class="ans"><p>The interior channel system collects water at the base of the foundation wall, the point where hydrostatic pressure forces moisture through, and directs it through a perimeter trench to the sump basin.</p></div></details><details><summary>How long does a primary sump pump last, and why do Livingston homes burn through them faster than expected?</summary><div class="ans"><p>A properly sized primary sump pump typically runs 7 to 10 years under normal operating conditions. Livingston homes with undersized basins short-cycle during heavy storms, the pump activates, the basin refills within seconds, and the pump activates again.</p></div></details><details><summary>Does waterproofing a Livingston basement from the inside actually stop water from damaging the foundation walls?</summary><div class="ans"><p>Interior drainage manages water at the perimeter, it prevents flooding of your finished basement space, but it does not stop hydrostatic pressure from acting on the foundation wall itself.</p></div></details></div>
     </div>
   </section>
   <footer class="sfoot">
@@ -1015,7 +1091,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
       </div>
       <div class="fbot">
         <span>&copy; 2026 ARD Waterproofing</span>
-        <a href="../../privacy-policy/">Privacy policy</a><a href="../../terms-of-service/">Terms of service</a>
+        <a href="../../privacy-policy/">Privacy policy</a><a href="../../terms-of-service/">Terms of service</a><a href="../../conditions-of-use/">Conditions of use</a><a href="../../infringement-policy/">Infringement policy</a>
         <span>Design preview. Colors are read from the client's own logo and are a placeholder
         until Grace Design supplies the official palette.</span>
       </div>

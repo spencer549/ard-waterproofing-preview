@@ -68,13 +68,57 @@ body.solo .stage{padding-top:0}
       .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
       438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
       and the CTA band uses lg rather than inventing a third. */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
-  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
-  border:2px solid transparent;cursor:pointer}
-.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
-.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+/* BUTTONS, strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems, all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band, so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border, which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding, small for the primary conversion action on the page.
+   Primary stays rust and stays alone, per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+.btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+.btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+/* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only, immediately below. */
 .btn-d{background:var(--navy);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
+.btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+
+/* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card, so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,.band-navy .btn-d,.midcta .btn-d,.chero .btn-d,
+.ctasplit .btn-d,.herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+
+@media(hover:hover) and (pointer:fine){
+  .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
+    0 8px 22px rgba(219,60,17,.36)}
+  .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
+  .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
+    background:#fff;color:var(--navy);border-color:#fff}
+  .btn-w:hover{background:var(--sand)}}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn-o:focus-visible,.ctabanner .btn-d:focus-visible,.band-navy .btn-d:focus-visible,
+.chero .btn-d:focus-visible{outline-color:#fff}
+
+/* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+@media(hover:hover) and (pointer:fine){
+  .chipnote a:hover{text-decoration-color:#fff}}
 .btn.wide{width:100%}
 .eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
 .eyebrow.dk{color:var(--rust)}
@@ -205,7 +249,13 @@ body.solo .stage{padding-top:0}
 .sfoot a{color:#fff;text-decoration:none}
 .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
 .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+/* FIVE columns, not four. The footer has always had five children (brand, Services, Areas
+   we serve, Company, Get in touch) and only four tracks, so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
 .fg p{line-height:1.8;margin-bottom:.6em}
 .sfoot .lic{font-size:13.5px;color:#7e97ad}
 .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
@@ -318,14 +368,37 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
+/* HEADER NAVIGATION, enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding, which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target, with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px, which also gives the rust phone pill
+   room to read as the primary action it is. */
 #C .chead{background:var(--navy);color:#fff}
-#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
   align-items:center;gap:26px}
 #C .chead .lg{color:#fff}
-#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
-#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
-#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
-  font:700 14px var(--head);text-decoration:none}
+#C .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead nav>a:hover,#C .chead .mm>a:hover{color:#fff;background:rgba(255,255,255,.10)}}
+#C .chead nav>a:focus-visible,#C .chead .mm>a:focus-visible{
+  outline:2px solid #fff;outline-offset:-2px}
+/* The current section stays legible against the lighter default. */
+#C .chead .mm>a[aria-expanded="true"],#C .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead .tel:hover{background:var(--rust-dk)}}
+#C .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #C .chead .burger{color:#fff}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
@@ -399,7 +472,10 @@ body.solo #B .subnav{top:72px}
   #C .mrow{grid-template-columns:1fr;gap:12px}
   #C .cmeta{grid-template-columns:1fr}
   #C .fgrid{grid-template-columns:1fr 1fr}
+  /* Five columns do not fit here. Two tracks with the brand block spanning both keeps the
+     four content columns paired instead of leaving one orphaned on its own row. */
   .fg{grid-template-columns:1fr 1fr}
+  .fg > :first-child{grid-column:1 / -1}
   .cmpwrap{grid-template-columns:1fr}
 }
 @media (max-width:820px){
@@ -1005,7 +1081,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   </header>
 
   <div class="chero haspic" id="estimate">
-    <div class="cbg"><img src="../../../video/g-yard-water.jpg" alt="Standing water pooling on a residential lawn"></div>
+    <div class="cbg"><img src="../../../gallery/full/074.jpg" alt="French drain and yard drainage work by ARD Waterproofing"></div>
     <div class="wrap chero-in">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Home</a> <i>/</i>
@@ -1073,13 +1149,13 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-white">
     <div class="wrap">
       <div class="shead"><h2>Exterior French Drain Installation in Wayne, how we do it</h2></div>
-      <div class="mrows brief"><div class="topic"><div class="tlead"><h3>Exterior French Drain Installation</h3><p>Exterior French drain installation is one of the most reliable solutions for protecting homes in Wayne, New Jersey, from persistent water intrusion and flooding. A properly installed French drain diverts water away from your foundation, helping prevent damage to basements, crawl spaces, and even landscaping. At ARD Waterproofing, we understand the unique challenges faced by Wayne homeowners,whether you’re dealing with surface water runoff, saturated soil, or heavy seasonal storms common in Passaic County. Our team leverages years of experience and a deep understanding of local drainage variations to deliver solutions tailored to your property’s specific needs.</p></div><figure class="tpic"><img src="../../../video/h-crawlspace.jpeg" alt="Crawl space finished with a sealed encapsulation liner" loading="lazy"></figure><details class="tmore"><summary><span class="moreopen">Read the full detail</span><span class="moreshut">Show less</span></summary><div class="tbody"><p>French drains are particularly effective in neighborhoods near the Passaic River or those with high water tables, where groundwater seepage can be a constant threat. Our process begins with a thorough property assessment, identifying areas most susceptible to water accumulation. By designing your system with both efficiency and aesthetics in mind, we ensure your lawn, driveway, and exterior spaces remain both protected and visually appealing. ARD Waterproofing is committed to using best-in-class techniques, ensuring every installation meets or exceeds industry standards for longevity and performance.</p></div></details></div><div class="topic hasinline"><div class="tlead"><h3>Expert Guidance for Lasting Water Damage Protection</h3><p>Water damage can lead to costly repairs, hazardous mold growth, and lasting structural issues. ARD Waterproofing’s expertise ensures your Wayne property receives the right protection the first time. Our team doesn’t just install French drains,we guide you through the process, helping you understand the science behind exterior drainage and the benefits of proactive water management.</p></div><figure class="tpic"><img src="../../../video/g-basement-3.jpg" alt="Finished basement interior with an exposed beam" loading="lazy"></figure><div class="tbody inline"><p>We offer practical advice on maintaining your new drainage system, monitoring for early warning signs of water intrusion, and integrating other waterproofing solutions for Wayne’s homes . Our commitment extends beyond installation: we provide ongoing support and maintenance tips to help you get the most out of your investment. By working with ARD Waterproofing, you gain a partner dedicated to safeguarding your home for years to come.</p></div></div></div>
+      <div class="mrows brief"><div class="topic"><div class="tlead"><h3>Exterior French Drain Installation</h3><p>Exterior French drain installation is one of the most reliable solutions for protecting homes in Wayne, New Jersey, from persistent water intrusion and flooding. A properly installed French drain diverts water away from your foundation, helping prevent damage to basements, crawl spaces, and even landscaping. At ARD Waterproofing, we understand the unique challenges faced by Wayne homeowners,whether you’re dealing with surface water runoff, saturated soil, or heavy seasonal storms common in Passaic County. Our team leverages years of experience and a deep understanding of local drainage variations to deliver solutions tailored to your property’s specific needs.</p></div><figure class="tpic"><img src="../../../gallery/full/076.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"></figure><details class="tmore"><summary><span class="moreopen">Read the full detail</span><span class="moreshut">Show less</span></summary><div class="tbody"><p>French drains are particularly effective in neighborhoods near the Passaic River or those with high water tables, where groundwater seepage can be a constant threat. Our process begins with a thorough property assessment, identifying areas most susceptible to water accumulation. By designing your system with both efficiency and aesthetics in mind, we ensure your lawn, driveway, and exterior spaces remain both protected and visually appealing. ARD Waterproofing is committed to using best-in-class techniques, ensuring every installation meets or exceeds industry standards for longevity and performance.</p></div></details></div><div class="topic hasinline"><div class="tlead"><h3>Expert Guidance for Lasting Water Damage Protection</h3><p>Water damage can lead to costly repairs, hazardous mold growth, and lasting structural issues. ARD Waterproofing’s expertise ensures your Wayne property receives the right protection the first time. Our team doesn’t just install French drains,we guide you through the process, helping you understand the science behind exterior drainage and the benefits of proactive water management.</p></div><figure class="tpic"><img src="../../../gallery/full/077.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"></figure><div class="tbody inline"><p>We offer practical advice on maintaining your new drainage system, monitoring for early warning signs of water intrusion, and integrating other waterproofing solutions for Wayne’s homes . Our commitment extends beyond installation: we provide ongoing support and maintenance tips to help you get the most out of your investment. By working with ARD Waterproofing, you gain a partner dedicated to safeguarding your home for years to come.</p></div></div></div>
       <details class="more"><summary><span class="moreopen">See all 8 sections</span><span class="moreshut">Show less</span></summary><div class="mrows brief"><div class="topic nopic"><div class="tlead"><h3>Trust Our Proven Waterproofing and Drainage System Solutions</h3><p>We conduct detailed site inspections, using industry-leading technology to pinpoint problem areas and design comprehensive solutions. Our team collaborates with homeowners throughout the process, ensuring every system is customized for maximum effectiveness and compliance with local regulations. Whether your property is located near Wayne Hills, Packanack Lake, or closer to downtown Wayne, our systems are designed to withstand local weather patterns, heavy rain events, and fluctuating groundwater levels.</p></div></div><div class="topic nopic"><div class="tlead"><h3>Our Proven Installation Process</h3><p>At ARD Waterproofing, our installation process is designed for efficiency, transparency, and minimal disruption to your daily life. Every exterior French drain project begins with a thorough on-site evaluation, taking into account soil conditions, property grading, and proximity to landscaping or hardscape. We develop a tailored plan that outlines the optimal path for your new drain, ensuring water is directed safely away from your foundation and living spaces.</p></div></div><div class="topic nopic hasinline"><div class="tlead"><h3>Premium Materials and Tools We Use</h3><p>Quality materials are the cornerstone of a successful drainage installation. At ARD Waterproofing, we use only premium-grade, industry-approved components for every French drain project in Wayne. Our drainage pipes are heavy-duty, perforated PVC or corrugated plastic, designed for maximum durability and resistance to root intrusion. We utilize high-permeability fabrics, washed stone, and advanced catch basins to optimize flow and filtration.</p></div><div class="tbody inline"><p>Our toolbox includes state-of-the-art trenchers, compact excavators, and laser-leveling equipment, enabling precise installation with minimal disruption. We source all materials from trusted suppliers, ensuring consistent quality and compliance with local building codes. This commitment to excellence translates into longer-lasting, more effective drainage solutions for your property.</p></div></div><div class="topic nopic hasinline"><div class="tlead"><h3>Advanced Stormwater Drainage Systems and Dry Wells</h3><p>Wayne’s weather can be unpredictable, with sudden downpours and heavy storms posing a significant risk to properties. Our advanced stormwater drainage systems and dry wells are engineered to handle large volumes of water, protecting your home and landscape year-round. We design each system to direct runoff away from vulnerable areas, utilizing slope grading, swales, and subsurface piping to maximize efficiency.</p></div><div class="tbody inline"><p>Dry wells act as underground reservoirs, temporarily storing excess water and allowing it to percolate slowly back into the soil. This eco-friendly approach helps prevent surface pooling, erosion, and damage to lawns or garden beds. Our team evaluates your property’s unique topography and soil composition to recommend the best combination of stormwater management solutions, ensuring sustainable, effective results.</p></div></div><div class="topic nopic"><div class="tlead"><h3>What Makes Our Installation Results Last</h3><p>Our exterior French drain systems are built to withstand Wayne’s toughest conditions, offering reliable protection against basement flooding and crawl space moisture. By intercepting water before it reaches your foundation, our drains significantly reduce the risk of mold growth, wood rot, and structural damage. We use advanced waterproofing membranes and vapor barriers as additional safeguards for sensitive areas.</p></div><details class="tmore"><summary><span class="moreopen">Read the full detail</span><span class="moreshut">Show less</span></summary><div class="tbody"><div class="brow-sub"><h4>Protection Against Flooding and Mold in Basements and Crawl Spaces</h4><p>Routine maintenance and periodic inspections are part of our service, ensuring your system continues to operate at peak performance. We also educate homeowners on recognizing early warning signs of water intrusion, empowering you to take action before minor issues escalate. ARD Waterproofing’s comprehensive approach has helped countless local families maintain dry, healthy living environments,even during the wettest seasons.</p></div><div class="brow-sub"><h4>Ensuring Durable Plumbing, Pipe, and Masonry Work</h4><p>Quality plumbing and masonry are essential for a robust drainage system. Our skilled technicians use only top-tier pipes, fittings, and sealants, ensuring every connection is watertight and built to last. We pay close attention to joint integrity, slope calculations, and backfill compaction to prevent settling or pipe failure over time.</p></div></div></details></div><div class="topic nopic hasinline"><div class="tlead"><h3>How We Ensure Safety, Quality, and Satisfaction</h3><p>Every ARD Waterproofing project is staffed by experienced professionals with specialized training in exterior drainage, plumbing, and masonry. Our crews follow strict safety protocols, use advanced equipment, and adhere to local codes and regulations. We are fully licensed and insured, giving you confidence that your home is in capable hands.</p></div><div class="tbody inline"><div class="brow-sub"><h4>Dedicated Construction and Expert Teams on Every Project</h4></div><div class="brow-sub"><h4>HomeAdvisor and BBB Verified for Your Peace of Mind</h4><p>These third-party endorsements demonstrate our commitment to ethical practices, fair pricing, and outstanding workmanship. When you choose ARD Waterproofing, you’re choosing a partner who values your trust and works tirelessly to earn it.</p></div></div></div></div></details>
     </div>
   </section>
 
   <div class="ctabanner">
-    <div class="ctabg"><img src="../../../video/h-exterior-fd.webp" alt="" aria-hidden="true"></div>
+    <div class="ctabg"><img src="../../../gallery/full/082.jpg" alt="" aria-hidden="true"></div>
     <div class="wrap ctabar">
       <div class="ctatext">
         <h2>Find out what your Wayne home actually needs</h2>
@@ -1117,7 +1193,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-white">
     <div class="wrap">
       <div class="shead center"><div class="eyebrow dk">Service area</div>
-      <h2>Find your town and your job</h2>
+      <h2>Waterproofing and drainage by New Jersey town</h2>
       <p class="lede">Waterproofing and foundation drainage across West Essex, Union,
       Passaic and Morris Counties, dispatched from Smull Ave in West Caldwell.</p></div>
       <div class="ggrid"><div class="gband"><div class="gbh"><h3>Exterior French Drain Installation in other towns</h3><a class="gall" href="../../../areas/">All service areas &rarr;</a></div><div class="gtiles" style="--cols:4"><a class="gtile" href="../../../areas/livingston/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Livingston</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/montclair/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Montclair</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/north-caldwell/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>North Caldwell</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/short-hills/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Short Hills</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/south-orange/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>South Orange</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/summit/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Summit</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/verona/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Verona</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a><a class="gtile" href="../../../areas/west-caldwell/exterior-french-drain-installation/"><span class="cpin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Caldwell</b><em>Exterior French Drain Installation</em></span><span class="carrow">&rarr;</span></a></div></div><div class="gband"><div class="gbh"><h3>More in Wayne</h3><a class="gall" href="../../../areas/wayne/">Everything we do in Wayne &rarr;</a></div><div class="gtiles" style="--cols:1"><a class="gtile" href="../../../areas/wayne/french-drain-service/"><span class="ctxt"><b>French Drain Service</b><em>in Wayne</em></span><span class="carrow">&rarr;</span></a></div></div></div>
@@ -1132,14 +1208,14 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
   <section class="band-sand">
     <div class="narrow">
       <div class="shead center"><h2>Common questions about exterior french drain installation in Wayne</h2></div>
-      <div class="faq"><details open><summary>What are the signs that I need exterior drain installation?</summary><div class="ans"><p>Common signs include persistent basement moisture, visible water stains, pooling water near your foundation, or musty odors in crawl spaces. If you notice soil erosion, cracks in basement walls, or excessive dampness after rain, it’s time to consider a professional drain assessment.</p></div></details><details><summary>How long does a typical installation process take?</summary><div class="ans"><p>Most exterior French drain installations in Wayne can be completed within 2 to 4 days, depending on property size, soil conditions, and weather. We strive to minimize disruption and restore your property promptly.</p></div></details><details><summary>What materials are used in a drainage system?</summary><div class="ans"><p>Our systems use perforated PVC or corrugated pipes, high-permeability fabrics, washed gravel, and robust catch basins. We select materials that are durable, environmentally friendly, and proven to withstand Wayne’s climate.</p></div></details><details><summary>How effective are French drains for crawlspaces and basements?</summary><div class="ans"><p>French drains are highly effective at intercepting groundwater, reducing hydrostatic pressure, and preventing moisture intrusion in both basements and crawl spaces. Combined with sump pumps and proper grading, they provide comprehensive protection for your home.</p></div></details><details><summary>Are there any specific maintenance requirements for sump pumps and pipes?</summary><div class="ans"><p>Yes, routine inspections and cleaning are recommended to ensure optimal performance. Check sump pump operation, clear debris from discharge lines, and monitor for signs of clogs or slow drainage.</p></div></details></div>
+      <div class="faq"><details><summary>What are the signs that I need exterior drain installation?</summary><div class="ans"><p>Common signs include persistent basement moisture, visible water stains, pooling water near your foundation, or musty odors in crawl spaces. If you notice soil erosion, cracks in basement walls, or excessive dampness after rain, it’s time to consider a professional drain assessment.</p></div></details><details><summary>How long does a typical installation process take?</summary><div class="ans"><p>Most exterior French drain installations in Wayne can be completed within 2 to 4 days, depending on property size, soil conditions, and weather. We strive to minimize disruption and restore your property promptly.</p></div></details><details><summary>What materials are used in a drainage system?</summary><div class="ans"><p>Our systems use perforated PVC or corrugated pipes, high-permeability fabrics, washed gravel, and robust catch basins. We select materials that are durable, environmentally friendly, and proven to withstand Wayne’s climate.</p></div></details><details><summary>How effective are French drains for crawlspaces and basements?</summary><div class="ans"><p>French drains are highly effective at intercepting groundwater, reducing hydrostatic pressure, and preventing moisture intrusion in both basements and crawl spaces. Combined with sump pumps and proper grading, they provide comprehensive protection for your home.</p></div></details><details><summary>Are there any specific maintenance requirements for sump pumps and pipes?</summary><div class="ans"><p>Yes, routine inspections and cleaning are recommended to ensure optimal performance. Check sump pump operation, clear debris from discharge lines, and monitor for signs of clogs or slow drainage.</p></div></details></div>
     </div>
   </section>
 
   <section class="band-white">
     <div class="wrap">
-      <div class="shead"><h2>Recent work</h2></div>
-      <div class="gal"><figure><img src="../../../video/g-french-drain.jpg" alt="Interior French drain channel backfilled before the floor is closed" loading="lazy"><figcaption>Interior French drain, backfilled before closing</figcaption></figure><figure><img src="../../../video/g-basement-1.jpg" alt="Basement wall and floor joint after waterproofing" loading="lazy"><figcaption>Wall and floor joint, treated</figcaption></figure><figure><img src="../../../video/g-basement-2.jpg" alt="Empty unfinished basement after a drainage system installation" loading="lazy"><figcaption>Dry basement, system in</figcaption></figure><figure><img src="../../../video/g-jobsite.jpg" alt="Mini excavator on a residential exterior drainage job" loading="lazy"><figcaption>Exterior drainage excavation</figcaption></figure><figure><img src="../../../video/g-excavation.jpeg" alt="ARD crew setting a drainage basin in a gravel bed" loading="lazy"><figcaption>Drainage basin going in</figcaption></figure><figure><img src="../../../video/g-landscape-drain.jpeg" alt="Channel drain being installed across a residential lawn" loading="lazy"><figcaption>Channel drain, lawn run</figcaption></figure></div>
+      <div class="shead"><h2>Recent waterproofing work near Wayne</h2></div>
+      <div class="gal"><figure><img src="../../../gallery/full/112.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/115.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/120.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/122.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/123.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure><figure><img src="../../../gallery/full/124.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure></div>
     </div>
   </section>
 
@@ -1165,7 +1241,7 @@ details.tmore .tbody .brow-sub + .brow-sub{margin-top:18px;padding-top:16px;
       </div>
       <div class="fbot">
         <span>&copy; 2026 ARD Waterproofing</span>
-        <a href="../../../privacy-policy/">Privacy policy</a><a href="../../../terms-of-service/">Terms of service</a>
+        <a href="../../../privacy-policy/">Privacy policy</a><a href="../../../terms-of-service/">Terms of service</a><a href="../../../conditions-of-use/">Conditions of use</a><a href="../../../infringement-policy/">Infringement policy</a>
         <span>Design preview. Colors are read from the client's own logo and are a placeholder
         until Grace Design supplies the official palette.</span>
       </div>

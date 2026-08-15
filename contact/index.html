@@ -68,13 +68,57 @@ body.solo .stage{padding-top:0}
       .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
       438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
       and the CTA band uses lg rather than inventing a third. */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
-  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
-  border:2px solid transparent;cursor:pointer}
-.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
-.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+/* BUTTONS, strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems, all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band, so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border, which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding, small for the primary conversion action on the page.
+   Primary stays rust and stays alone, per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+.btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+.btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+/* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only, immediately below. */
 .btn-d{background:var(--navy);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
+.btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+
+/* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card, so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,.band-navy .btn-d,.midcta .btn-d,.chero .btn-d,
+.ctasplit .btn-d,.herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+
+@media(hover:hover) and (pointer:fine){
+  .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
+    0 8px 22px rgba(219,60,17,.36)}
+  .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
+  .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
+    background:#fff;color:var(--navy);border-color:#fff}
+  .btn-w:hover{background:var(--sand)}}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn-o:focus-visible,.ctabanner .btn-d:focus-visible,.band-navy .btn-d:focus-visible,
+.chero .btn-d:focus-visible{outline-color:#fff}
+
+/* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+@media(hover:hover) and (pointer:fine){
+  .chipnote a:hover{text-decoration-color:#fff}}
 .btn.wide{width:100%}
 .eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
 .eyebrow.dk{color:var(--rust)}
@@ -205,7 +249,13 @@ body.solo .stage{padding-top:0}
 .sfoot a{color:#fff;text-decoration:none}
 .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
 .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+/* FIVE columns, not four. The footer has always had five children (brand, Services, Areas
+   we serve, Company, Get in touch) and only four tracks, so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
 .fg p{line-height:1.8;margin-bottom:.6em}
 .sfoot .lic{font-size:13.5px;color:#7e97ad}
 .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
@@ -318,14 +368,37 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
+/* HEADER NAVIGATION, enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding, which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target, with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px, which also gives the rust phone pill
+   room to read as the primary action it is. */
 #C .chead{background:var(--navy);color:#fff}
-#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
   align-items:center;gap:26px}
 #C .chead .lg{color:#fff}
-#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
-#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
-#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
-  font:700 14px var(--head);text-decoration:none}
+#C .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead nav>a:hover,#C .chead .mm>a:hover{color:#fff;background:rgba(255,255,255,.10)}}
+#C .chead nav>a:focus-visible,#C .chead .mm>a:focus-visible{
+  outline:2px solid #fff;outline-offset:-2px}
+/* The current section stays legible against the lighter default. */
+#C .chead .mm>a[aria-expanded="true"],#C .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead .tel:hover{background:var(--rust-dk)}}
+#C .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #C .chead .burger{color:#fff}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
@@ -399,7 +472,10 @@ body.solo #B .subnav{top:72px}
   #C .mrow{grid-template-columns:1fr;gap:12px}
   #C .cmeta{grid-template-columns:1fr}
   #C .fgrid{grid-template-columns:1fr 1fr}
+  /* Five columns do not fit here. Two tracks with the brand block spanning both keeps the
+     four content columns paired instead of leaving one orphaned on its own row. */
   .fg{grid-template-columns:1fr 1fr}
+  .fg > :first-child{grid-column:1 / -1}
   .cmpwrap{grid-template-columns:1fr}
 }
 @media (max-width:820px){
@@ -888,6 +964,125 @@ article.post p{margin:0 0 14px;font:400 17px/1.78 var(--body);color:var(--ink)}
 .prail{position:sticky;top:96px}
 .lnum{display:inline-block;min-width:32px;color:var(--rust)}
 
+/* ---- blog post banner, rebuilt 2026-08-15 -------------------------------------------
+   Spencer: "make this twoliner only and occupy as much space on the banner so that it
+   wont have any dead space. Also add CTA buttons on the banner."
+
+   The banner inherited template C's two-column hero, where the right 0.9fr column holds
+   the estimate form. A blog post has no form, so that column was empty: the headline was
+   squeezed into the left 1.1fr at max-width 18ch and wrapped to FIVE lines while half the
+   photograph sat unused. One column, the full wrap width, and a smaller clamp so a 100
+   character headline lands on two lines. The freed space takes the CTA pair.
+
+   THE #C PREFIX IS LOAD BEARING. service_templates.css sets `#C .chero h1{max-width:18ch}`
+   with an ID in the selector, and an ID outranks any number of classes, so the unprefixed
+   `.chero.haspic.post h1` lost and the headline stayed at 46px on five lines. Measured, not
+   assumed: the first attempt reported lines=5, font=46px, 41% of the banner width. */
+#C .chero.haspic.post .chero-in{grid-template-columns:1fr}
+#C .chero.haspic.post h1{max-width:none;margin:10px 0 14px;
+  font-size:clamp(26px,2.72vw,37px);line-height:1.1;letter-spacing:-.022em;
+  text-wrap:balance}
+#C .chero.haspic.post .pmeta{margin:0 0 22px}
+.herocta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.herocta .btn{margin:0}
+.herocta .hcnote{font:500 13.5px var(--body);color:#c2d6e6;margin:0 0 0 4px}
+@media(max-width:760px){
+  #C .chero.haspic.post h1{max-width:none;font-size:clamp(23px,5.6vw,28px)}
+  .herocta{gap:10px}
+  .herocta .btn{flex:1 1 100%;text-align:center}
+  .herocta .hcnote{flex:1 1 100%;margin:2px 0 0}}
+
+/* ---- inline contextual links, 2026-08-15 --------------------------------------------
+   Spencer pointed at bigeasypatios.com, where a mid-sentence "permit and wind guide"
+   links out of the prose to the page that covers it. That is the pattern: the link is
+   part of the sentence, so it reads as a reference rather than as a rail of link cards
+   bolted under the article. Rust, bold, underlined with a visible offset so it is
+   unmistakably a link inside body text, and it does not rely on colour alone. */
+article.post p a, article.post li a{color:var(--rust);font-weight:700;
+  text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(219,60,17,.42)}
+@media(hover:hover) and (pointer:fine){
+  article.post p a:hover, article.post li a:hover{
+    text-decoration-color:var(--rust);background:rgba(219,60,17,.07)}}
+article.post p a:focus-visible, article.post li a:focus-visible{
+  outline:2px solid var(--rust);outline-offset:2px}
+
+/* Subheads inside the article. The live article nests H3s under its H2s and the template
+   had no rule for them, so they rendered at body weight hard against the H2's rust rule
+   with no gap, reading as a bolded first line rather than as a heading. */
+article.post h3{margin:26px 0 8px;font:700 19.5px/1.35 var(--head);color:var(--navy);
+  letter-spacing:-.01em}
+article.post h2 + h3{margin-top:18px}
+
+/* ---- blog index pagination, 2026-08-15 ---------------------------------------------
+   Ten articles per page, the rest behind Next. Nineteen cards in one grid ran the index
+   to nearly 4,000px. */
+/* THIS RULE IS LOAD BEARING. .pcard sets its own display, and any author display rule
+   beats the UA stylesheet's [hidden]{display:none}, so without this the pager updates its
+   labels and dots correctly while all 19 cards stay on screen. Verified by counting
+   offsetParent, not by reading the markup. */
+.pcard[hidden]{display:none !important}
+.pager{display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:34px 0 10px;flex-wrap:wrap}
+.pgbtn{background:var(--navy);color:#fff;border:0;border-radius:3px;padding:11px 20px;
+  font:700 14px var(--head);cursor:pointer;transition:background .18s ease}
+/* Disabled controls are exempt from WCAG 1.4.3, but the first version measured 2.7:1 and
+   simply looked broken rather than inactive. #5f5849 on the sand chip clears 4.5. */
+.pgbtn:disabled{background:var(--sand-2);color:#5f5849;cursor:default}
+@media(hover:hover) and (pointer:fine){.pgbtn:not(:disabled):hover{background:var(--rust)}}
+.pgbtn:focus-visible,.pgdot:focus-visible{outline:2px solid var(--rust);outline-offset:2px}
+.pgdots{display:flex;gap:7px}
+.pgdot{width:34px;height:34px;border:1px solid var(--line);background:#fff;
+  border-radius:3px;font:700 14px var(--head);color:var(--navy);cursor:pointer;
+  transition:background .18s ease,color .18s ease,border-color .18s ease}
+.pgdot.on{background:var(--rust);border-color:var(--rust);color:#fff}
+@media(hover:hover) and (pointer:fine){
+  .pgdot:not(.on):hover{border-color:var(--rust);color:var(--rust)}}
+.pgcount{text-align:center;margin:0 0 6px;font:500 13.5px var(--body);color:var(--mut)}
+@media(max-width:520px){.pgbtn{padding:10px 15px;font-size:13px}
+  .pgdot{width:30px;height:30px;font-size:13px}}
+
+/* bulleted lists inside the article body */
+.plist{margin:2px 0 20px;padding-left:22px}
+.plist li{margin:8px 0;font:400 16.5px/1.75 var(--body);color:var(--ink)}
+
+/* In-body photographs. HEIGHT CAPPED 2026-08-15, Spencer: "please adjust the images size
+   so it wont be too long". At the article column's full width these ran 500px+ tall each
+   and three of them added roughly 1,600px to the page. Capped and cropped to a landscape
+   band, which also gives the article a consistent rhythm instead of whatever aspect ratio
+   the camera happened to produce. object-position keeps the middle of the frame. */
+.postfig{margin:24px 0 28px}
+.postfig img{width:100%;height:300px;object-fit:cover;object-position:center;
+  display:block;border-radius:3px}
+.postfig figcaption{margin-top:9px;font:400 13.5px/1.6 var(--body);color:var(--mut)}
+@media(max-width:900px){.postfig img{height:230px}}
+@media(max-width:520px){.postfig img{height:190px}}
+
+/* Mid-article CTA, lifted from the article's own inline call to action.
+   SELECTORS ARE article.post-SCOPED ON PURPOSE. `.midcta p` is specificity (0,1,1) and
+   loses to `article.post p` at (0,1,2), so the body ink colour won and the copy rendered
+   near-black on navy: legible in the markup, unreadable on screen. Same class of bug as
+   .pcard[hidden]. Do not "simplify" these back to .midcta p. */
+.midcta{margin:30px 0;background:var(--navy);border-radius:3px;padding:28px 30px}
+article.post .midcta p{margin:0 0 18px;font:400 16.5px/1.72 var(--body);color:#dbe7f2}
+article.post .midcta p:last-of-type{margin-bottom:18px}
+article.post .midcta a.btn{margin:0;color:#fff;text-decoration:none;font-weight:700}
+article.post .midcta a.btn:hover{text-decoration:none}
+@media(max-width:520px){.midcta{padding:22px 20px}
+  article.post .midcta a.btn{display:block;text-align:center}}
+
+/* FAQ accordion on the post */
+.pfaq{margin-top:34px}
+.pfaq details{border-top:1px solid var(--line);padding:2px 0}
+.pfaq details:last-of-type{border-bottom:1px solid var(--line)}
+.pfaq summary{cursor:pointer;list-style:none;padding:16px 34px 16px 0;position:relative;
+  font:700 17px/1.5 var(--head);color:var(--navy)}
+.pfaq summary::-webkit-details-marker{display:none}
+.pfaq summary::after{content:"+";position:absolute;right:6px;top:14px;
+  font:700 22px/1 var(--head);color:var(--rust)}
+.pfaq details[open] summary::after{content:"3"}
+.pfaq .fa{padding:0 0 18px;font:400 16.5px/1.75 var(--body);color:var(--ink)}
+
 
 /* legal layout, rebuilt 2026-08-14. The reading column is capped ONCE, by the grid, and
    the sidebar column only exists when there is a contents list to sit in it. */
@@ -1100,7 +1295,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
   </header>
 
   <div class="chero haspic">
-    <div class="cbg"><img src="../video/h-foundation.jpeg" alt="ARD Waterproofing van on site"></div>
+    <div class="cbg"><img src="../gallery/full/000.jpg" alt="ARD Waterproofing van on site"></div>
     <div class="wrap chero-in">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <i>/</i>
@@ -1116,7 +1311,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
 
   <section class="band-white" id="estimate">
     <div class="wrap">
-      <div class="shead"><h2>Reach us</h2>
+      <div class="shead"><h2>Contact ARD Waterproofing in West Caldwell, NJ</h2>
       <p class="lede">Three ways in, all of them monitored. Emergencies are answered around
       the clock.</p></div>
       <div class="cform">
@@ -1175,7 +1370,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
 
   <section class="band-white">
     <div class="wrap">
-      <div class="shead"><h2>Towns we cover</h2>
+      <div class="shead"><h2>New Jersey towns we waterproof</h2>
       <p class="lede">If your town is not on this list, call anyway. These are the ones
       with a page of their own.</p></div>
       <div class="townwrap"><a class="townlink" href="../areas/west-caldwell/">West Caldwell</a><a class="townlink" href="../areas/livingston/">Livingston</a><a class="townlink" href="../areas/montclair/">Montclair</a><a class="townlink" href="../areas/north-caldwell/">North Caldwell</a><a class="townlink" href="../areas/short-hills/">Short Hills</a><a class="townlink" href="../areas/south-orange/">South Orange</a><a class="townlink" href="../areas/summit/">Summit</a><a class="townlink" href="../areas/verona/">Verona</a><a class="townlink" href="../areas/wayne/">Wayne</a><a class="townlink" href="../areas/west-orange/">West Orange</a></div>
@@ -1183,10 +1378,10 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
   </section>
 
   <div class="ctabanner">
-    <div class="ctabg"><img src="../video/g-excavation.jpeg" alt="" aria-hidden="true"></div>
+    <div class="ctabg"><img src="../gallery/full/011.jpg" alt="" aria-hidden="true"></div>
     <div class="wrap ctabar">
       <div class="ctatext">
-        <h2>Tell us what you are seeing</h2>
+        <h2>Tell us what you are seeing in your basement</h2>
         <ul class="ctachecks">
           <li>Free estimate, in writing</li>
           <li>100% lifetime transferable warranty</li>
@@ -1221,7 +1416,7 @@ a.inc .incgo{margin-top:auto;padding-top:12px;font:700 13.5px var(--head);color:
       </div>
       <div class="fbot">
         <span>&copy; 2026 ARD Waterproofing</span>
-        <a href="../privacy-policy/">Privacy policy</a><a href="../terms-of-service/">Terms of service</a>
+        <a href="../privacy-policy/">Privacy policy</a><a href="../terms-of-service/">Terms of service</a><a href="../conditions-of-use/">Conditions of use</a><a href="../infringement-policy/">Infringement policy</a>
         <span>Design preview. Colors are read from the client's own logo and are a placeholder
         until Grace Design supplies the official palette.</span>
       </div>

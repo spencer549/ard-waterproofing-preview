@@ -68,13 +68,57 @@ body.solo .stage{padding-top:0}
       .btn-lg at 16.5px, and the CTA band's own 17px. "Get my free estimate" rendered at
       438x46, 225x53 and 241x57 on a single page. There are now two sizes, base and lg,
       and the CTA band uses lg rather than inventing a third. */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;
-  border-radius:var(--r-sharp);font:700 15px var(--head);text-decoration:none;
-  border:2px solid transparent;cursor:pointer}
-.btn-p{background:var(--rust);color:#fff}.btn-p:hover{background:var(--rust-dk)}
-.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+/* BUTTONS, strengthened 2026-08-15. Spencer: "improve the CTA buttons. Make sure it is
+   prominent and easy to see."
+   Three measured problems, all of them making a CTA hard to find:
+     .btn-d was navy on a navy CTA band, so the secondary action was a navy rectangle on a
+       navy field with no border at all.
+     .btn-o carried a 45% white border, which reads as a disabled control rather than a
+       button.
+     Both sat at 15px/14px padding, small for the primary conversion action on the page.
+   Primary stays rust and stays alone, per the fleet register's one-primary-CTA rule. The
+   secondary is now a proper high-contrast outline so it is unmistakably clickable without
+   competing with the primary. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;
+  border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
+  border:2px solid transparent;cursor:pointer;line-height:1.2}
+.btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
+  0 6px 16px rgba(219,60,17,.28)}
+.btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
+/* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
+   "Call or text" beside every service page's city grid). Turning it into a white outline
+   globally would have made those invisible. The outline treatment is scoped to dark
+   surfaces only, immediately below. */
 .btn-d{background:var(--navy);color:#fff}
-.btn-w{background:#fff;color:var(--navy)}
+.btn-w{background:#fff;color:var(--navy);box-shadow:0 1px 2px rgba(11,24,39,.22),
+  0 6px 16px rgba(11,24,39,.20)}
+
+/* On a dark surface a navy button is invisible. Give it a full-strength white outline so
+   the secondary action still reads as a button.
+   EVERY SELECTOR HERE MUST BE A GENUINELY DARK CONTAINER. `.bcta` was in this list once
+   and it is the button row inside the homepage's WHITE hero card, so the "Call or text"
+   button turned white on white and vanished completely. Do not add a selector here without
+   checking the background it actually paints on; check_button_contrast.py measures it. */
+.ctabanner .btn-d,.band-navy .btn-d,.midcta .btn-d,.chero .btn-d,
+.ctasplit .btn-d,.herocta .btn-d{background:rgba(255,255,255,.10);border-color:#fff;color:#fff}
+
+@media(hover:hover) and (pointer:fine){
+  .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
+    0 8px 22px rgba(219,60,17,.36)}
+  .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
+  .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
+    background:#fff;color:var(--navy);border-color:#fff}
+  .btn-w:hover{background:var(--sand)}}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn-o:focus-visible,.ctabanner .btn-d:focus-visible,.band-navy .btn-d:focus-visible,
+.chero .btn-d:focus-visible{outline-color:#fff}
+
+/* "See all service areas" was plain 13.5px body text with no affordance at all. */
+.chipnote a{color:#fff;font-weight:700;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.55)}
+@media(hover:hover) and (pointer:fine){
+  .chipnote a:hover{text-decoration-color:#fff}}
 .btn.wide{width:100%}
 .eyebrow{font:700 12px var(--head);text-transform:uppercase;letter-spacing:.16em;color:var(--blue-lt)}
 .eyebrow.dk{color:var(--rust)}
@@ -205,7 +249,13 @@ body.solo .stage{padding-top:0}
 .sfoot a{color:#fff;text-decoration:none}
 .sfoot .lg{color:#fff;display:inline-block;margin-bottom:14px}
 .sfoot h4{color:#fff;font-size:15px;margin-bottom:13px;font-family:var(--head)}
-.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:36px}
+/* FIVE columns, not four. The footer has always had five children (brand, Services, Areas
+   we serve, Company, Get in touch) and only four tracks, so Get in touch wrapped onto a
+   second row underneath the brand block while the fourth column sat empty beside it: a
+   tall band of dead space on every one of the 66 pages. Spencer flagged it 2026-08-15.
+   The fifth track is the widest of the link columns because it carries a phone number and
+   two full sentences rather than a list of short links. */
+.fg{display:grid;grid-template-columns:1.45fr .95fr .95fr .8fr 1.15fr;gap:32px}
 .fg p{line-height:1.8;margin-bottom:.6em}
 .sfoot .lic{font-size:13.5px;color:#7e97ad}
 .fbot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
@@ -318,14 +368,37 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
+/* HEADER NAVIGATION, enlarged 2026-08-15. Spencer: "can you improve and make the
+   navigation buttons bigger?"
+   Measured before: 14px type in a 17px-tall hit area with zero padding, which is less than
+   half the 44px minimum tap target and reads as small next to a 54px logo. Now 16px type
+   in a 44px target, with the padding doing the spacing so the gap could come down and the
+   row still breathes. The header grows 64px to 76px, which also gives the rust phone pill
+   room to read as the primary action it is. */
 #C .chead{background:var(--navy);color:#fff}
-#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
+#C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
   align-items:center;gap:26px}
 #C .chead .lg{color:#fff}
-#C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
-#C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
-#C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
-  font:700 14px var(--head);text-decoration:none}
+#C .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
+  align-items:center}
+#C .chead nav>a,#C .chead .mm>a{color:#e2ecf4;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead nav>a:hover,#C .chead .mm>a:hover{color:#fff;background:rgba(255,255,255,.10)}}
+#C .chead nav>a:focus-visible,#C .chead .mm>a:focus-visible{
+  outline:2px solid #fff;outline-offset:-2px}
+/* The current section stays legible against the lighter default. */
+#C .chead .mm>a[aria-expanded="true"],#C .chead nav>a.here{color:#fff;
+  background:rgba(255,255,255,.12)}
+#C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
+  display:inline-flex;align-items:center;border-radius:var(--r-sharp);
+  font:700 15.5px var(--head);text-decoration:none;
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  transition:background-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+  #C .chead .tel:hover{background:var(--rust-dk)}}
+#C .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #C .chead .burger{color:#fff}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
@@ -399,7 +472,10 @@ body.solo #B .subnav{top:72px}
   #C .mrow{grid-template-columns:1fr;gap:12px}
   #C .cmeta{grid-template-columns:1fr}
   #C .fgrid{grid-template-columns:1fr 1fr}
+  /* Five columns do not fit here. Two tracks with the brand block spanning both keeps the
+     four content columns paired instead of leaving one orphaned on its own row. */
   .fg{grid-template-columns:1fr 1fr}
+  .fg > :first-child{grid-column:1 / -1}
   .cmpwrap{grid-template-columns:1fr}
 }
 @media (max-width:820px){
@@ -772,7 +848,7 @@ body{background:#fff}
   </header>
 
   <div class="chero haspic" id="estimate">
-    <div class="cbg"><img src="../../video/h-window-wells.jpeg" alt="Covered window well with a drain and clean gravel bed"></div>
+    <div class="cbg"><img src="../../gallery/full/042.jpg" alt="Window well installed by ARD Waterproofing"></div>
     <div class="wrap chero-in">
       <div>
         <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Home</a> <i>/</i>
@@ -811,7 +887,7 @@ body{background:#fff}
   <section class="band-white">
     <div class="wrap">
       <div class="shead"><h2>How ARD does this work</h2></div>
-      <div class="mrows"><div class="mpic"><figure><img src="../../video/g-jobsite.jpg" alt="ARD mini excavator on a residential exterior drainage job" loading="lazy"></figure><div class="mtxt"><h3>The Right Way to Install an Egress Window: What Most Contractors Skip</h3><p>A properly installed egress window is a structural project, a waterproofing project, and a drainage project, all three at once. Treating it as anything less is how you end up with a flooded basement six months after installation.</p><p>Here’s how ARD Waterproofing approaches every egress window and window well project:</p></div></div><div class="mpic flip"><figure><img src="../../video/ard-hero-basement.jpg" alt="Unfinished basement with a below-grade window" loading="lazy"></figure><div class="mtxt"><h3>Custom Masonry Window Wells: The Difference Between a Hole in the Ground and Something That Looks Right</h3><p>A corrugated metal window well does one thing: it keeps soil from collapsing against the glass. A custom masonry well does that and adds natural light, weather protection, tiered egress steps if required, and a finished exterior appearance that doesn’t look like an afterthought.</p><p>For homeowners in North Caldwell, Livingston, and the surrounding communities who have invested significantly in their homes’ curb appeal, a galvanized metal half-circle sitting below a beautiful foundation planting is a real aesthetic problem. We build window wells in natural stone, concrete block, and brick that integrate with the existing exterior materials of the home.</p></div></div></div>
+      <div class="mrows"><div class="mpic"><figure><img src="../../gallery/full/054.jpg" alt="Window well installed by ARD Waterproofing" loading="lazy"></figure><div class="mtxt"><h3>The Right Way to Install an Egress Window: What Most Contractors Skip</h3><p>A properly installed egress window is a structural project, a waterproofing project, and a drainage project, all three at once. Treating it as anything less is how you end up with a flooded basement six months after installation.</p><p>Here’s how ARD Waterproofing approaches every egress window and window well project:</p></div></div><div class="mpic flip"><figure><img src="../../gallery/full/066.jpg" alt="Window well installed by ARD Waterproofing" loading="lazy"></figure><div class="mtxt"><h3>Custom Masonry Window Wells: The Difference Between a Hole in the Ground and Something That Looks Right</h3><p>A corrugated metal window well does one thing: it keeps soil from collapsing against the glass. A custom masonry well does that and adds natural light, weather protection, tiered egress steps if required, and a finished exterior appearance that doesn’t look like an afterthought.</p><p>For homeowners in North Caldwell, Livingston, and the surrounding communities who have invested significantly in their homes’ curb appeal, a galvanized metal half-circle sitting below a beautiful foundation planting is a real aesthetic problem. We build window wells in natural stone, concrete block, and brick that integrate with the existing exterior materials of the home.</p></div></div></div>
       <details class="more"><summary><span class="moreopen">See more detail</span><span class="moreshut">Show less</span></summary><div class="mrows"><div class="mrow"><h3>Window Well Flooding: The Permanent Fix</h3><div><p>Here’s what’s actually happening: water from rain, roof runoff, or surface grading is concentrating at the foundation wall near the window well. The gravel bed at the bottom of the well fills up faster than it can drain. Once the well fills, water finds the path of least resistance, through the window frame, through the sill, into the basement.</p><p>The permanent fix is a window well drain connected to an exterior French drain that intercepts the water before it reaches the well and moves it away from the foundation entirely. We’ve installed this system on dozens of homes throughout the Caldwells, Montclair, and Wayne, including homes where homeowners had been dealing with the same flooded well for years before calling us.</p></div></div></div></details>
     </div>
   </section>
@@ -826,10 +902,10 @@ body{background:#fff}
   </section>
 
   <div class="ctabanner">
-    <div class="ctabg"><img src="../../video/h-foundation.jpeg" alt="" aria-hidden="true"></div>
+    <div class="ctabg"><img src="../../gallery/full/093.jpg" alt="" aria-hidden="true"></div>
     <div class="wrap ctabar">
       <div class="ctatext">
-        <h2>Find out what your home actually needs</h2>
+        <h2>Get a window wells &amp; egress windows estimate in New Jersey</h2>
         <ul class="ctachecks">
           <li>Free estimate, in writing</li>
           <li>100% lifetime transferable warranty</li>
@@ -879,7 +955,7 @@ body{background:#fff}
   <section class="band-sand cities">
     <div class="wrap">
       <div class="shead center"><div class="eyebrow dk">Window Wells &amp; Egress Windows near you</div>
-      <h2>Cities we serve</h2>
+      <h2>Window Wells &amp; Egress Windows in New Jersey, town by town</h2>
       <p class="lede">Window Wells &amp; Egress Windows across West Essex, Union, Passaic and Morris Counties, dispatched from
       Smull Ave in West Caldwell.</p></div>
       <div class="citygrid" style="--cols:5"><a class="citycard" href="../../areas/west-caldwell/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Caldwell</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/livingston/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Livingston</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/montclair/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Montclair</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/north-caldwell/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>North Caldwell</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/short-hills/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Short Hills</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/south-orange/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>South Orange</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/summit/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Summit</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/verona/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Verona</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/wayne/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>Wayne</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a><a class="citycard" href="../../areas/west-orange/"><span class="cpin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.9 0 7 3 7 6.7 0 4.6-7 11.3-7 11.3S5 14.3 5 9.7C5 6 8.1 3 12 3z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span><span class="ctxt"><b>West Orange</b><em>Window Wells &amp; Egress Windows</em></span><span class="carrow">&rarr;</span></a></div>
@@ -894,15 +970,15 @@ body{background:#fff}
 
   <section class="band-white">
     <div class="wrap">
-      <div class="shead"><h2>Recent work</h2></div>
-      <div class="gal"><figure><img src="../../video/g-french-drain.jpg" alt="Interior French drain channel backfilled before the floor is closed" loading="lazy"><figcaption>Interior French drain, backfilled before closing</figcaption></figure><figure><img src="../../video/g-basement-1.jpg" alt="Basement wall and floor joint after waterproofing" loading="lazy"><figcaption>Wall and floor joint, treated</figcaption></figure><figure><img src="../../video/g-basement-2.jpg" alt="Empty unfinished basement after a drainage system installation" loading="lazy"><figcaption>Dry basement, system in</figcaption></figure><figure><img src="../../video/g-yard-water.jpg" alt="Standing water pooling on a residential lawn" loading="lazy"><figcaption>Yard water, the source of many calls</figcaption></figure><figure><img src="../../video/g-basement-3.jpg" alt="Finished basement interior with exposed beam" loading="lazy"><figcaption>Finished basement, protected</figcaption></figure></div>
+      <div class="shead"><h2>Recent Window Wells &amp; Egress Windows jobs in New Jersey</h2></div>
+      <div class="gal"><figure><img src="../../gallery/full/095.jpg" alt="Window well installed by ARD Waterproofing" loading="lazy"><figcaption>Window wells</figcaption></figure><figure><img src="../../gallery/full/024.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../gallery/full/056.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../gallery/full/128.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../gallery/full/129.jpg" alt="Exterior foundation waterproofing by ARD Waterproofing" loading="lazy"><figcaption>Exterior foundation waterproofing</figcaption></figure><figure><img src="../../gallery/full/058.jpg" alt="French drain and yard drainage work by ARD Waterproofing" loading="lazy"><figcaption>French drains and yard drainage</figcaption></figure></div>
     </div>
   </section>
 
   <section class="band-sand">
     <div class="narrow">
       <div class="shead center"><h2>Common questions</h2></div>
-      <div class="faq"><details open><summary>What permits does my township in Essex County require for an egress window installation?</summary><div class="ans"><p>Any egress window installation that involves cutting into a foundation wall is a structural alteration and requires a building permit from your local township enforcing agency under the New Jersey Uniform Construction Code.</p></div></details><details><summary>Why does my window well keep flooding during heavy rain even though it has a gravel bed?</summary><div class="ans"><p>A gravel bed is a passive drainage layer, it slows the rate at which water pools, but it doesn't move water away from the foundation. In Northern New Jersey's clay-heavy soil, the gravel bed saturates quickly because the surrounding soil doesn't absorb water fast enough to keep up with heavy rainfall.</p></div></details><details><summary>How does Northern New Jersey's clay soil affect the egress window installation process?</summary><div class="ans"><p>The clay-heavy soil common to Essex, Passaic, and Morris Counties creates two specific challenges. First, it holds water near the foundation longer than sandy or loamy soil, which makes drainage system design more critical, a window well without a properly tied drain will flood reliably.</p></div></details><details><summary>Does adding an egress window increase my home's value in the Northern New Jersey market?</summary><div class="ans"><p>Yes, in two measurable ways. First, an egress window converts a basement room from a non-conforming space into a legal bedroom under New Jersey's building code, a legal bedroom adds directly to the listed bedroom count, which is one of the primary drivers of home value in the Essex County market.</p></div></details><details><summary>How quickly can ARD Waterproofing reach West Caldwell and the surrounding area, and are there travel fees?</summary><div class="ans"><p>We dispatch from our West Caldwell location at 98 Smull Ave, so response times to West Caldwell, North Caldwell, Caldwell Borough, and the immediately surrounding communities are typically same-day or next-day for assessments. We cover all of Essex, Passaic, and Morris Counties with no travel fees.</p></div></details><details class="more morefaq"><summary><span class="moreopen">See all 7 questions</span><span class="moreshut">Show less</span></summary><div class="faqmore"><details><summary>Can I install an egress window myself, or do I need a licensed contractor in New Jersey?</summary><div class="ans"><p>New Jersey requires a building permit for any structural alteration to a foundation wall, and that permit requires the work to be performed or supervised by a licensed contractor.</p></div></details><details><summary>What is the minimum egress window size required for a legal bedroom in New Jersey?</summary><div class="ans"><p>Under IRC Section R310, which New Jersey has adopted statewide, a basement bedroom window must provide a minimum net clear opening of 5.7 square feet, with a minimum opening height of 24 inches and a minimum opening width of 20 inches. The maximum sill height from the finished floor is 44 inches.</p></div></details></div></details></div>
+      <div class="faq"><details><summary>What permits does my township in Essex County require for an egress window installation?</summary><div class="ans"><p>Any egress window installation that involves cutting into a foundation wall is a structural alteration and requires a building permit from your local township enforcing agency under the New Jersey Uniform Construction Code.</p></div></details><details><summary>Why does my window well keep flooding during heavy rain even though it has a gravel bed?</summary><div class="ans"><p>A gravel bed is a passive drainage layer, it slows the rate at which water pools, but it doesn't move water away from the foundation. In Northern New Jersey's clay-heavy soil, the gravel bed saturates quickly because the surrounding soil doesn't absorb water fast enough to keep up with heavy rainfall.</p></div></details><details><summary>How does Northern New Jersey's clay soil affect the egress window installation process?</summary><div class="ans"><p>The clay-heavy soil common to Essex, Passaic, and Morris Counties creates two specific challenges. First, it holds water near the foundation longer than sandy or loamy soil, which makes drainage system design more critical, a window well without a properly tied drain will flood reliably.</p></div></details><details><summary>Does adding an egress window increase my home's value in the Northern New Jersey market?</summary><div class="ans"><p>Yes, in two measurable ways. First, an egress window converts a basement room from a non-conforming space into a legal bedroom under New Jersey's building code, a legal bedroom adds directly to the listed bedroom count, which is one of the primary drivers of home value in the Essex County market.</p></div></details><details><summary>How quickly can ARD Waterproofing reach West Caldwell and the surrounding area, and are there travel fees?</summary><div class="ans"><p>We dispatch from our West Caldwell location at 98 Smull Ave, so response times to West Caldwell, North Caldwell, Caldwell Borough, and the immediately surrounding communities are typically same-day or next-day for assessments. We cover all of Essex, Passaic, and Morris Counties with no travel fees.</p></div></details><details class="more morefaq"><summary><span class="moreopen">See all 7 questions</span><span class="moreshut">Show less</span></summary><div class="faqmore"><details><summary>Can I install an egress window myself, or do I need a licensed contractor in New Jersey?</summary><div class="ans"><p>New Jersey requires a building permit for any structural alteration to a foundation wall, and that permit requires the work to be performed or supervised by a licensed contractor.</p></div></details><details><summary>What is the minimum egress window size required for a legal bedroom in New Jersey?</summary><div class="ans"><p>Under IRC Section R310, which New Jersey has adopted statewide, a basement bedroom window must provide a minimum net clear opening of 5.7 square feet, with a minimum opening height of 24 inches and a minimum opening width of 20 inches. The maximum sill height from the finished floor is 44 inches.</p></div></details></div></details></div>
     </div>
   </section>
   <footer class="sfoot">
@@ -927,7 +1003,7 @@ body{background:#fff}
       </div>
       <div class="fbot">
         <span>&copy; 2026 ARD Waterproofing</span>
-        <a href="../../privacy-policy/">Privacy policy</a><a href="../../terms-of-service/">Terms of service</a>
+        <a href="../../privacy-policy/">Privacy policy</a><a href="../../terms-of-service/">Terms of service</a><a href="../../conditions-of-use/">Conditions of use</a><a href="../../infringement-policy/">Infringement policy</a>
         <span>Design preview. Colors are read from the client's own logo and are a placeholder
         until Grace Design supplies the official palette.</span>
       </div>
