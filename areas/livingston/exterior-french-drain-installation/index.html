@@ -202,8 +202,16 @@ body.solo .stage{padding-top:0}
 .faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font:700 17.5px var(--head);
   color:var(--navy);position:relative}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";position:absolute;right:8px;top:15px;font:400 26px var(--head);color:var(--rust)}
-.faq details[open] summary::after{content:"\2212"}
+/* The +/- marker MUST be scoped to the question it belongs to. Both rules used a
+   descendant combinator, so once the "See all N questions" wrapper (details.more)
+   was open, every summary beneath it matched `.faq details[open] summary` and painted
+   a minus, whether that question was open or not. Clicking a revealed question shut
+   it without the marker ever changing back. 47 markers across 30 pages, all of them
+   inside the See-more block. `> summary` ties the marker to its OWN details, and
+   :not(.more) keeps both rules off the See-more control, which paints its own chevron
+   and previously only won that fight on source order. */
+.faq details:not(.more) > summary::after{content:"+";position:absolute;right:8px;top:15px;font:400 26px var(--head);color:var(--rust)}
+.faq details:not(.more)[open] > summary::after{content:"\2212"}
 .faq .ans{padding:0 40px 22px 0;color:var(--mute);font-size:16px;line-height:1.7}
 .faq .ans p{margin:0}
 .band-sand .faq summary{color:var(--navy)}

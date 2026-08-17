@@ -110,8 +110,8 @@ body.solo .stage{padding-top:0}
 .faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font:700 17.5px var(--head);
   color:var(--navy);position:relative}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";position:absolute;right:8px;top:17px;font:400 26px var(--head);color:var(--rust)}
-.faq details[open] summary::after{content:"\2212"}
+.faq details:not(.more) > summary::after{content:"+";position:absolute;right:8px;top:17px;font:400 26px var(--head);color:var(--rust)}
+.faq details:not(.more)[open] > summary::after{content:"\2212"}
 .faq .ans{padding:0 40px 22px 0;color:var(--mute);font-size:16px;line-height:1.7}
 
 /* areas chips, shared */
