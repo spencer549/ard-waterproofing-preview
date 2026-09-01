@@ -355,9 +355,13 @@ body.solo .stage{padding-top:0}
 .burger{display:none;background:transparent;border:0;cursor:pointer;padding:9px;margin-left:auto;
   flex-direction:column;gap:5px;color:inherit}
 .burger span{display:block;width:25px;height:2px;background:currentColor;border-radius:2px;transition:.2s}
-.burger.on span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger.on span:nth-child(2){opacity:0}
-.burger.on span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* These were keyed to '.burger.on', but nothing ever adds that class: the toggle sets
+   aria-expanded and puts .navopen on the header. So the bars-to-X animation was dead.
+   Keyed to the attribute the script actually sets, which also means the control's state
+   is exposed to assistive tech and drawn on screen from the same source of truth. */
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .mobnav{display:none;background:#fff;border-top:1px solid var(--line);max-height:76vh;overflow-y:auto}
 .mobnav.on{display:block}
 /* The header's own .in is a flex row. The mobnav panel reuses the .in class for width,
@@ -474,8 +478,15 @@ body.solo .stage{padding-top:0}
   font:700 14px var(--head);color:var(--rust);text-decoration:none}
 #B .mm .drop.area .allsvc{grid-column:1/-1}
 #B .burger{display:none;background:transparent;border:0;cursor:pointer;padding:9px;margin-left:12px;color:inherit}
+/* margin:5px 0 here duplicated the parent's own gap:5px, so the bars sat 17px apart
+   centre to centre (2 + 5 + 5 + 5) rather than 7px. The X transform offsets by 7px, so
+   the bars rotated without converging and the open state drew a chevron instead of a
+   cross. Spacing is the parent's gap alone now, which is the single source it should
+   have been all along. Removing the margins also shrank the button from 64px to 34px
+   tall, under the 44px touch minimum, so the burger carries an explicit 44x44 floor
+   rather than depending on the icon's own box to supply it. */
 #B .burger span{display:block;width:25px;height:2px;background:currentColor;border-radius:2px;
-  transition:.2s;margin:5px 0}
+  transition:.2s;margin:0}
 #B #A .ahead nav>a,#B #A .ahead .mm>a{color:rgba(255,255,255,.92);text-decoration:none}
 #B #A .ahead .burger{color:#fff}
 #B #B .bhead2 nav>a,#B #B .bhead2 .mm>a{color:var(--ink);text-decoration:none}
@@ -742,22 +753,41 @@ body.solo .stage{padding-top:0}
 @media(max-width:760px){#B .bhero .pic{height:34vh;min-height:220px}}
 .stage{padding-top:0}body{background:#fff}#B .lg img{display:block;height:88px;width:auto;max-height:88px;aspect-ratio:360 / 273}#B .lg{display:inline-flex;align-items:center}@media(max-width:640px){#B .lg img{height:60px;max-height:60px}}
 
-/* Homepage header, narrow widths. 2026-09-01, found while swapping in the new logo.
-   The brand mark is a flex item with width:auto, so the overflowing nav row squeezed
-   it to 0px wide: on a 390px phone the logo rendered at zero and the page scrolled
-   sideways to 678px. Pre-existing, and it is homepage-only. Every inner page runs
-   #C .chead, which the shared 1080px collapse rules DO name; this header was
-   rescoped from .bhead to .chead and the rules were never renamed with it, so
-   #B's nav never collapsed.
-   Fixed here without inventing a menu the homepage does not have: the mark stops
-   shrinking, and below 1080px the nav LINKS go while the phone CTA stays, because
-   .tel lives inside <nav> and it is the page's primary conversion element.
-   Still open: index.html has no .mobnav panel and no burger script, so the homepage
-   has no mobile menu. That needs the panel + 8-line toggle ported from an inner page. */
+/* Homepage header, narrow widths. Rebuilt 2026-09-01 to give the homepage the mobile
+   menu it never had. Two faults were fixed here first, both pre-existing and both
+   homepage-only: the brand mark is a flex item with width:auto, so the overflowing nav
+   row squeezed it to 0px wide on every phone; and the shared 1080px collapse rules name
+   .bhead, while this header was rescoped to .chead and they were never renamed with it,
+   so #B's nav never collapsed and the page scrolled sideways to 678px. Inner pages were
+   never affected, they run #C .chead, which those rules do name.
+
+   The menu follows the inner-page pattern exactly: there is no separate panel in the
+   markup, the existing <nav> becomes an absolutely positioned column when .navopen is
+   set on the header. One difference is deliberate. The phone number now sits OUTSIDE
+   <nav>, so it stays pinned in the bar at every width instead of hiding behind the
+   burger. This is a 24 hour emergency waterproofing site and the call is the primary
+   action, so it should never cost a tap to find. */
+#B .chead{position:relative}
 #B .chead .lg,#B .chead .lg img{flex:0 0 auto}
+
 @media(max-width:1080px){
-  #B .chead nav>a:not(.tel),#B .chead .mm{display:none}
-  #B .chead nav{margin-left:auto;gap:0}
+  /* id-scoped to match '#B .chead nav' above, or a class-only rule silently loses and
+     the desktop nav stays visible on phones. */
+  #B .chead nav{display:none}
+  #B .chead .tel{margin-left:auto}
+  #B .chead .burger{display:flex;align-items:center;justify-content:center;
+    min-width:44px;min-height:44px}
+
+  #B .chead.navopen nav{
+    display:flex;position:absolute;top:100%;left:0;right:0;background:#fff;
+    flex-direction:column;align-items:stretch;gap:0;padding:14px 24px 20px;margin-left:0;
+    box-shadow:0 24px 50px rgba(17,35,55,.24);max-height:72vh;overflow:auto;z-index:300}
+  #B .chead.navopen nav>a,#B .chead.navopen .mm>a{
+    color:var(--ink);padding:12px 0;border-bottom:1px solid var(--line)}
+  #B .chead.navopen .mm{position:static}
+  #B .chead.navopen .mm .drop,#B .chead.navopen .mm:hover .drop{
+    position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;
+    padding:8px 0 14px;width:auto;border-top:0;grid-template-columns:1fr}
 }
 /* The 640px step above is written '#B .lg img', which loses on specificity to
    '#B .chead .lg img' further up and only lands because it also sets max-height.
@@ -812,8 +842,8 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
           </div>
         </div>
         <a href="gallery/">Gallery</a><a href="reviews/">Reviews</a><a href="blog/">Blog</a><a href="about/">About</a><a href="contact/">Contact</a>
-        <a class="tel" href="tel:+19176918411">(917) 691-8411</a>
       </nav>
+      <a class="tel" href="tel:+19176918411">(917) 691-8411</a>
       <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
@@ -1069,4 +1099,15 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
   </footer>
 
 </div>
+<script>
+/* Burger toggle, ported from the inner pages. index.html carried NO script at all, which
+   is why its burger button did nothing and the homepage had no mobile menu. */
+document.querySelectorAll('.burger').forEach(function(b){
+  b.addEventListener('click', function(){
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!open));
+    b.closest('header').classList.toggle('navopen', !open);
+  });
+});
+</script>
 </body>
