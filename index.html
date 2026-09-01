@@ -830,7 +830,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
       <header class="chead">
     <div class="in">
       <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-2026.png" width="360" height="273" alt="ARD Waterproofing"></a>
-      <nav>
+      <nav id="b-mobnav">
         <div class="mm"><a href="services/">Our Services &#9662;</a>
           <div class="drop svc"><div><h5>Waterproofing &amp; Basement</h5><ul><li><a href="services/basement-waterproofing/">Basement Waterproofing</a></li><li><a href="services/foundation-waterproofing/">Foundation Waterproofing</a></li><li><a href="services/interior-french-drains/">Interior French Drains</a></li><li><a href="services/exterior-french-drains/">Exterior French Drains</a></li><li><a href="services/channel-drains/">Channel Drains</a></li><li><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a></li><li><a href="services/sump-pumps/">Sump Pumps</a></li><li><a href="services/window-wells-egress-windows/">Window Wells & Egress Windows</a></li></ul></div><div><h5>Outdoor Services</h5><ul><li><a href="services/retaining-walls/">Retaining Walls</a></li><li><a href="services/patios-pavers/">Patios & Pavers</a></li><li><a href="services/walkways/">Driveway & Walkway</a></li><li><a href="services/masonry/">Masonry</a></li></ul><a class="allsvc" href="services/">View all services &rarr;</a></div></div>
         </div>
@@ -844,7 +844,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
         <a href="gallery/">Gallery</a><a href="reviews/">Reviews</a><a href="blog/">Blog</a><a href="about/">About</a><a href="contact/">Contact</a>
       </nav>
       <a class="tel" href="tel:+19176918411">(917) 691-8411</a>
-      <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="burger" aria-label="Menu" aria-controls="b-mobnav" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
 
@@ -1103,11 +1103,27 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
 /* Burger toggle, ported from the inner pages. index.html carried NO script at all, which
    is why its burger button did nothing and the homepage had no mobile menu. */
 document.querySelectorAll('.burger').forEach(function(b){
+  var head = b.closest('header');
+  var panel = head.querySelector('nav');
+
+  /* The CSS cap is 72vh, which does not know the header sits below a promo bar. On a
+     360x568 viewport that put the panel's bottom 84px past the screen edge, so its last
+     items needed a second scroll to reach. Measure the space actually left below the
+     header instead, on open and on resize. */
+  function fit(){
+    if (!head.classList.contains('navopen')) return;
+    var gap = window.innerHeight - head.getBoundingClientRect().bottom - 8;
+    panel.style.maxHeight = Math.max(gap, 180) + 'px';
+  }
+
   b.addEventListener('click', function(){
     var open = b.getAttribute('aria-expanded') === 'true';
     b.setAttribute('aria-expanded', String(!open));
-    b.closest('header').classList.toggle('navopen', !open);
+    head.classList.toggle('navopen', !open);
+    if (open) { panel.style.maxHeight = ''; } else { fit(); }
   });
+
+  window.addEventListener('resize', fit);
 });
 </script>
 </body>
