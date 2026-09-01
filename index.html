@@ -491,7 +491,7 @@ body.solo .stage{padding-top:0}
    row still breathes. The header grows 64px to 76px,#B which also gives the rust phone pill
    room to read as the primary action it is. */
 .chead{background:var(--navy);color:#fff}
-#B .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:76px;display:flex;
+#B .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:90px;display:flex;
   align-items:center;gap:26px}
 #B .chead .lg{color:#fff}
 #B .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
@@ -537,13 +537,13 @@ body.solo .stage{padding-top:0}
 #B .soc{display:flex;gap:10px;margin-top:12px}
 #B .soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;
   align-items:center;justify-content:center;font:700 12px var(--head)}
-#B .sfoot .lg img{height:58px;max-height:58px}
-#B .sfoot .lg img{height:58px;width:auto;display:block}
+#B .sfoot .lg img{height:84px;max-height:84px}
+#B .sfoot .lg img{height:84px;width:auto;display:block}
 #B .sfoot .lg{display:inline-block;line-height:0;margin-bottom:14px}
 
 /* Client logo in the homepage header, 2026-08-15. Direction B shipped a
    text wordmark; every other page shows the real logo at 187x54. */
-#B .bhead .lg img,#B .chead .lg img{height:54px;width:auto;display:block}
+#B .bhead .lg img,#B .chead .lg img{height:68px;width:auto;display:block}
 #B .bhead .lg,#B .chead .lg{display:inline-block;line-height:0}
 
 /* Standard CTA band, ported from template C 2026-08-15 so the homepage
@@ -731,7 +731,43 @@ body.solo .stage{padding-top:0}
    offset card sat below the fold. Sized so the card is visible on load. */
 #B .bhero .pic{height:46vh;min-height:320px;max-height:440px}
 @media(max-width:760px){#B .bhero .pic{height:34vh;min-height:220px}}
-.stage{padding-top:0}body{background:#fff}#B .lg img{display:block;height:54px;width:auto;max-height:54px}#B .lg{display:inline-flex;align-items:center}@media(max-width:640px){#B .lg img{height:42px;max-height:42px}}</style>
+.stage{padding-top:0}body{background:#fff}#B .lg img{display:block;height:68px;width:auto;max-height:68px}#B .lg{display:inline-flex;align-items:center}@media(max-width:640px){#B .lg img{height:54px;max-height:54px}}
+
+/* Homepage header, narrow widths. 2026-09-01, found while swapping in the new logo.
+   The brand mark is a flex item with width:auto, so the overflowing nav row squeezed
+   it to 0px wide: on a 390px phone the logo rendered at zero and the page scrolled
+   sideways to 678px. Pre-existing, and it is homepage-only. Every inner page runs
+   #C .chead, which the shared 1080px collapse rules DO name; this header was
+   rescoped from .bhead to .chead and the rules were never renamed with it, so
+   #B's nav never collapsed.
+   Fixed here without inventing a menu the homepage does not have: the mark stops
+   shrinking, and below 1080px the nav LINKS go while the phone CTA stays, because
+   .tel lives inside <nav> and it is the page's primary conversion element.
+   Still open: index.html has no .mobnav panel and no burger script, so the homepage
+   has no mobile menu. That needs the panel + 8-line toggle ported from an inner page. */
+#B .chead .lg,#B .chead .lg img{flex:0 0 auto}
+@media(max-width:1080px){
+  #B .chead nav>a:not(.tel),#B .chead .mm{display:none}
+  #B .chead nav{margin-left:auto;gap:0}
+}
+/* The 640px step above is written '#B .lg img', which loses on specificity to
+   '#B .chead .lg img' further up and only lands because it also sets max-height.
+   Restated at matching specificity so the phone size holds on its own. */
+@media(max-width:640px){#B .chead .lg img{height:54px;max-height:54px}}
+
+/* Homepage footer grid, 2026-09-01. Also pre-existing and also homepage-only.
+   The five-track .fg rule was added later in the same stylesheet than the 900px
+   and 640px collapse rules and carries identical specificity, so source order let
+   it win: the footer stayed five columns on a 390px phone. Two consequences, both
+   visible. The page scrolled sideways to 678px, and the brand column measured
+   about 90px, which clamped the logo's width while its height stayed pinned, so
+   the client's mark rendered squashed out of proportion. Inner pages order these
+   correctly already; this restates their steps after the five-track rule. */
+@media(max-width:900px){
+  #B .sfoot .fg{grid-template-columns:1fr 1fr}
+  #B .sfoot .fg > :first-child{grid-column:1 / -1}
+}
+@media(max-width:640px){#B .sfoot .fg{grid-template-columns:1fr}}</style>
 </head>
 <body>
 <div class="pvbar"><span><b>Preview</b> of the redesigned ARD Waterproofing
@@ -754,7 +790,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
   <div style="position:relative">
       <header class="chead">
     <div class="in">
-      <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
+      <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-2026-dark.png" width="360" height="273" alt="ARD Waterproofing"></a>
       <nav>
         <div class="mm"><a href="services/">Our Services &#9662;</a>
           <div class="drop svc"><div><h5>Waterproofing &amp; Basement</h5><ul><li><a href="services/basement-waterproofing/">Basement Waterproofing</a></li><li><a href="services/foundation-waterproofing/">Foundation Waterproofing</a></li><li><a href="services/interior-french-drains/">Interior French Drains</a></li><li><a href="services/exterior-french-drains/">Exterior French Drains</a></li><li><a href="services/channel-drains/">Channel Drains</a></li><li><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a></li><li><a href="services/sump-pumps/">Sump Pumps</a></li><li><a href="services/window-wells-egress-windows/">Window Wells & Egress Windows</a></li></ul></div><div><h5>Outdoor Services</h5><ul><li><a href="services/retaining-walls/">Retaining Walls</a></li><li><a href="services/patios-pavers/">Patios & Pavers</a></li><li><a href="services/walkways/">Driveway & Walkway</a></li><li><a href="services/masonry/">Masonry</a></li></ul><a class="allsvc" href="services/">View all services &rarr;</a></div></div>
@@ -998,7 +1034,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
     <div class="wrap">
       <div class="fg">
         <div>
-          <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-dark.png" width="920" height="265" alt="ARD Waterproofing"></a>
+          <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-2026-dark.png" width="360" height="273" alt="ARD Waterproofing"></a>
           <p>Waterproofing and foundation drainage across West Essex, Union, Passaic and
           Morris Counties. Owner on site, estimates in writing.</p>
           <p class="lic">98 Smull Ave, West Caldwell, NJ 07006<br>
