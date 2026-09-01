@@ -490,26 +490,35 @@ body.solo .stage{padding-top:0}
    in a 44px target,#B with the padding doing the spacing so the gap could come down and the
    row still breathes. The header grows 64px to 76px,#B which also gives the rust phone pill
    room to read as the primary action it is. */
-.chead{background:var(--navy);color:#fff}
-#B .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:90px;display:flex;
+/* Direction C, white header, picked 2026-09-01. The mark is 1.32:1 where the retired
+   wordmark was 3.47:1, so it could not be made legible on the navy bar by size alone.
+   The bar takes the logo's own ground instead, which needs no colourway and no plate.
+   The navy footer still runs the dark colourway. */
+.chead{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(17,35,55,.04),0 6px 18px rgba(17,35,55,.06)}
+#B .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;min-height:112px;display:flex;
   align-items:center;gap:26px}
-#B .chead .lg{color:#fff}
+#B .chead .lg{color:var(--navy)}
 #B .chead nav{margin-left:auto;display:flex;gap:6px;font:600 16px var(--head);
   align-items:center}
-#B .chead nav>a,#B .chead .mm>a{color:#e2ecf4;text-decoration:none;
+#B .chead nav>a:not(.tel),#B .chead .mm>a{color:var(--ink);text-decoration:none;
   display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
   border-radius:var(--r-sharp);transition:color .18s ease,background-color .18s ease}
-#B .chead nav>a:focus-visible,#B .chead .mm>a:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+/* The homepage header never had a nav hover state; the inner pages do. On the navy bar
+   that only read as a missing polish, on the white bar it reads as a dead link. */
+@media(hover:hover) and (pointer:fine){
+  #B .chead nav>a:not(.tel):hover,#B .chead .mm>a:hover{color:var(--rust);background:#f2f6f9}}
+#B .chead nav>a:focus-visible,#B .chead .mm>a:focus-visible{outline:2px solid var(--navy);outline-offset:-2px}
 #B /* The current section stays legible against the lighter default. */
-.chead .mm>a[aria-expanded="true"],#B .chead nav>a.here{color:#fff;
-  background:rgba(255,255,255,.12)}
+.chead .mm>a[aria-expanded="true"],#B .chead nav>a.here{color:var(--rust);
+  background:#f2f6f9}
 #B .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
   display:inline-flex;align-items:center;border-radius:var(--r-sharp);
   font:700 15.5px var(--head);text-decoration:none;
   box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
   transition:background-color .18s ease}
-#B .chead .tel:focus-visible{outline:3px solid #fff;outline-offset:2px}
-#B .chead .burger{color:#fff}
+#B .chead .tel:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+#B .chead .burger{color:var(--navy)}
 #B .chead .lg{display:inline-flex;align-items:center}
 #B .chead .drop li a.here{color:var(--rust);font-weight:700}
 /* B's hero assumed an ABSOLUTE header sitting over it. The shared header
@@ -537,13 +546,13 @@ body.solo .stage{padding-top:0}
 #B .soc{display:flex;gap:10px;margin-top:12px}
 #B .soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;
   align-items:center;justify-content:center;font:700 12px var(--head)}
-#B .sfoot .lg img{height:84px;max-height:84px}
-#B .sfoot .lg img{height:84px;width:auto;display:block}
+#B .sfoot .lg img{height:96px;max-height:96px}
+#B .sfoot .lg img{height:96px;width:auto;display:block}
 #B .sfoot .lg{display:inline-block;line-height:0;margin-bottom:14px}
 
 /* Client logo in the homepage header, 2026-08-15. Direction B shipped a
    text wordmark; every other page shows the real logo at 187x54. */
-#B .bhead .lg img,#B .chead .lg img{height:68px;width:auto;display:block}
+#B .bhead .lg img,#B .chead .lg img{height:88px;width:auto;display:block}
 #B .bhead .lg,#B .chead .lg{display:inline-block;line-height:0}
 
 /* Standard CTA band, ported from template C 2026-08-15 so the homepage
@@ -731,7 +740,7 @@ body.solo .stage{padding-top:0}
    offset card sat below the fold. Sized so the card is visible on load. */
 #B .bhero .pic{height:46vh;min-height:320px;max-height:440px}
 @media(max-width:760px){#B .bhero .pic{height:34vh;min-height:220px}}
-.stage{padding-top:0}body{background:#fff}#B .lg img{display:block;height:68px;width:auto;max-height:68px}#B .lg{display:inline-flex;align-items:center}@media(max-width:640px){#B .lg img{height:54px;max-height:54px}}
+.stage{padding-top:0}body{background:#fff}#B .lg img{display:block;height:88px;width:auto;max-height:88px;aspect-ratio:360 / 273}#B .lg{display:inline-flex;align-items:center}@media(max-width:640px){#B .lg img{height:60px;max-height:60px}}
 
 /* Homepage header, narrow widths. 2026-09-01, found while swapping in the new logo.
    The brand mark is a flex item with width:auto, so the overflowing nav row squeezed
@@ -753,7 +762,7 @@ body.solo .stage{padding-top:0}
 /* The 640px step above is written '#B .lg img', which loses on specificity to
    '#B .chead .lg img' further up and only lands because it also sets max-height.
    Restated at matching specificity so the phone size holds on its own. */
-@media(max-width:640px){#B .chead .lg img{height:54px;max-height:54px}}
+@media(max-width:640px){#B .chead .lg img{height:60px;max-height:60px}}
 
 /* Homepage footer grid, 2026-09-01. Also pre-existing and also homepage-only.
    The five-track .fg rule was added later in the same stylesheet than the 900px
@@ -790,7 +799,7 @@ border-bottom:1px solid #22334a}.pvbar b{color:#fff}</style>
   <div style="position:relative">
       <header class="chead">
     <div class="in">
-      <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-2026-dark.png" width="360" height="273" alt="ARD Waterproofing"></a>
+      <a class="lg" href="" aria-label="ARD Waterproofing home"><img src="video/ard-logo-2026.png" width="360" height="273" alt="ARD Waterproofing"></a>
       <nav>
         <div class="mm"><a href="services/">Our Services &#9662;</a>
           <div class="drop svc"><div><h5>Waterproofing &amp; Basement</h5><ul><li><a href="services/basement-waterproofing/">Basement Waterproofing</a></li><li><a href="services/foundation-waterproofing/">Foundation Waterproofing</a></li><li><a href="services/interior-french-drains/">Interior French Drains</a></li><li><a href="services/exterior-french-drains/">Exterior French Drains</a></li><li><a href="services/channel-drains/">Channel Drains</a></li><li><a href="services/crawl-space-encapsulation/">Crawlspace Encapsulation</a></li><li><a href="services/sump-pumps/">Sump Pumps</a></li><li><a href="services/window-wells-egress-windows/">Window Wells & Egress Windows</a></li></ul></div><div><h5>Outdoor Services</h5><ul><li><a href="services/retaining-walls/">Retaining Walls</a></li><li><a href="services/patios-pavers/">Patios & Pavers</a></li><li><a href="services/walkways/">Driveway & Walkway</a></li><li><a href="services/masonry/">Masonry</a></li></ul><a class="allsvc" href="services/">View all services &rarr;</a></div></div>

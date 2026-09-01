@@ -307,15 +307,20 @@ body.solo #B .subnav{top:72px}
    C, "THE ESTIMATE"
    form-led hero, no photo | compact bar header | commercial first, timeline
    ===================================================================== */
-#C .chead{background:var(--navy);color:#fff}
+/* Direction C, white header, picked 2026-09-01. The mark is 1.32:1 where the retired
+   wordmark was 3.47:1, so it could not be made legible on the navy bar by size alone.
+   The bar takes the logo's own ground instead, which needs no colourway and no plate.
+   The navy footer still runs the dark colourway. */
+#C .chead{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(17,35,55,.04),0 6px 18px rgba(17,35,55,.06)}
 #C .chead .in{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;
   align-items:center;gap:26px}
-#C .chead .lg{color:#fff}
+#C .chead .lg{color:var(--navy)}
 #C .chead nav{margin-left:auto;display:flex;gap:20px;font:600 14px var(--head);align-items:center}
 #C .chead nav>a,#C .chead .mm>a{color:#c5d5e3;text-decoration:none}
 #C .chead .tel{background:var(--rust);color:#fff;padding:8px 16px;border-radius:var(--r-sharp);
   font:700 14px var(--head);text-decoration:none}
-#C .chead .burger{color:#fff}
+#C .chead .burger{color:var(--navy)}
 #C .chero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:56px 0 64px}
 #C .chero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
 #C .chero .crumbs{color:#8ea6bd}
