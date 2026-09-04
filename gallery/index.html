@@ -18,7 +18,7 @@ html{scroll-behavior:smooth}
 :root{
   --navy:#112337; --navy-2:#1b3a55;
   --blue:#125e98; --blue-lt:#2e88c0; --blue-dk:#0b4570;
-  --rust:#db3c11; --rust-dk:#b02f0b;
+  --rust:#0070c0; --rust-dk:#0058a0;
   --ink:#23262a; --mute:#5d6672; --line:#dde4ea;
   --soft:#f4f7f9; --sand:#f3ede4; --sand-2:#e6dccd; --clay:#8c7a63;
   --r-sharp:3px; --r-soft:12px;
@@ -83,7 +83,7 @@ body.solo .stage{padding-top:0}
   border-radius:var(--r-sharp);font:700 15.5px var(--head);text-decoration:none;
   border:2px solid transparent;cursor:pointer;line-height:1.2}
 .btn-p{background:var(--rust);color:#fff;box-shadow:0 1px 2px rgba(11,24,39,.18),
-  0 6px 16px rgba(219,60,17,.28)}
+  0 6px 16px rgba(0,112,192,.28)}
 .btn-o{background:rgba(255,255,255,.10);color:#fff;border-color:#fff}
 /* .btn-d stays a solid navy button, because it is ALSO used on light sand bands (the
    "Call or text" beside every service page's city grid). Turning it into a white outline
@@ -104,7 +104,7 @@ body.solo .stage{padding-top:0}
 
 @media(hover:hover) and (pointer:fine){
   .btn-p:hover{background:var(--rust-dk);box-shadow:0 1px 2px rgba(11,24,39,.2),
-    0 8px 22px rgba(219,60,17,.36)}
+    0 8px 22px rgba(0,112,192,.36)}
   .btn-o:hover,.ctabanner .btn-d:hover,.band-navy .btn-d:hover,.midcta .btn-d:hover,
   .chero .btn-d:hover,.ctasplit .btn-d:hover,.herocta .btn-d:hover{
     background:#fff;color:var(--navy);border-color:#fff}
@@ -407,7 +407,7 @@ body.solo #B .subnav{top:72px}
 #C .chead .tel{background:var(--rust);color:#fff;padding:0 20px;min-height:44px;
   display:inline-flex;align-items:center;border-radius:var(--r-sharp);
   font:700 15.5px var(--head);text-decoration:none;
-  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(219,60,17,.26);
+  box-shadow:0 1px 2px rgba(11,24,39,.2),0 5px 14px rgba(0,112,192,.26);
   transition:background-color .18s ease}
 @media(hover:hover) and (pointer:fine){
   #C .chead .tel:hover{background:var(--rust-dk)}}
@@ -1013,10 +1013,10 @@ article.post p{margin:0 0 14px;font:400 17px/1.78 var(--body);color:var(--ink)}
    unmistakably a link inside body text, and it does not rely on colour alone. */
 article.post p a, article.post li a{color:var(--rust);font-weight:700;
   text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;
-  text-decoration-color:rgba(219,60,17,.42)}
+  text-decoration-color:rgba(0,112,192,.42)}
 @media(hover:hover) and (pointer:fine){
   article.post p a:hover, article.post li a:hover{
-    text-decoration-color:var(--rust);background:rgba(219,60,17,.07)}}
+    text-decoration-color:var(--rust);background:rgba(0,112,192,.07)}}
 article.post p a:focus-visible, article.post li a:focus-visible{
   outline:2px solid var(--rust);outline-offset:2px}
 
